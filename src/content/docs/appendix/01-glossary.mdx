@@ -1,8 +1,210 @@
 ---
 title: 附录 A · 全书术语表
-description: 待生成
+description: 收录全书 13 章出现的 140 余个 Web3 专业术语，按主题分组给出中英对照、一句话解释和讲解最透的章节链接，方便随时速查与考前复习。
 sidebar:
   order: 1
 ---
 
-占位。
+> **使用说明：** 这份术语表按主题分成 10 组，覆盖全书 13 章出现过的高频概念。查词时先看"一句话解释"能不能独立看懂；如果需要更完整的机制拆解、案例和踩坑提醒，点开"出现章节"那一列的链接跳到原文。你也可以直接用右上角的搜索框输入中文或英文关键词，搜索结果会带你跳到具体段落，比翻这张表更快。建议第一次通读全书前先扫一眼分组标题建立框架，读完某一章后回来对照复习，考前冲刺时重点看结尾的「最容易混淆的 8 组概念」。
+
+## 一、基础概念
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 三代互联网 | Web1 / Web2 / Web3 | 从只读的静态网页，到平台垄断数据的读写网络，再到用户自持资产和身份的价值网络 | [1.1](/01-what-is-web3/01-web1-web2-web3/) |
+| 去中心化 | Decentralization | 权力和数据不集中在单一机构，而是分散给网络中大量独立参与者 | [1.2](/01-what-is-web3/02-why-decentralization/) |
+| 去中心化应用 | DApp | 前端与智能合约交互、逻辑跑在链上而非某家公司服务器的应用 | [1.3](/01-what-is-web3/03-glossary-map/) |
+| 去中心化自治组织 | DAO | 由代币持有者通过链上投票共同决定资金使用和规则修改的组织形式 | [1.3](/01-what-is-web3/03-glossary-map/) |
+| 治理代币 | Governance Token | 持有者可以对协议参数、资金分配、升级方向进行投票的代币 | [1.3](/01-what-is-web3/03-glossary-map/) |
+| 区块 | Block | 打包一批交易并按时间顺序连接成链的账本基本单元 | [2.1](/02-blockchain-basics/01-ledger-metaphor/) |
+| 哈希 | Hash | 把任意长度数据压缩成固定长度指纹的函数，输入差一点输出就面目全非 | [2.2](/02-blockchain-basics/02-hash-and-blocks/) |
+| 全节点 / 轻节点 / 档案节点 | Full / Light / Archive Node | 分别负责完整验证、依赖证明快速查询、保存全部历史数据的三类节点分工 | [2.3](/02-blockchain-basics/03-nodes-and-network/) |
+| 工作量证明 | PoW（Proof of Work） | 矿工靠海量哈希运算竞争记账权，谁先算出符合难度的结果谁出块 | [2.4](/02-blockchain-basics/04-consensus-pow/) |
+| 权益证明 | PoS（Proof of Stake） | 验证者锁定资本代替烧电竞争，作恶会被扣除质押本金 | [2.5](/02-blockchain-basics/05-consensus-pos/) |
+| 不可能三角 | Blockchain Trilemma | 去中心化、安全、可扩展三个目标互相制约，没有链能同时做到极致 | [2.6](/02-blockchain-basics/06-trilemma/) |
+| 硬分叉 / 软分叉 | Hard Fork / Soft Fork | 前者不向后兼容、旧节点必须升级；后者向后兼容、旧节点仍可运行 | [2.7](/02-blockchain-basics/07-fork-and-governance/) |
+| 51% 攻击 | 51% Attack | 攻击者掌握全网过半算力或质押量后可以篡改交易记录、发起双花 | [2.4](/02-blockchain-basics/04-consensus-pow/) |
+
+## 二、密码学与钱包
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 对称加密 | Symmetric Encryption | 加密解密用同一把密钥，速度快但两方要先安全共享这把钥匙 | [3.1](/03-cryptography/01-symmetric-vs-asymmetric/) |
+| 非对称加密 | Asymmetric Encryption | 公钥加密、私钥解密的双钥体系，解决了陌生人之间的密钥分发难题 | [3.1](/03-cryptography/01-symmetric-vs-asymmetric/) |
+| 私钥 | Private Key | 64 位十六进制字符组成的绝密数字，用来签署交易、证明资产归属 | [3.2](/03-cryptography/02-private-public-key/) |
+| 公钥 | Public Key | 由私钥经椭圆曲线运算推出，可公开且无法反推出私钥 | [3.2](/03-cryptography/02-private-public-key/) |
+| 地址 | Address | 账户对外公开的标识符，类似银行卡号，可以放心分享 | [3.2](/03-cryptography/02-private-public-key/) |
+| 助记词 | Seed Phrase / BIP-39 | 12-24 个精选英文单词，编码了生成全部地址所需的随机熵 | [3.3](/03-cryptography/03-mnemonic-bip39/) |
+| HD 钱包与派生路径 | HD Wallet / BIP-32 / BIP-44 | 一个助记词经分层推导可生成无限个地址，路径格式如 m/44'/60'/0'/0/n | [3.4](/03-cryptography/04-hd-wallet-path/) |
+| 数字签名 | Digital Signature | 用私钥对交易签名，任何人用公钥都能验证签名真实性且无需暴露私钥 | [3.5](/03-cryptography/05-digital-signature/) |
+| 哈希函数 | SHA-256 / Keccak-256 | 比特币和以太坊分别采用的两种主力哈希算法，各自服务不同场景 | [3.6](/03-cryptography/06-hash-functions/) |
+| 默克尔树 | Merkle Tree | 把成千上万笔交易逐层配对哈希，浓缩成一个根哈希便于快速验证 | [3.7](/03-cryptography/07-merkle-tree/) |
+| 零知识证明 | ZKP（Zero-Knowledge Proof） | 不透露秘密本身也能证明"我知道这个秘密"的密码学技术 | [3.8](/03-cryptography/08-zk-intro/) |
+| 热钱包 | Hot Wallet | 私钥存在联网设备上的钱包，操作便利但暴露面大 | [4.1](/04-wallets/01-wallet-types/) |
+| 冷钱包 | Cold Wallet | 私钥从不接触网络的钱包，安全性高但操作流程复杂 | [4.1](/04-wallets/01-wallet-types/) |
+| 托管钱包 | Custodial Wallet | 私钥由交易所等第三方代管，省心但要信任对方不作恶不被黑 | [4.1](/04-wallets/01-wallet-types/) |
+| Gas 费机制 | Base Fee / Priority Fee | EIP-1559 后 Gas 费拆成会被销毁的基础费和给验证者的优先费两部分 | [4.5](/04-wallets/05-gas-mechanics/) |
+| 授权与撤销 | Approve / Revoke | 允许合约动用你代币的操作，默认无限额度是最常见的资产被盗诱因 | [4.6](/04-wallets/06-approvals-and-revoke/) |
+| 硬件钱包 | Hardware Wallet | 私钥保存在独立安全芯片、离线签名的物理设备，只保护私钥不保护你的判断 | [4.7](/04-wallets/07-hardware-wallet/) |
+| 账户抽象 | Account Abstraction（ERC-4337 / EIP-7702） | 让钱包获得社交恢复、批量交易、费用赞助等智能合约级能力的升级方案 | [4.8](/04-wallets/08-account-abstraction/) |
+
+## 三、以太坊与智能合约
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 以太坊虚拟机 | EVM | 执行合约字节码的 256 位栈式虚拟机，全网节点执行结果必须一致 | [5.2](/05-ethereum-smart-contracts/02-evm-and-state/) |
+| 外部账户 | EOA（Externally Owned Account） | 由私钥控制、能主动发起交易的普通钱包账户，本身没有代码 | [5.1](/05-ethereum-smart-contracts/01-ethereum-vs-bitcoin/) |
+| 合约账户 | Contract Account | 拥有代码和存储、只能被动响应外部调用的账户类型 | [5.3](/05-ethereum-smart-contracts/03-what-is-contract/) |
+| 世界状态 | World State | 全部账户信息构成的分层树结构，每个新区块都会更新一次状态根 | [5.2](/05-ethereum-smart-contracts/02-evm-and-state/) |
+| 智能合约 | Smart Contract | 部署在链上、由交易触发自动执行的程序，代码即规则 | [5.3](/05-ethereum-smart-contracts/03-what-is-contract/) |
+| Solidity | Solidity | 以太坊最主流的合约编程语言，语法接近 JavaScript | [5.4](/05-ethereum-smart-contracts/04-read-solidity/) |
+| 应用二进制接口 | ABI | 描述合约有哪些函数和参数格式的规范，外部程序靠它编解码调用数据 | [5.4](/05-ethereum-smart-contracts/04-read-solidity/) |
+| 重入漏洞 | Reentrancy | 攻击者趁余额没更新反复回调提款函数、把钱多次取走的经典漏洞 | [5.3](/05-ethereum-smart-contracts/03-what-is-contract/) |
+| 合约验证 | Contract Verification | 把源码重新编译后与链上字节码比对，证明代码公开可读，但不等于安全 | [5.7](/05-ethereum-smart-contracts/07-verify-contract/) |
+| 代理模式（UUPS） | Proxy Pattern / UUPS（ERC-1822） | 用户访问固定代理地址，管理员可替换背后的逻辑合约实现合约升级 | [5.8](/05-ethereum-smart-contracts/08-upgradeable-proxy/) |
+| 内存池 | Mempool | 交易广播后、被打包进区块前的公开等待区，任何人都能提前看到 | [5.6](/05-ethereum-smart-contracts/06-mempool-mev/) |
+| 最大可提取价值 | MEV | 出块者通过调整区块内交易顺序、插入或剔除交易来榨取的额外利润 | [5.6](/05-ethereum-smart-contracts/06-mempool-mev/) |
+| 三明治攻击 | Sandwich Attack | 机器人在你的交易前后各夹一笔单子，抬价后又回落套现的抢跑手法 | [5.6](/05-ethereum-smart-contracts/06-mempool-mev/) |
+
+## 四、代币与 NFT 资产
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 同质化代币标准 | ERC-20 | 任意两枚完全等价、可自由互换的代币标准，稳定币和治理代币都属此类 | [6.1](/06-tokens-nft/01-token-standards/) |
+| 非同质化代币标准 | ERC-721 | 每一枚都有唯一编号、彼此不可互换的代币标准，用于藏品和门票 | [6.1](/06-tokens-nft/01-token-standards/) |
+| 多代币标准 | ERC-1155 | 一份合约里同时管理同质化和非同质化代币，批量转账更省 Gas | [6.1](/06-tokens-nft/01-token-standards/) |
+| 代币经济学 | Tokenomics | 研究代币的供应节奏、分配结构和真实需求如何决定长期价格的框架 | [6.2](/06-tokens-nft/02-tokenomics/) |
+| 完全稀释估值 | FDV（Fully Diluted Valuation） | 假设全部代币都已解锁流通后的理论市值，等于现价乘以总供应量 | [6.2](/06-tokens-nft/02-tokenomics/) |
+| 解锁曲线与悬崖期 | Unlock Schedule / Cliff | 团队和投资人手中的代币按什么时间表释放，悬崖期一到常伴随集中抛压 | [6.3](/06-tokens-nft/03-unlock-schedule/) |
+| 法币抵押型稳定币 | Fiat-Collateralized Stablecoin | 发行方存入等额法币或国债作背书的稳定币，如 USDT、USDC | [6.4](/06-tokens-nft/04-stablecoins/) |
+| 超额抵押型稳定币 | Over-Collateralized Stablecoin | 用价值高于面值的加密资产抵押铸出的稳定币，典型代表是 DAI | [6.4](/06-tokens-nft/04-stablecoins/) |
+| 算法稳定币 | Algorithmic Stablecoin | 不靠真实资产抵押、纯用套利机制维持锚定的稳定币，脆弱性已被反复验证 | [6.4](/06-tokens-nft/04-stablecoins/) |
+| 脱锚 | Depeg | 稳定币价格偏离承诺的 1 美元，可能是短暂折价也可能是不可逆崩塌 | [6.5](/06-tokens-nft/05-stablecoin-failures/) |
+| UST/LUNA 崩盘 | UST Collapse（2022） | 算法稳定币 UST 脱锚引发数百亿美元生态归零的标志性事件 | [6.5](/06-tokens-nft/05-stablecoin-failures/) |
+| NFT 元数据 | Metadata / Token URI / IPFS | NFT 图片和属性信息通常不存在链上，靠一条链接指向去中心化存储 | [6.6](/06-tokens-nft/06-nft-basics/) |
+| 版税 | Royalty（EIP-2981） | 二级市场转手时分给原创作者的抽成，是否强制执行取决于交易平台 | [6.6](/06-tokens-nft/06-nft-basics/) |
+| 现实世界资产 | RWA（Real-World Assets） | 把国债、房产等链下资产代币化搬上链，使其可全球交易和组合 | [6.8](/06-tokens-nft/08-rwa-and-new-assets/) |
+
+## 五、交易与市场
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 中心化交易所 | CEX | 由公司托管用户资产并在内部数据库撮合交易的平台 | [7.1](/07-exchanges-trading/01-cex-overview/) |
+| 去中心化交易所 | DEX | 用链上智能合约完成撮合、用户全程自持私钥的交易场所 | [7.3](/07-exchanges-trading/03-dex-and-amm/) |
+| 实名认证 | KYC（Know Your Customer） | 交易所要求提交身份信息以符合监管要求的合规流程 | [7.1](/07-exchanges-trading/01-cex-overview/) |
+| 订单簿 | Order Book | 按价格排队的买单卖单清单，价格发现发生在两边队列碰撞处 | [7.2](/07-exchanges-trading/02-orderbook-basics/) |
+| 滑点 | Slippage | 预期成交价和实际成交价之间的偏差，交易规模越大偏得越多 | [7.2](/07-exchanges-trading/02-orderbook-basics/) |
+| 自动做市商 | AMM（Automated Market Maker） | 用数学公式自动报价的做市机制，取代人工挂单让任意代币随时可换 | [7.3](/07-exchanges-trading/03-dex-and-amm/) |
+| 流动性提供者 | LP（Liquidity Provider） | 往流动性池按比例存入两种资产、按份额分手续费的参与者 | [7.4](/07-exchanges-trading/04-lp-and-il/) |
+| 无常损失 | IL（Impermanent Loss） | 池内代币价格变动导致被动调仓，最终价值低于当初直接持有不动的差额 | [7.4](/07-exchanges-trading/04-lp-and-il/) |
+| 永续合约 | Perpetual Futures | 没有交割日、可以一直持有的杠杆合约，靠资金费率把价格拉回现货附近 | [7.6](/07-exchanges-trading/06-perp-and-leverage/) |
+| 资金费率 | Funding Rate | 永续合约多空双方定期结算的费用，用来把合约价拉回现货价 | [7.6](/07-exchanges-trading/06-perp-and-leverage/) |
+| 强制平仓 | Liquidation | 保证金率跌破维持线后系统自动砍仓的价格触发事件 | [7.6](/07-exchanges-trading/06-perp-and-leverage/) |
+| 闪电贷 | Flash Loan | 无需抵押借出巨额资金，但必须在同一笔交易内还清否则整笔回滚 | [7.7](/07-exchanges-trading/07-arbitrage/) |
+| 止损 | Stop Loss | 提前设好的自动离场价格，把单笔交易的最大亏损锁在可承受范围内 | [7.8](/07-exchanges-trading/08-trading-discipline/) |
+
+## 六、DeFi
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 去中心化金融 | DeFi | 用智能合约替代银行券商提供借贷、交易、衍生品服务的链上金融体系 | [8.1](/08-defi/01-defi-map/) |
+| 抵押率 | LTV（Loan-to-Value） | 抵押品价值中最多能借出的比例，决定你能借多少钱 | [8.2](/08-defi/02-lending/) |
+| 健康因子 | Health Factor（HF） | 抵押品加权价值除以总债务得到的安全余量，跌到 1.0 以下即被清算 | [8.2](/08-defi/02-lending/) |
+| 清算人 | Liquidator | 替借款人还债换取折价奖励的第三方机器人，维持协议不产生坏账 | [8.2](/08-defi/02-lending/) |
+| 流动性挖矿 | Yield Farming | 把资金存入协议换取代币奖励，高收益往往靠增发代币补贴撑出来 | [8.3](/08-defi/03-yield-farming/) |
+| 名义年利率 | APR（Annual Percentage Rate） | 不计复利的年化数字，项目方常用它做宣传因为数字更漂亮 | [8.3](/08-defi/03-yield-farming/) |
+| 实际年化收益率 | APY（Annual Percentage Yield） | 计入复投频率后的真实年化，与代币价格挂钩的部分会随币价缩水 | [8.3](/08-defi/03-yield-farming/) |
+| 流动性质押代币 | LST（Liquid Staking Token） | 质押 ETH 后拿到的可自由交易计息凭证，如 Lido 的 stETH | [8.4](/08-defi/04-staking-lst/) |
+| 流动性再质押代币 | LRT（Liquid Restaking Token） | 把 LST 再质押到其他网络换来的第二层凭证，收益叠加风险也叠加 | [8.4](/08-defi/04-staking-lst/) |
+| 罚没 | Slashing | 验证者作恶或长期掉线时被扣除部分质押本金的惩罚机制 | [8.4](/08-defi/04-staking-lst/) |
+| 预言机操纵 | Oracle Manipulation | 用巨额资金瞬间拉扭某个池子价格、骗过协议喂价来低价套走抵押品 | [8.7](/08-defi/07-defi-risks/) |
+| 闪电贷攻击 | Flash Loan Attack | 借来无抵押巨款，在一笔交易内操纵价格榨干协议再还款走人 | [8.7](/08-defi/07-defi-risks/) |
+| 真实收益 | Real Yield | 来自手续费、借贷利差等真实业务的分红，而非靠印代币补贴出来的收益 | [8.6](/08-defi/06-stable-yield/) |
+
+## 七、扩容与多链
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 第一层网络 | Layer 1 / L1 | 承载最终结算与安全共识的基础区块链，如比特币、以太坊主网 | [9.1](/09-layer2-multichain/01-why-scaling/) |
+| 第二层网络 | Layer 2 / L2 | 建立在 L1 之上处理大量交易、定期向 L1 提交证明的独立执行层 | [9.1](/09-layer2-multichain/01-why-scaling/) |
+| 汇总 | Rollup | 把大量交易打包压缩后提交到 L1 结算的主流扩容方式 | [9.1](/09-layer2-multichain/01-why-scaling/) |
+| 乐观汇总 | Optimistic Rollup | 默认信任链下交易正确、只在被挑战时才验证的扩容方案 | [9.2](/09-layer2-multichain/02-rollup-optimistic/) |
+| 欺诈证明 | Fraud Proof | 挑战期内用于证明某笔交易存在错误的链上交互式仲裁机制 | [9.2](/09-layer2-multichain/02-rollup-optimistic/) |
+| 零知识汇总 | ZK Rollup | 用零知识证明验证交易有效性、无需挑战期的扩容方案 | [9.3](/09-layer2-multichain/03-rollup-zk/) |
+| zk-SNARK | zk-SNARK | 证明体积小、验证快但需要可信设置的零知识证明系统 | [9.3](/09-layer2-multichain/03-rollup-zk/) |
+| zk-STARK | zk-STARK | 无需可信设置、抗量子但证明体积较大的零知识证明系统 | [9.3](/09-layer2-multichain/03-rollup-zk/) |
+| 排序器 | Sequencer | L2 上负责收集、排序并打包交易提交至 L1 的节点角色 | [9.2](/09-layer2-multichain/02-rollup-optimistic/) |
+| 跨链桥 | Bridge | 在不同区块链间转移资产与消息的基础设施 | [9.6](/09-layer2-multichain/06-bridges/) |
+| 锁定铸造模型 | Lock-Mint | 资产锁定在源链、在目标链铸造等额包装资产的跨链模型 | [9.6](/09-layer2-multichain/06-bridges/) |
+| 包装资产 | Wrapped Asset | 通过锁定原生资产、在另一条链铸造出的等额映射代币 | [9.8](/09-layer2-multichain/08-multichain-ops/) |
+| 侧链 | Sidechain | 与主链并行运行、通过桥接交互资产的独立链，安全性不继承主链 | [9.4](/09-layer2-multichain/04-l2-landscape/) |
+
+## 八、研究与空投
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 区块浏览器 | Block Explorer | 查询链上地址、交易与合约信息的基础工具，如 Etherscan | [10.2](/10-onchain-research/02-block-explorers/) |
+| 链上数据平台 | On-chain Data Platform | 提供 TVL 排行、SQL 查询、地址追踪等功能的专用分析工具集合 | [10.3](/10-onchain-research/03-data-platforms/) |
+| 锁定总价值 | TVL（Total Value Locked） | 锁定在协议或链上资产的美元总值，衡量规模但非唯一健康指标 | [10.3](/10-onchain-research/03-data-platforms/) |
+| 幸存者偏差 | Survivorship Bias | 只统计存活项目数据、忽略已失败项目导致收益率被系统性高估的偏差 | [10.3](/10-onchain-research/03-data-platforms/) |
+| 巨鲸追踪 | Whale Tracking | 监控大户钱包资金流向、发现潜在市场信号的分析方法 | [10.5](/10-onchain-research/05-whale-tracking/) |
+| 聪明钱 | Smart Money | 历史交易胜率高、被认为具有信息优势的专业投资地址 | [10.5](/10-onchain-research/05-whale-tracking/) |
+| 尽职调查 | Due Diligence（DD） | 对项目产品、代币、团队、审计等多维度核实真实性与风险的系统化流程 | [10.7](/10-onchain-research/07-due-diligence/) |
+| 空投 | Airdrop | 项目方免费向用户分发代币，以换取网络效应与去中心化合法性 | [11.1](/11-airdrop-farming/01-airdrop-logic/) |
+| 测试网农业 | Testnet Farming | 在项目主网上线前于测试网参与交互、零成本积累早期资格的策略 | [11.2](/11-airdrop-farming/02-find-opportunities/) |
+| 女巫攻击 | Sybil Attack | 单一实体制造大量虚假身份，骗取本应分散给真实用户的空投奖励 | [11.5](/11-airdrop-farming/05-sybil-detection/) |
+| 首次去中心化交易所发行 | IDO / Launchpad | 项目通过去中心化交易所或打新平台首次公开发行代币的融资方式 | [11.6](/11-airdrop-farming/06-ido-launchpad/) |
+| 代币生成事件 | TGE（Token Generation Event） | 项目代币正式铸造发行、通常伴随空投分配的关键时间节点 | [11.7](/11-airdrop-farming/07-points-and-season/) |
+| 积分赛季制 | Points Season | 用户在数月赛季周期内持续累积积分、赛季末按积分兑换代币的空投模式 | [11.7](/11-airdrop-farming/07-points-and-season/) |
+| 成本率 | Cost Ratio | （Gas 费+时间成本）占预期空投收益的比例，用于筛选值得参与的项目 | [11.4](/11-airdrop-farming/04-cost-accounting/) |
+
+## 九、安全与攻击
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 威胁模型 | Threat Model | 系统性梳理资产可能流失的所有攻击渠道，用于设计对应防御架构 | [12.1](/12-security-risk/01-threat-model/) |
+| 盲签 | Blind Signing | 用户在看不懂十六进制交易内容的情况下直接签署，是资产被盗的主要根源 | [12.3](/12-security-risk/03-signature-attacks/) |
+| 清晰签名 | Clear Signing | 硬件钱包在签名前显示人类可读的交易内容，用于对抗盲签风险 | [12.2](/12-security-risk/02-phishing/) |
+| 地址投毒 | Address Poisoning | 攻击者构造与常用地址相似的地址，诱导用户误复制粘贴转账 | [12.2](/12-security-risk/02-phishing/) |
+| Permit 签名攻击 | Permit（EIP-2612） | 离线授权标准，用户签名后合约可在有效期内代为转账，且签名一旦签出不可撤销 | [12.3](/12-security-risk/03-signature-attacks/) |
+| 全局授权 | setApprovalForAll | NFT/代币合约中一次调用即可授予某地址转移全部资产权限的函数 | [12.3](/12-security-risk/03-signature-attacks/) |
+| Rug Pull | Rug Pull（跑路） | 项目方通过保留合约权限或抽走流动性突然卷款跑路的诈骗模式 | [12.4](/12-security-risk/04-rugpull-patterns/) |
+| 蜜罐代币 | Honeypot | 可以买入但无法卖出（或卖出税极高）的恶意代币，专门诱骗用户接盘 | [12.4](/12-security-risk/04-rugpull-patterns/) |
+| 智能合约审计 | Smart Contract Audit | 第三方机构对合约代码进行的安全检查，能发现常见漏洞但不保证完全安全 | [12.5](/12-security-risk/05-contract-audit-reading/) |
+| 形式化验证 | Formal Verification | 用数学方法证明合约逻辑严格符合预期规范，是最高级别的审计手段 | [12.5](/12-security-risk/05-contract-audit-reading/) |
+| 作战安全 | OPSEC（Operations Security） | 通过设备、网络、账号多层隔离降低个人信息与资产暴露面的实践理念 | [12.6](/12-security-risk/06-opsec/) |
+| 气隙签名 | Air-gapped Signing | 硬件钱包完全不联网，仅通过二维码等方式与外部通信完成签名 | [12.6](/12-security-risk/06-opsec/) |
+| 钱包分层管理 | Wallet Tiering | 按用途和额度把资产拆分到金库、交互、测试三类钱包，缩小单点风险 | [12.7](/12-security-risk/07-wallet-hygiene/) |
+| 应急响应 | Incident Response | 资产被盗后按确认、隔离、通知交易所、追踪报案顺序展开的标准处置流程 | [12.8](/12-security-risk/08-incident-response/) |
+| 隐私混合器 | Privacy Mixer | 将链上资金打乱来源与去向关联的工具，资金一旦进入即极难追踪 | [12.8](/12-security-risk/08-incident-response/) |
+
+## 十、行业与岗位
+
+| 术语（中文） | 英文 / 缩写 | 一句话解释 | 出现章节 |
+|---|---|---|---|
+| 行业三层结构 | Protocol / Infrastructure / Application Layer | Web3 行业按协议层、基础设施层、应用层划分，各层融资和招聘特征不同 | [13.1](/13-industry-career/01-industry-map/) |
+| 代币薪酬 | Token Compensation | 用项目代币替代部分现金发放的薪酬形式，存在波动、流动性与稀释三重风险 | [13.2](/13-industry-career/02-job-roles/) |
+| 商务拓展 | BD（Business Development） | 负责交易所上线、机构合作、融资支持等外部关系维护的岗位职能 | [13.2](/13-industry-career/02-job-roles/) |
+| 关键意见领袖 | KOL（Key Opinion Leader） | 在特定领域有影响力、可为项目背书推广的社交媒体人物 | [13.4](/13-industry-career/04-kol-and-content/) |
+| 获客成本 | CAC（Customer Acquisition Cost） | 投放成本除以新增活跃用户数，用于评估某个渠道或 KOL 的投放效率 | [13.4](/13-industry-career/04-kol-and-content/) |
+| 加密资产市场监管条例 | MiCA | 欧盟针对加密资产的统一监管框架，为企业级应用提供了合规路径 | [13.5](/13-industry-career/05-global-ops/) |
+| 异步优先工作制 | Async-first | 以文档记录和异步视频代替实时会议，让跨时区团队摆脱同步在线约束 | [13.5](/13-industry-career/05-global-ops/) |
+| 最小化可行版本 | MVP（Minimum Viable Product） | 只实现核心功能、快速验证问题和方案的最小成品，是作品集项目的推荐形式 | [13.7](/13-industry-career/07-portfolio/) |
+| 归属期 | Vesting | 期权或代币薪酬分批解锁的时间安排，直接决定实际能兑现的比例和时机 | [13.8](/13-industry-career/08-interview-and-risk/) |
+| 归属悬崖 | Vesting Cliff | 员工任职未满一定期限前无法获得任何期权/代币份额的门槛机制 | [13.8](/13-industry-career/08-interview-and-risk/) |
+| 现金跑道 | Cash Runway | 公司现有资金能维持运营的时长，是判断财务健康度和裁员风险的核心指标 | [13.8](/13-industry-career/08-interview-and-risk/) |
+| 信息自动化流水线 | Information Automation Pipeline | 把数据抓取、清洗、摘要等重复性研究工作交给 AI 处理，人工只负责判断 | [13.6](/13-industry-career/06-ai-automation/) |
+| 人工审核节点 | Human Checkpoint | 在自动化流程中特意保留的人工把关环节，确保事实、承诺、财务类内容准确 | [13.6](/13-industry-career/06-ai-automation/) |
+
+## 最容易混淆的 8 组概念
+
+| 概念 A | 概念 B | 核心区别 |
+|---|---|---|
+| Layer 1（[2.6](/02-blockchain-basics/06-trilemma/)） | Layer 2（[9.1](/09-layer2-multichain/01-why-scaling/)） | L1 是独立结算的基础链，安全和最终性都由自己承担；L2 建在 L1 之上处理交易，定期向 L1 提交证明，安全性来自 L1 |
+| APR（[8.3](/08-defi/03-yield-farming/)） | APY（[8.3](/08-defi/03-yield-farming/)） | APR 是不计复利的年化数字，看着更高；APY 计入复投频率，才是更贴近真实到手收益的口径 |
+| 代币（[6.1](/06-tokens-nft/01-token-standards/)） | 币（原生代币 / Coin） | 币指某条链自己的原生资产（如 ETH、BTC），用来付 Gas；代币是在别人的链上用合约标准发行的资产，本身不能直接付 Gas |
+| 热钱包（[4.1](/04-wallets/01-wallet-types/)） | 冷钱包（[4.1](/04-wallets/01-wallet-types/)） | 热钱包私钥在联网设备上，操作快但暴露面大；冷钱包私钥从不接触网络，安全性高但每次交易流程更繁琐 |
+| 无常损失（[7.4](/07-exchanges-trading/04-lp-and-il/)） | 普通亏损 | 无常损失特指做市商因池内两种资产价格比例变动、相对单纯持有产生的账面差额，撤出后才会"坐实"；普通亏损是资产本身价格下跌造成的直接损失 |
+| 私钥（[3.2](/03-cryptography/02-private-public-key/)） | 助记词（[3.3](/03-cryptography/03-mnemonic-bip39/)） | 私钥对应单个地址，是最终的签名密钥；助记词是一整个种子，能通过 HD 派生生成无数个私钥和地址 |
+| Rollup（[9.2](/09-layer2-multichain/02-rollup-optimistic/)） | 侧链（[9.4](/09-layer2-multichain/04-l2-landscape/)） | Rollup 把交易数据和证明提交回 L1，安全性继承主链；侧链是独立运行的另一条链，靠自己的验证者集合保障安全，风险与主链无关 |
+| 质押（[2.5](/02-blockchain-basics/05-consensus-pos/)） | 挖矿（[2.4](/02-blockchain-basics/04-consensus-pow/)） | 质押是 PoS 机制下锁定资本参与共识，作恶被扣本金；挖矿是 PoW 机制下用算力竞争记账权，成本是电力和硬件而非资本冻结 |
