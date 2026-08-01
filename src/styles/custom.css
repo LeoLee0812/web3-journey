@@ -1,0 +1,137 @@
+/* 从 0 开始的 Web3 之旅 —— 全站视觉定制
+   主色取自「链上」质感：青绿 + 深空蓝，暗色为默认体验 */
+
+:root {
+  /* Starlight 强调色（青绿系） */
+  --sl-color-accent-low: #0d3a35;
+  --sl-color-accent: #14b8a6;
+  --sl-color-accent-high: #7ff0e0;
+
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #e7f0ef;
+  --sl-color-gray-2: #b9c6c5;
+  --sl-color-gray-3: #7c8b8a;
+  --sl-color-gray-4: #46524f;
+  --sl-color-gray-5: #2b3634;
+  --sl-color-gray-6: #1a2422;
+  --sl-color-black: #101817;
+
+  --sl-content-width: 50rem;
+  /* 中文正文阅读优化 */
+  --sl-line-height: 1.85;
+  --sl-text-code: 0.9em;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #c9f3ec;
+  --sl-color-accent: #0d9488;
+  --sl-color-accent-high: #04413a;
+
+  --sl-color-white: #101817;
+  --sl-color-gray-1: #22302e;
+  --sl-color-gray-2: #43514f;
+  --sl-color-gray-3: #6b7a78;
+  --sl-color-gray-4: #94a3a1;
+  --sl-color-gray-5: #d5dedd;
+  --sl-color-gray-6: #eef4f3;
+  --sl-color-gray-7: #f6faf9;
+  --sl-color-black: #ffffff;
+}
+
+/* ── 中文排版 ───────────────────────────────────────────── */
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans SC', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sl-markdown-content p,
+.sl-markdown-content li {
+  letter-spacing: 0.01em;
+}
+
+/* 正文段落之间留出呼吸感 */
+.sl-markdown-content :is(p, ul, ol, table, blockquote) {
+  margin-top: 1.1rem;
+}
+
+/* 标题层级更清晰 */
+.sl-markdown-content h2 {
+  margin-top: 2.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+}
+.sl-markdown-content h3 {
+  margin-top: 1.9rem;
+  color: var(--sl-color-white);
+}
+
+/* ── 配图 ──────────────────────────────────────────────── */
+.sl-markdown-content img {
+  border-radius: 12px;
+  border: 1px solid var(--sl-color-gray-5);
+  display: block;
+  margin: 1.6rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 图注：紧跟图片的斜体段落 */
+.sl-markdown-content img + em,
+.sl-markdown-content p > em:only-child {
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--sl-color-gray-3);
+  font-style: normal;
+  margin-top: -0.9rem;
+}
+
+/* ── 表格 ──────────────────────────────────────────────── */
+.sl-markdown-content table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  font-size: 0.92rem;
+}
+.sl-markdown-content th {
+  background: var(--sl-color-gray-6);
+  white-space: nowrap;
+}
+
+/* ── Mermaid 图 ────────────────────────────────────────── */
+.mermaid-wrapper {
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  padding: 1.1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 12px;
+  background: var(--sl-color-gray-6);
+  text-align: center;
+}
+.mermaid-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── 首页 Hero ─────────────────────────────────────────── */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-accent-high);
+  border: 1px solid var(--sl-color-accent);
+}
+
+/* 术语表卡片 */
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}

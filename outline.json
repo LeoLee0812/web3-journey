@@ -1,0 +1,215 @@
+{
+  "project": "从 0 开始的 Web3 之旅",
+  "audience": "Web3 知识几乎为 0 的中文读者（求职方向：Web3 运营 / 研究分析 / AI 自动化）",
+  "targetWords": 100000,
+  "chapters": [
+    {
+      "id": "01-what-is-web3",
+      "num": 1,
+      "title": "第 1 章 · 认识 Web3：从互联网的三次进化说起",
+      "goal": "让一个完全不懂的人建立正确直觉：Web3 到底解决什么问题、不解决什么问题，术语先混个脸熟。",
+      "sections": [
+        { "id": "01-web1-web2-web3", "title": "Web1 / Web2 / Web3：三代互联网的所有权之争" },
+        { "id": "02-why-decentralization", "title": "为什么要去中心化？中心化平台真正的三个痛点" },
+        { "id": "03-glossary-map", "title": "术语速通地图：60 个高频词，一次搞清中英文对照" },
+        { "id": "04-value-internet", "title": "「价值互联网」：当信息可以复制，而钱不能" },
+        { "id": "05-web3-stack-overview", "title": "Web3 技术栈全景图：从底层链到应用层，你在哪一层" },
+        { "id": "06-history-timeline", "title": "一部十七年简史：从比特币白皮书到今天的行业格局" },
+        { "id": "07-myths-and-truths", "title": "破除幻觉：Web3 被吹过头的部分与被低估的部分" },
+        { "id": "08-learning-path", "title": "给零基础的学习路线图：这本知识库怎么用" }
+      ]
+    },
+    {
+      "id": "02-blockchain-basics",
+      "num": 2,
+      "title": "第 2 章 · 区块链底层：一本谁都能查、谁都改不了的账本",
+      "goal": "用账本、快递柜、班级记账本这类类比，把区块、哈希、共识、节点讲透，不要求任何数学基础。",
+      "sections": [
+        { "id": "01-ledger-metaphor", "title": "从班级记账本讲起：区块链到底是什么结构" },
+        { "id": "02-hash-and-blocks", "title": "哈希：数字指纹如何把区块串成不可篡改的链" },
+        { "id": "03-nodes-and-network", "title": "节点、全节点与轻节点：谁在真正保存这本账" },
+        { "id": "04-consensus-pow", "title": "工作量证明 PoW：挖矿到底在算什么" },
+        { "id": "05-consensus-pos", "title": "权益证明 PoS：以太坊为什么要抛弃显卡" },
+        { "id": "06-trilemma", "title": "不可能三角：去中心化、安全、可扩展只能挑两个" },
+        { "id": "07-fork-and-governance", "title": "分叉与治理：链上世界的「宪法修正案」怎么通过" },
+        { "id": "08-read-a-block", "title": "动手：在区块浏览器里读懂一个真实区块的每一栏" }
+      ]
+    },
+    {
+      "id": "03-cryptography",
+      "num": 3,
+      "title": "第 3 章 · 密码学基础：私钥、签名与地址的真相",
+      "goal": "把非对称加密、助记词、签名机制讲到能自己解释给别人听，为钱包安全打底。",
+      "sections": [
+        { "id": "01-symmetric-vs-asymmetric", "title": "对称与非对称加密：一把锁两把钥匙的思想实验" },
+        { "id": "02-private-public-key", "title": "私钥、公钥、地址：三者到底是怎么推导出来的" },
+        { "id": "03-mnemonic-bip39", "title": "12 个英文单词凭什么等于你的全部资产（BIP-39）" },
+        { "id": "04-hd-wallet-path", "title": "HD 钱包与派生路径：一个助记词为什么能生出无数地址" },
+        { "id": "05-digital-signature", "title": "数字签名：你「点确认」的那一刻究竟发生了什么" },
+        { "id": "06-hash-functions", "title": "哈希函数详解：SHA-256 与 Keccak 的日常用途" },
+        { "id": "07-merkle-tree", "title": "默克尔树：为什么手机也能验证一笔十年前的交易" },
+        { "id": "08-zk-intro", "title": "零知识证明入门：不告诉你答案也能证明我知道" }
+      ]
+    },
+    {
+      "id": "04-wallets",
+      "num": 4,
+      "title": "第 4 章 · 钱包实战：你的第一个链上身份",
+      "goal": "从零建钱包、备份、转账、授权管理，全流程可跟着做，安全动作写成清单。",
+      "sections": [
+        { "id": "01-wallet-types", "title": "热钱包、冷钱包、托管钱包：先搞清你在托付给谁" },
+        { "id": "02-create-first-wallet", "title": "实操：创建人生第一个自托管钱包（含每一步截图要点）" },
+        { "id": "03-backup-strategy", "title": "助记词备份的正确姿势与七种作死方式" },
+        { "id": "04-first-transaction", "title": "第一笔转账：地址、金额、Gas、确认数逐项拆解" },
+        { "id": "05-gas-mechanics", "title": "Gas 费机制：EIP-1559 之后你到底在为什么付费" },
+        { "id": "06-approvals-and-revoke", "title": "授权（Approve）是最大暗雷：如何查看与撤销" },
+        { "id": "07-hardware-wallet", "title": "硬件钱包选购与使用：什么时候值得买" },
+        { "id": "08-account-abstraction", "title": "账户抽象与智能钱包：没有助记词的未来长什么样" }
+      ]
+    },
+    {
+      "id": "05-ethereum-smart-contracts",
+      "num": 5,
+      "title": "第 5 章 · 以太坊与智能合约：可编程的钱",
+      "goal": "解释 EVM、合约、交易生命周期，让非开发者也能看懂合约在干什么、风险在哪。",
+      "sections": [
+        { "id": "01-ethereum-vs-bitcoin", "title": "以太坊与比特币的根本分歧：账本 vs 世界计算机" },
+        { "id": "02-evm-and-state", "title": "EVM 与状态机：链上「世界状态」是怎么被改写的" },
+        { "id": "03-what-is-contract", "title": "智能合约到底是什么：自动售货机的极简模型" },
+        { "id": "04-read-solidity", "title": "看懂 Solidity：非开发者需要认识的十个关键词" },
+        { "id": "05-tx-lifecycle", "title": "一笔交易的一生：从签名到打包再到最终确定" },
+        { "id": "06-mempool-mev", "title": "内存池与 MEV：你的交易在被谁抢跑" },
+        { "id": "07-verify-contract", "title": "实操：在浏览器里核验一个合约是否开源、是否有后门函数" },
+        { "id": "08-upgradeable-proxy", "title": "可升级合约与代理模式：项目方能偷偷改规则吗" }
+      ]
+    },
+    {
+      "id": "06-tokens-nft",
+      "num": 6,
+      "title": "第 6 章 · 代币世界：ERC-20、稳定币与 NFT",
+      "goal": "把代币标准、经济模型、稳定币机制、NFT 讲成一套可用于项目研究的判断框架。",
+      "sections": [
+        { "id": "01-token-standards", "title": "ERC-20 / 721 / 1155：三个标准决定了链上资产的形态" },
+        { "id": "02-tokenomics", "title": "代币经济学入门：供应、释放、通胀与真实需求" },
+        { "id": "03-unlock-schedule", "title": "解锁曲线与抛压测算：投研最实用的一张表" },
+        { "id": "04-stablecoins", "title": "稳定币三大流派：法币抵押、超额抵押与算法稳定" },
+        { "id": "05-stablecoin-failures", "title": "案例复盘：UST 崩盘与几次脱锚事件的教训" },
+        { "id": "06-nft-basics", "title": "NFT 是什么：从图片说起，讲到版税、元数据与存储" },
+        { "id": "07-nft-utility", "title": "NFT 的真实用途与泡沫：哪些叙事活下来了" },
+        { "id": "08-rwa-and-new-assets", "title": "RWA 与新型链上资产：把国债、房产搬上链的现实进展" }
+      ]
+    },
+    {
+      "id": "07-exchanges-trading",
+      "num": 7,
+      "title": "第 7 章 · 交易所与交易：CEX、DEX 与 AMM",
+      "goal": "覆盖简历中的「CEX、DEX、现货波段、链上套利」能力项，讲清撮合机制与实操流程。",
+      "sections": [
+        { "id": "01-cex-overview", "title": "中心化交易所全景：注册、KYC、充提与资产安全" },
+        { "id": "02-orderbook-basics", "title": "订单簿、深度与滑点：看懂一张交易界面的每个数字" },
+        { "id": "03-dex-and-amm", "title": "DEX 与 AMM：恒定乘积公式如何取代做市商" },
+        { "id": "04-lp-and-il", "title": "做流动性提供者（LP）与无常损失的精确算法" },
+        { "id": "05-swap-in-practice", "title": "实操：一笔链上 Swap 的完整流程与防夹设置" },
+        { "id": "06-perp-and-leverage", "title": "合约、永续与杠杆：爆仓是怎么算出来的" },
+        { "id": "07-arbitrage", "title": "链上套利与价差：搬砖、三角套利与资金费率套利" },
+        { "id": "08-trading-discipline", "title": "交易纪律与仓位管理：比找到好币更难的部分" }
+      ]
+    },
+    {
+      "id": "08-defi",
+      "num": 8,
+      "title": "第 8 章 · DeFi 全景：链上金融乐高",
+      "goal": "借贷、挖矿、衍生品、收益来源与风险拆解，配合真实协议讲解。",
+      "sections": [
+        { "id": "01-defi-map", "title": "DeFi 全景地图：七个赛道与它们的头部协议" },
+        { "id": "02-lending", "title": "链上借贷：抵押率、健康因子与清算机制" },
+        { "id": "03-yield-farming", "title": "流动性挖矿：APR/APY 的真相与「挖提卖」死亡螺旋" },
+        { "id": "04-staking-lst", "title": "质押、流动性质押与再质押（LST / LRT）" },
+        { "id": "05-derivatives", "title": "链上衍生品与结构化产品：期权、永续与收益凭证" },
+        { "id": "06-stable-yield", "title": "收益从哪来：区分真实收益、代币补贴与庞氏结构" },
+        { "id": "07-defi-risks", "title": "DeFi 风险清单：合约、预言机、治理与系统性风险" },
+        { "id": "08-defi-workflow", "title": "实操流水线：评估一个新协议要不要投的十二步" }
+      ]
+    },
+    {
+      "id": "09-layer2-multichain",
+      "num": 9,
+      "title": "第 9 章 · 扩容、多链与跨链桥",
+      "goal": "讲清 L2 技术路线、主流公链差异、跨链桥原理与风险，对应简历「跨链桥」能力项。",
+      "sections": [
+        { "id": "01-why-scaling", "title": "为什么必须扩容：区块空间是稀缺商品" },
+        { "id": "02-rollup-optimistic", "title": "Optimistic Rollup：欺诈证明与七天挑战期" },
+        { "id": "03-rollup-zk", "title": "ZK Rollup：有效性证明与它的工程难点" },
+        { "id": "04-l2-landscape", "title": "L2 生态盘点：主流网络的定位与取舍" },
+        { "id": "05-alt-l1", "title": "非以太坊公链：Solana、Bitcoin 生态与其他 L1 的差异化" },
+        { "id": "06-bridges", "title": "跨链桥原理：锁定铸造、流动性池与消息传递三种模型" },
+        { "id": "07-bridge-hacks", "title": "桥为什么总被黑：历史大案与自查清单" },
+        { "id": "08-multichain-ops", "title": "多链操作手册：如何管理十条链上的资产与 Gas" }
+      ]
+    },
+    {
+      "id": "10-onchain-research",
+      "num": 10,
+      "title": "第 10 章 · 链上数据分析与项目研究方法",
+      "goal": "直接对应简历「项目研究与跟踪、资金流向、社区活跃」，给出可复用的研究工作流与工具链。",
+      "sections": [
+        { "id": "01-research-framework", "title": "项目研究框架：从叙事、团队、代币到资金流的六维打分表" },
+        { "id": "02-block-explorers", "title": "区块浏览器进阶：从一个地址挖出一整条资金链路" },
+        { "id": "03-data-platforms", "title": "链上数据平台工具箱：各类看板分别解决什么问题" },
+        { "id": "04-dune-basics", "title": "看懂并改写 Dune 看板：非程序员的 SQL 最小集" },
+        { "id": "05-whale-tracking", "title": "巨鲸与聪明钱追踪：地址标签、资金异动与预警设置" },
+        { "id": "06-social-signals", "title": "社区热度量化：从社交平台与开发者活跃度里读信号" },
+        { "id": "07-due-diligence", "title": "尽职调查清单：融资、锁仓、审计报告怎么核实" },
+        { "id": "08-research-report", "title": "产出物：写一份能拿去面试的项目研究报告（含模板）" }
+      ]
+    },
+    {
+      "id": "11-airdrop-farming",
+      "num": 11,
+      "title": "第 11 章 · 空投、打新与交互实战",
+      "goal": "对应简历「打新、空投交互、项目筛选」，讲策略、成本核算与合规风险，不鼓吹暴富。",
+      "sections": [
+        { "id": "01-airdrop-logic", "title": "空投的本质：项目方在为什么付费" },
+        { "id": "02-find-opportunities", "title": "机会发现：从融资、测试网与积分体系里找线索" },
+        { "id": "03-interaction-strategy", "title": "交互策略设计：深度、频率、金额与时间跨度" },
+        { "id": "04-cost-accounting", "title": "成本核算：把 Gas、时间与机会成本算成一张表" },
+        { "id": "05-sybil-detection", "title": "女巫检测：项目方是怎么把你判定为刷子的" },
+        { "id": "06-ido-launchpad", "title": "打新与 Launchpad：一级半市场的规则与风险" },
+        { "id": "07-points-and-season", "title": "积分制与赛季制：新一代空投的玩法变化" },
+        { "id": "08-realistic-expectations", "title": "现实预期管理：收益分布、税务与合规的注意事项" }
+      ]
+    },
+    {
+      "id": "12-security-risk",
+      "num": 12,
+      "title": "第 12 章 · 安全与风控：在暗林里活下来",
+      "goal": "对应简历「重视合约安全与风险识别」，做成可执行的防御手册。",
+      "sections": [
+        { "id": "01-threat-model", "title": "建立威胁模型：你的资产会从哪七个口子流走" },
+        { "id": "02-phishing", "title": "钓鱼全图鉴：假网站、假客服、假空投与剪贴板劫持" },
+        { "id": "03-signature-attacks", "title": "签名攻击：Permit、setApprovalForAll 与盲签的杀伤力" },
+        { "id": "04-rugpull-patterns", "title": "Rug Pull 识别：从合约权限与流动性锁看出跑路准备" },
+        { "id": "05-contract-audit-reading", "title": "看懂审计报告：哪些结论有意义，哪些是营销" },
+        { "id": "06-opsec", "title": "个人 OPSEC：设备、网络、账号与身份隔离" },
+        { "id": "07-wallet-hygiene", "title": "钱包分层管理：金库、交互、垃圾钱包的三层架构" },
+        { "id": "08-incident-response", "title": "被盗之后：黄金一小时的应急处置流程" }
+      ]
+    },
+    {
+      "id": "13-industry-career",
+      "num": 13,
+      "title": "第 13 章 · 行业与职业：把 Web3 变成你的工作",
+      "goal": "直接服务求职：岗位地图、运营增长打法、AI 自动化提效、面试与作品集。",
+      "sections": [
+        { "id": "01-industry-map", "title": "Web3 行业地图：钱从哪来、公司分几类、谁在招人" },
+        { "id": "02-job-roles", "title": "岗位说明书：运营、研究、BD、社区、增长各自要什么" },
+        { "id": "03-community-growth", "title": "社区运营实战：从 0 到 1 万人的冷启动与留存打法" },
+        { "id": "04-kol-and-content", "title": "内容与 KOL 合作：叙事包装、投放与效果衡量" },
+        { "id": "05-global-ops", "title": "出海与多时区协作：面向海外社群的运营差异" },
+        { "id": "06-ai-automation", "title": "AI 与自动化提效：把研究、资讯与内容生产做成流水线" },
+        { "id": "07-portfolio", "title": "作品集怎么做：三个能证明能力的可交付物" },
+        { "id": "08-interview-and-risk", "title": "求职与避坑：面试常见题、薪酬结构与识别空壳项目" }
+      ]
+    }
+  ]
+}
