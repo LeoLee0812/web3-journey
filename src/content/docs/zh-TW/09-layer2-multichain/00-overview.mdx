@@ -1,0 +1,43 @@
+---
+title: 本章導讀 · 擴容、多鏈與跨鏈橋
+description: 區塊空間為什麼不夠用、Rollup 如何擴容、多鏈資產怎麼安全流轉——本章幫你搭起理解 L2 與跨鏈的完整框架。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 以太坊主網的區塊空間是稀缺資源，Layer 2 用 Rollup 技術把交易搬到鏈下執行、把結果壓縮後提交回主網，而跨鏈橋則負責把資產和訊息在這些鏈之間搬運——本章講清這套體系怎麼運轉、怎麼選、怎麼防坑。
+
+![多條區塊鏈通過橋樑與高速公路網路互聯的示意插畫](/images/09-layer2-multichain/cover.png)
+
+*圖注：Layer 2 與跨鏈橋共同構成了多鏈世界的"公路網"，把原本擁堵的單一主鏈拆分成多條並行車道 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+Web3 早已不是"一條以太坊主網打天下"的時代。截至 2026 年 8 月，僅 Layer 2 就有 20 多條網路在執行，加上 Solana、比特幣生態 L2、Cosmos/Polkadot 等非以太坊公鏈，普通使用者的資產很容易散落在五六條鏈上。這帶來兩個直接問題：**該把交易放在哪條鏈**，以及**資產在鏈與鏈之間搬運時怎麼才安全**。本章按"為什麼要擴容 → 兩條擴容技術路線 → 各鏈定位 → 跨鏈橋怎麼工作 → 跨鏈橋為什麼總出事 → 日常怎麼管理多鏈資產"的順序，把這套體系從原理講到實操。
+
+## 讀完本章你能做到
+
+- 看懂"區塊空間稀缺"和 Gas 競價的底層邏輯，不再被"Ethereum 太貴"這種籠統說法帶偏
+- 分清 Optimistic Rollup 和 ZK Rollup 的技術權衡，知道 7 天挑戰期到底意味著什麼
+- 根據你要用的應用（而不是道聽途說）判斷該把資產放在 Base、Arbitrum 還是別的 L2
+- 識別跨鏈橋的三種模型（鎖定鑄造、流動性池、訊息傳遞），理解它們各自的風險來源
+- 建立一份跨鏈前的自查清單，避免成為下一個橋被黑事件的受害者
+
+## 本章內容索引
+
+<CardGrid>
+  <LinkCard title="1. 為什麼必須擴容" href="/zh-TW/09-layer2-multichain/01-why-scaling/" description="區塊空間是稀缺商品，供給固定而需求增長，費用競價是必然結果" />
+  <LinkCard title="2. Optimistic Rollup" href="/zh-TW/09-layer2-multichain/02-rollup-optimistic/" description="欺詐證明機制與 7 天挑戰期，雙軌提現如何兼顧安全與速度" />
+  <LinkCard title="3. ZK Rollup" href="/zh-TW/09-layer2-multichain/03-rollup-zk/" description="有效性證明省去挑戰期，代價是證明生成延遲與硬體成本" />
+  <LinkCard title="4. L2 生態盤點" href="/zh-TW/09-layer2-multichain/04-l2-landscape/" description="Base、Arbitrum、Optimism 的市場格局與差異化定位" />
+  <LinkCard title="5. 非以太坊公鏈" href="/zh-TW/09-layer2-multichain/05-alt-l1/" description="Solana 高吞吐、比特幣 L2、Cosmos/Polkadot 模組化路線的取捨" />
+  <LinkCard title="6. 跨鏈橋原理" href="/zh-TW/09-layer2-multichain/06-bridges/" description="鎖定鑄造、流動性池、訊息傳遞三種模型的機制與風險" />
+  <LinkCard title="7. 橋為什麼總被黑" href="/zh-TW/09-layer2-multichain/07-bridge-hacks/" description="歷史大案拆解與跨鏈前的自查清單" />
+  <LinkCard title="8. 多鏈操作手冊" href="/zh-TW/09-layer2-multichain/08-multichain-ops/" description="Gas 管理、跨鏈路由選擇、錢包分級持有的實操指南" />
+</CardGrid>
+
+## 前置知識提示
+
+本章假設你已經理解區塊鏈的基本運作方式（區塊、交易、Gas、錢包）和以太坊主網的核心概念。如果你還不熟悉這些，建議先回頭讀完前面講以太坊基礎和錢包操作的章節，再進入本章——否則"Rollup""挑戰期""DVN"這些術語會讓你雲裡霧裡。

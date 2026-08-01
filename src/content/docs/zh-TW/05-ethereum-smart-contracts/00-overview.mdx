@@ -1,0 +1,46 @@
+---
+title: 本章導讀 · 以太坊與智能合約
+description: 從帳戶模型到 EVM 執行，從 Solidity 關鍵詞到交易生命週期與 MEV，再到合約驗證與代理升級——建立看懂並核驗一份智能合約的完整能力。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 本章要解決一個問題——當你在鏈上和一份陌生的智能合約打交道時，你能不能自己判斷它在做什麼、可不可信，而不是隻看別人說"安全"就相信。
+
+![以太坊虛擬機器與智能合約自動化的示意插畫](/images/05-ethereum-smart-contracts/cover.png)
+
+*圖注：以太坊在帳本之上加了一臺可程式設計的虛擬機器，程式碼由此成為能自動執行的規則 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+比特幣能記帳，但不能"執行規則"。以太坊在帳本之上加了一臺**圖靈完備的虛擬機器（EVM）**，讓程式碼本身成為可以自動執行、不可篡改的"規則制定者"——這就是智能合約。但靈活性帶來了複雜性：合約可以被設計得很安全，也可以被設計得暗藏後門；升級機制可以用來修復漏洞，也可以用來偷偷改規則。本章從底層架構一路講到實操核驗，目標是讓你不依賴任何人背書，自己就能讀懂一份合約的風險邊界。
+
+## 讀完你能做到什麼
+
+- 說清楚以太坊的帳戶模型和比特幣的 UTXO 模型在架構上的根本區別，以及各自的取捨
+- 理解 EVM 如何把一筆交易變成"世界狀態"的一次改寫，為什麼所有節點必須執行相同順序
+- 看懂智能合約的本質限制：它只能被動響應，不會主動做任何事
+- 在 Etherscan 上認出十個最關鍵的 Solidity 關鍵詞，快速定位許可權相關的程式碼
+- 追蹤一筆交易從簽名到最終確定的完整生命週期，理解 Gas 費為什麼時高時低
+- 識別 mempool 搶跑和 MEV 三明治攻擊的原理，知道怎麼設定滑點來自保
+- 獨立核驗一個合約是否開源、有沒有常見的後門函式模式
+- 判斷一個可升級合約（代理模式）的風險等級，看懂誰真正掌握著"改規則"的權力
+
+## 小節索引
+
+<CardGrid>
+  <LinkCard title="1. 以太坊與比特幣的根本分歧" href="/zh-TW/05-ethereum-smart-contracts/01-ethereum-vs-bitcoin/" description="帳戶模型 vs UTXO 模型，兩種記帳哲學決定了誰能跑智能合約" />
+  <LinkCard title="2. EVM 與狀態機" href="/zh-TW/05-ethereum-smart-contracts/02-evm-and-state/" description="鏈上「世界狀態」是怎麼被一筆筆交易改寫的" />
+  <LinkCard title="3. 智能合約到底是什麼" href="/zh-TW/05-ethereum-smart-contracts/03-what-is-contract/" description="自動售貨機模型：合約只會被動響應，永遠不會主動做事" />
+  <LinkCard title="4. 看懂 Solidity" href="/zh-TW/05-ethereum-smart-contracts/04-read-solidity/" description="非開發者也要認識的十個關鍵詞，秒速識別許可權陷阱" />
+  <LinkCard title="5. 一筆交易的一生" href="/zh-TW/05-ethereum-smart-contracts/05-tx-lifecycle/" description="從簽名、廣播、打包到最終確定，五個階段和 Gas 機制" />
+  <LinkCard title="6. 記憶體池與 MEV" href="/zh-TW/05-ethereum-smart-contracts/06-mempool-mev/" description="你的交易在被誰搶跑：三明治攻擊與 MEV 三角關係" />
+  <LinkCard title="7. 實操：核驗一個合約" href="/zh-TW/05-ethereum-smart-contracts/07-verify-contract/" description="用 30 秒紅旗清單判斷合約是否開源、有沒有後門" />
+  <LinkCard title="8. 可升級合約與代理模式" href="/zh-TW/05-ethereum-smart-contracts/08-upgradeable-proxy/" description="專案方能不能偷偷改規則？關鍵看誰掌握升級權" />
+</CardGrid>
+
+## 前置知識提示
+
+本章預設你已經讀過前面幾章，知道什麼是錢包、私鑰、公開地址，以及 Gas 這個概念的雛形。如果你還沒搞清楚"鏈上地址是怎麼來的"或者"熱錢包、冷錢包、託管錢包有什麼區別"，建議先回去補第 4 章《錢包》再回來讀本章，否則第 2、3 節會有點陡。

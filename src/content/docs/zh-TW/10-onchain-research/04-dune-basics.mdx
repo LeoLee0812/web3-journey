@@ -1,0 +1,138 @@
+---
+title: 看懂並改寫 Dune 看板：非程式設計師的 SQL 最小集
+description: Dune 已積累 200K+ 公開看板。學會 Fork 和改四句 SQL 就能定製查詢，門檻從"必須懂程式碼"降到"會改引數"。
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句話結論：** Dune 已降低入門門檻到"Fork + 改引數"，200K+ 公開看板可直接複用，非程式設計師也能在 2-3 分鐘內定製查詢。
+
+## 為什麼要自己改看板，而不是找現成的
+
+想像你在 Excel 裡看到一份同事做的銷售資料透視表，但資料只到上個月。你需要的是"本月資料"。兩個選擇：一是求同事重新做一份（等他有空、互相溝通、版本管理混亂），二是自己複製表格、把"上月"改成"本月"、按一下 F9 重新整理資料，3 分鐘搞定。
+
+Dune 也是這樣。200K+ 公開儀表板裡大多數是"模板"，而不是專為你設計的。學會 Fork（複製）看板和修改關鍵引數（時間、合約地址、代幣名），你就從"資料的消費者"變成"快速研究者"。這是鏈上分析的工作流分界線。
+
+![多屏電腦前分析各類圖表資料的場景](/images/10-onchain-research/04-dune-basics.jpg)
+
+*圖注：Fork 一個看板就像坐到別人電腦前，把現成的圖表改成你需要的引數 · 圖片：Pexels / AlphaTradeZone*
+
+## SQL 最小集：你只需要記住 4 句
+
+Dune 基於 Trino SQL（不是標準 PostgreSQL），但查詢 95% 的用例只需要 4 個動詞：SELECT、FROM、WHERE、GROUP BY。
+
+| 動詞 | 作用 | 例子 |
+|------|------|------|
+| **SELECT** | 選擇要看的列 | `SELECT block_time, token_symbol, amount` |
+| **FROM** | 選擇資料表 | `FROM ethereum.erc20_transfer_events` |
+| **WHERE** | 篩選條件 | `WHERE block_time >= NOW() - INTERVAL '7' DAY` |
+| **GROUP BY** | 分組彙總 | `GROUP BY token_symbol` |
+
+這 4 個串起來就是完整查詢的骨架：
+
+```sql
+SELECT token_symbol, SUM(amount) as total
+FROM ethereum.erc20_transfer_events
+WHERE block_time >= NOW() - INTERVAL '7' DAY
+GROUP BY token_symbol
+```
+
+意思是："過去 7 天每種代幣的轉帳總量"。改一個數字（"7"→"30"），就變成"過去 30 天"。這就是 Fork 工作流的核心。
+
+## Fork 工作流 vs 從零寫查詢
+
+公開看板有一個藍色的 "Fork" 按鈕，點選後你會得到一份可編輯的副本。Dune 社群積累了 200K+ 這樣的模板，覆蓋：協議 TVL、代幣轉帳、DEX 交易量、錢包餘額、聰明錢動向。
+
+**何時 Fork（改現成的）**：
+- 你想看某協議的過去 30 天交易量（找已有的交易量看板，改引數）
+- 你想追蹤某個錢包的入出流（找已有的錢包分析看板，改地址）
+- 你想對比 A 代幣 vs B 代幣的活躍度（找已有的多代幣對比看板，改代幣符號）
+
+**何時自寫查詢**：
+- 沒有現成看板可用
+- 需要跨鏈聚合（如統計從以太坊到 Arbitrum 的跨鏈轉帳）
+- 需要自定義複雜邏輯（如識別"剛進場的新手 vs 老手巨鯨"）
+
+**比例經驗**：日常 80% 的需求靠 Fork 解決，真正自寫的只有 20%。
+
+<Mermaid chart={`graph LR
+  A["想要分析\n某個資料"] --> B{"現成看板\n中有嗎?"}
+  B -->|有| C["點 Fork"]
+  C --> D["改 3-5 個引數"]
+  D --> E["重新整理，看結果"]
+  B -->|沒有| F["自己寫 SQL"]
+  F --> G["學習 SELECT/WHERE\n等語法"]
+  G --> E
+`} />
+
+## 🧪 動手環節：10 分鐘 Fork 一個 TVL 看板
+
+<Steps>
+
+1. **開啟 Dune 並登入** → 訪問 https://dune.com，用郵箱或 GitHub 帳號註冊/登入（免費版足夠用）
+
+2. **搜尋一個熱門協議的 TVL 看板** → 在搜尋框輸入"Lido TVL"或"Aave TVL"，瀏覽結果。找到一個有綠色 ✓ 標記（官方認證或高熱度）的看板，點開它。
+
+3. **點 Fork 按鈕** → 頁面右上角有"Fork"按鈕，點選後 Dune 會建立一份屬於你的副本。
+
+4. **檢視 SQL 編輯器** → 看板下方會顯示 SQL 程式碼。找到 WHERE 子句裡的時間範圍，通常寫法是：
+   ```sql
+   WHERE block_time >= '2026-06-01' AND block_time <= '2026-08-01'
+   ```
+   或
+   ```sql
+   WHERE block_time >= NOW() - INTERVAL '30' DAY
+   ```
+
+5. **修改引數** → 把"30"改成"90"（查詢過去 90 天），或把日期範圍改成你要的時間段。
+
+6. **點重新整理或 "Refresh" 按鈕** → Dune 會重新執行查詢，生成新資料。如果沒報錯，你看到的就是改過後的結果。
+
+7. **儲存你的看板** → 點"Save"，起個名字（如"Lido TVL - 90 Days"），以後可以複用。
+
+</Steps>
+
+如果你卡在"看不懂 SQL"，可以用 Dune 的 AI 助手功能（部分付費計劃提供）或直接問 ChatGPT："怎樣改這條 SQL 只看最近 7 天的資料？"
+
+## ⚠️ 常見坑與誤區
+
+**坑 1：不加 WHERE 子句，查詢卡住或超時**
+
+新手常犯的錯誤是直接 `SELECT * FROM ethereum.transactions`，想要查整個以太坊的交易歷史（數十億行）。Dune 會警告你或直接超時。
+
+正確做法：永遠加時間範圍 `WHERE block_time >= NOW() - INTERVAL '7' DAY`。
+
+**坑 2：混淆穩定幣地址，資料重複或丟失**
+
+USDC 在以太坊和 Polygon 各有一個地址，在 Arbitrum 又有另一個。如果只查一個地址，會漏掉其他鏈的轉帳。查詢時用 `token_symbol = 'USDC'` 或檢查 `contract_address` 是否齊全。
+
+**坑 3：不檢查看板"Last Updated"時間**
+
+某些 Dune 看板可能 2 天沒更新（尤其是 L2 鏈的資料）。瀏覽時看頁面底部或圖表旁的時間戳，確認資料是否最新。
+
+**坑 4：過度信任預聚類資料的標籤**
+
+有些看板用"交易所冷錢包""巨鯨""VC 錢包"等標籤過濾資料，但這些標籤來自第三方（Arkham、Nansen），準確度在 70-95% 之間。釋出結論時要披露"資料來自 X 平臺的自動標籤，準確度有上限"。
+
+**坑 5：把相關性當因果關係**
+
+"TVL 增加 20% 的同時交易費也增加了 20%，所以 TVL 增加導致費用增加"——這是把相關性當因果。用 Dune 構建對照組（同時期的其他協議）來驗證，完整的辨析邏輯見[本章第 3 節](/zh-TW/10-onchain-research/03-data-platforms/)。
+
+## 本節要點
+
+- Dune 已積累 1.5M+ 資料集和 200K+ 公開儀表板；新手不需要從零寫 SQL，只需學會 Fork 和修改引數
+- SQL 最小集是 4 個動詞：SELECT、FROM、WHERE、GROUP BY；掌握它們就能處理 80% 的日常查詢
+- Fork 看板時，關鍵改動通常是時間範圍（NOW() - INTERVAL）、合約地址、代幣符號這三個引數
+- 永遠加 WHERE 子句篩選時間；不要無限制查詢整個表，否則會超時或卡住
+- 跨鏈資料需要小心：同一代幣在不同鏈有不同地址，用 token_symbol 而非硬編碼 contract_address
+- 看板的標籤資料（如"巨鯨"身份）來自第三方啟發式，準確度 70-95%，不能完全信任
+
+## 延伸閱讀
+
+- [Dune Analytics 官方文件 - Query Editor 入門](https://dune.com/docs) — 官方教程，含 Trino SQL 語法和資料表說明
+- [Mastering Chain Analytics - Dune SQL 中文教程](https://sixdegreelab.gitbook.io/mastering-chain-analytics/) — 從 SELECT 到聚合函式的完整中文指南
+- [登鏈社群 - Dune SQL 與以太坊資料分析](https://learnblockchain.cn/article/6480) — 社群貢獻的實戰案例
+- [Dune 官方 SQL 參考](https://dune.com/docs/query/sql-reference) — Trino 方言的完整函式庫和最佳實踐

@@ -1,0 +1,46 @@
+---
+title: 本章導讀 · 錢包實戰
+description: 從選錢包型別、建立錢包、備份助記詞到轉帳、Gas、授權撤銷、硬體錢包與帳戶抽象——建立獨立、安全地掌管鏈上資產的完整操作能力。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 本章要解決一個問題——你能不能獨立、安全地拿到並保管一個屬於自己的鏈上帳戶，而不是把身家性命全交給一個"忘了密碼可以找客服"的託管平臺。
+
+![硬體錢包、手機錢包應用與助記詞備份卡的插畫](/images/04-wallets/cover.png)
+
+*圖注：錢包實戰貫穿本章的三個核心物件——硬體裝置、手機端應用、離線備份 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+錢包不是"存幣的地方"，而是私鑰的託管方式——這是本章反覆強調的第一課。2025 年全球加密貨幣被盜總額超過 34 億美元，助記詞洩露、假應用、無限授權濫用是最常見的三個根因，而這些幾乎全部可以靠正確的操作習慣避免。本章從"選哪種錢包"講到"怎麼建立、怎麼備份、怎麼轉第一筆帳、Gas 費到底在付什麼、授權為什麼危險、要不要買硬體錢包、帳戶抽象會不會顛覆這一切"，目標是讓你在真金白銀上鍊之前，先把這些操作性的坑摸清楚。
+
+## 讀完你能做到什麼
+
+- 分清熱錢包、冷錢包、託管錢包的本質區別，根據自己的資金量和使用場景做出選擇
+- 親手建立一個自託管錢包，理解 BIP-39 助記詞和 BIP-44 派生路徑的原理
+- 用紙質手抄 + 物理隔離的方式正確備份助記詞，繞開雲盤、截圖等七種致命坑
+- 獨立完成一筆轉帳，看懂地址、Gas、確認數這幾個引數分別在幹什麼
+- 理解 EIP-1559 後 Gas 費的構成，知道錢是被銷燬了還是給了驗證者
+- 識別 Approve 授權的風險，用 Revoke.cash 定期檢查並撤銷不再需要的授權
+- 判斷自己是否值得買一臺硬體錢包，以及買回來該怎麼初始化
+- 瞭解帳戶抽象（ERC-4337、EIP-7702）現狀，知道它離取代助記詞還有多遠
+
+## 小節索引
+
+<CardGrid>
+  <LinkCard title="1. 熱錢包、冷錢包、託管錢包" href="/zh-TW/04-wallets/01-wallet-types/" description="錢包的本質是私鑰託管方式，選錢包就是選擇在安全和便利間怎麼權衡" />
+  <LinkCard title="2. 實操：建立人生第一個自託管錢包" href="/zh-TW/04-wallets/02-create-first-wallet/" description="5 分鐘用 MetaMask 生成一對私鑰、公鑰、地址，避開 7 個新手坑" />
+  <LinkCard title="3. 助記詞備份的正確姿勢" href="/zh-TW/04-wallets/03-backup-strategy/" description="備份好是 99% 的安全，洩露是 100% 的遊戲結束——七種作死方式逐一拆解" />
+  <LinkCard title="4. 第一筆轉帳" href="/zh-TW/04-wallets/04-first-transaction/" description="地址、金額、Gas、確認數四個引數逐項拆解，從困惑到看懂" />
+  <LinkCard title="5. Gas 費機制：EIP-1559 之後" href="/zh-TW/04-wallets/05-gas-mechanics/" description="基礎費銷燬、優先費給驗證者，搞懂這套機制才不會瞎猜手續費" />
+  <LinkCard title="6. 授權與撤銷" href="/zh-TW/04-wallets/06-approvals-and-revoke/" description="Approve 無限授權是 DeFi 最大的隱形炸彈，用 Revoke.cash 定期排雷" />
+  <LinkCard title="7. 硬體錢包選購與使用" href="/zh-TW/04-wallets/07-hardware-wallet/" description="不是必需品，什麼時候真的值得買、買回來怎麼用才安全" />
+  <LinkCard title="8. 帳戶抽象與智慧錢包" href="/zh-TW/04-wallets/08-account-abstraction/" description="ERC-4337 與 EIP-7702 兩條路徑，助記詞沒被取代但多了新選擇" />
+</CardGrid>
+
+## 前置知識提示
+
+本章預設你已經讀過前兩章，知道區塊鏈的基本記帳原理，以及私鑰、公鑰、非對稱加密這些密碼學概念的雛形（第 3 章《密碼學基礎》有詳細展開）。如果你還不清楚"私鑰和地址是怎麼算出來的"，建議先補第 3 章再回來，否則第 2 節講 BIP-39 派生時會有點跳。讀完本章，你就具備了獨立、安全操作一個鏈上帳戶的全部基礎能力，可以放心進入第 5 章去看智能合約到底在幹什麼。

@@ -1,0 +1,48 @@
+---
+title: 本章導讀 · 交易所與交易
+description: 從選對交易所到看懂訂單簿、玩轉 DEX、算清無常損失與爆倉價格，這一章教你把"買賣幣"這件事從直覺操作變成可計算的風險決策。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+![交易所與交易的抽象插畫：K線圖表、訂單簿與代幣兌換](/images/07-exchanges-trading/cover.png)
+
+*圖注：從中心化交易所的訂單簿，到去中心化交易所的自動做市，這一章拆解"買賣幣"背後的全部機制 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+前幾章講了錢包、鏈和資產是什麼，這一章回到最實際的問題：**錢怎麼變成幣，幣怎麼變成別的幣，以及每一步藏著什麼風險**。無論你是在中心化交易所（CEX）點「買入」，還是在去中心化交易所（DEX）點「Swap」，背後都是一套可以拆解、可以計算的機制——不是玄學，也不是運氣。
+
+本章會用真實事故案例（$220,800 變成 $5,272 的三明治攻擊、$1900 萬的無常損失、單日 $29 億的清算級聯）告訴你：絕大多數虧損不是"幣選錯了"，而是**引數設定錯了、風險沒算清楚**。
+
+## 讀完這一章你能做到什麼
+
+- 看懂交易所的儲備金證明和冷熱錢包分離，判斷一家 CEX 是否值得把資產放心地存進去
+- 看懂訂單簿、點差、流動性深度，理解滑點從哪裡來、該怎麼設定
+- 理解 AMM 恆定乘積公式 x·y=k，知道 DEX 憑什麼不需要人工做市商
+- 用公式 IL = 2√r/(1+r)−1 精確計算無常損失，而不是被高 APY 數字忽悠
+- 獨立完成一筆鏈上 Swap，並用滑點、私有 RPC 等手段防住 MEV 夾子
+- 算出永續合約的爆倉價格，理解槓桿倍數和清算線之間的確定性關係
+- 認清"無風險套利"的真實成本結構，以及為什麼散戶很難靠它穩定賺錢
+- 建立一套倉位管理和交易紀律的硬性規則，把生存放在收益前面
+
+## 本章目錄
+
+<CardGrid>
+  <LinkCard title="1. 中心化交易所全景" href="/zh-TW/07-exchanges-trading/01-cex-overview/" description="註冊、KYC、儲備金證明與冷熱錢包分離" />
+  <LinkCard title="2. 訂單簿、深度與滑點" href="/zh-TW/07-exchanges-trading/02-orderbook-basics/" description="看懂交易介面的每個數字，理解滑點從何而來" />
+  <LinkCard title="3. DEX 與 AMM" href="/zh-TW/07-exchanges-trading/03-dex-and-amm/" description="恆定乘積公式如何取代人工做市商" />
+  <LinkCard title="4. LP 與無常損失" href="/zh-TW/07-exchanges-trading/04-lp-and-il/" description="用精確公式判斷做流動性提供者是否真的賺錢" />
+  <LinkCard title="5. 實操：鏈上 Swap 與防夾" href="/zh-TW/07-exchanges-trading/05-swap-in-practice/" description="從授權到確認的完整流程，五大防 MEV 策略" />
+  <LinkCard title="6. 合約、永續與槓桿" href="/zh-TW/07-exchanges-trading/06-perp-and-leverage/" description="爆倉價格是怎麼用公式算出來的" />
+  <LinkCard title="7. 鏈上套利與價差" href="/zh-TW/07-exchanges-trading/07-arbitrage/" description="搬磚、三角套利、資金費率套利的真實成本" />
+  <LinkCard title="8. 交易紀律與倉位管理" href="/zh-TW/07-exchanges-trading/08-trading-discipline/" description="比選對幣更難的是活到正確的那一刻" />
+</CardGrid>
+
+## 前置知識提示
+
+閱讀本章前，建議你已經讀過**第 4 章（錢包與資產託管）**，理解私鑰、助記詞和鏈上地址的基本概念——本章大量內容涉及從錢包向交易所充提資產、以及在錢包中直接完成 DEX 交易，沒有這層基礎會看不懂授權（Approve）和簽名的具體操作。如果你還沒接觸過 Gas 費的概念，建議同步參考**第 2 章（區塊鏈基礎）**。
+
+下一章我們會從"交易"走向"DeFi"，看看這些交易機制如何組合成借貸、收益聚合等更復雜的鏈上金融產品。

@@ -1,0 +1,44 @@
+---
+title: 本章導讀 · DeFi 全景
+description: 從借貸、挖礦到質押、衍生品，本章教你拆解任何 DeFi 協議的收益來源與風險結構，建立一套可複用的十二步盡調流程。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 本章要解決一個問題——看到任何一個宣稱高 APY 的 DeFi 協議，你能不能在十分鐘內拆出它的收益到底從哪來、清算和爆雷的邊界在哪，而不是被數字本身嚇到或者誘惑。
+
+![鏈上金融樂高積木組成的去中心化金融體系插畫](/images/08-defi/cover.png)
+
+*圖注：DeFi 由借貸、質押、衍生品等模組像積木一樣互相拼接而成，理解每一塊的機制才能看清整體風險 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+DeFi（去中心化金融）把銀行的借貸、交易所的撮合、保險公司的風險池全部搬到了智能合約上，截至 2026 年 8 月全網 TVL（鎖定總價值）約 $71.77 億，但分散在借貸、DEX、流動性挖礦、質押、再質押、衍生品、收益策略七個賽道里，規模和風險結構天差地別。2025 年 10 月 AAVE 代幣一小時內閃跌 64%，Aave 協議自動處理了 1.8 億美元清算卻毫髮無損；同期 RDNT 專案宣稱 50% APR，實際到手只有 14.76%；2025 年 11 月 Stream Finance 因為依賴的 Balancer 被攻擊，連帶損失 9,300 萬美元。這些真實發生過的案例說明：DeFi 的收益和風險都是可以拆解的，不是玄學。本章就是教你拆解的方法。
+
+## 讀完你能做到什麼
+
+- 看懂健康因子、LTV、清算門檻三個核心引數，知道自己的借貸頭寸離清算還有多遠
+- 分清 APR 和 APY 的區別，識別代幣激勵型高收益背後的"挖提賣"死亡螺旋
+- 理解 LST（流動性質押）和 LRT（再質押）疊加槓桿後風險如何指數放大
+- 計算永續合約的清算價格和資金費率成本，知道多少倍槓桿是在拿本金賭博
+- 把任何一個 DeFi 協議的收益來源歸類為真實收益、代幣補貼或龐氏結構
+- 用十二步盡調流程系統評估一個新協議，而不是隻看 TVL 和 APY 兩個數字就下場
+
+## 小節索引
+
+<CardGrid>
+  <LinkCard title="1. DeFi 全景地圖：七個賽道與它們的頭部協議" href="/zh-TW/08-defi/01-defi-map/" description="借貸、DEX、挖礦、LST、LRT、衍生品、收益策略——各賽道規模與風險速覽" />
+  <LinkCard title="2. 鏈上借貸：抵押率、健康因子與清算機制" href="/zh-TW/08-defi/02-lending/" description="健康因子怎麼算、清算怎麼觸發，Aave 1.8 億美元清算案例復盤" />
+  <LinkCard title="3. 流動性挖礦：APR/APY 的真相與死亡螺旋" href="/zh-TW/08-defi/03-yield-farming/" description="RDNT 50% APR 騙局拆解，識別代幣激勵耗盡後的崩盤節奏" />
+  <LinkCard title="4. 質押、流動性質押與再質押（LST / LRT）" href="/zh-TW/08-defi/04-staking-lst/" description="從 32 ETH 驗證者到 Lido stETH 再到 ether.fi 再質押，槓桿一層層疊加的風險" />
+  <LinkCard title="5. 鏈上衍生品與結構化產品" href="/zh-TW/08-defi/05-derivatives/" description="永續合約的清算速度、資金費率成本，以及收益憑證裡藏著的期權風險" />
+  <LinkCard title="6. 收益從哪來：真實收益、代幣補貼與龐氏結構" href="/zh-TW/08-defi/06-stable-yield/" description="三類收益來源的可持續性對比，一套快速判斷 APY 真假的方法" />
+  <LinkCard title="7. DeFi 風險清單：合約、預言機、治理與系統性風險" href="/zh-TW/08-defi/07-defi-risks/" description="重入攻擊、預言機操縱、治理集中、級聯爆雷——四大風險維度全覆蓋" />
+  <LinkCard title="8. 實操流水線：評估新協議的十二步" href="/zh-TW/08-defi/08-defi-workflow/" description="信任基礎、技術底線、財務健康、風險決策，一套可複用的盡調清單" />
+</CardGrid>
+
+## 前置知識提示
+
+本章預設你已經讀完第 4 章《錢包實戰》（知道怎麼簽名授權、怎麼識別惡意合約）和第 7 章《交易所與交易》（理解 DEX、AMM、無常損失的基本概念）。如果你還不清楚什麼是 AMM（自動做市商）或者滑點是怎麼產生的，建議先補第 7 章第 3、4 節，否則本章第 3 節講無常損失時會缺一塊地基。讀完本章，你會具備獨立評估一個 DeFi 協議是否值得參與的完整框架，可以進入第 9 章去看這些協議在 Layer 2 和多鏈環境下又會遇到哪些新變數。

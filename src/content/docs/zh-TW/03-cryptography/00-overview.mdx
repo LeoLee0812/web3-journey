@@ -1,0 +1,43 @@
+---
+title: 本章導讀 · 密碼學基礎
+description: 從一把鑰匙講到零知識證明，搞懂私鑰、公鑰、地址、簽名、助記詞到底是怎麼來的，為什麼它們各自不可逆，這是安全用錢包的底層前提。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 你的 Web3 帳戶沒有使用者名稱密碼，只有一串數字——本章拆開這串數字從隨機數到地址、從助記詞到簽名的完整推導鏈條，讓你知道每一步為什麼安全、又會在哪一步栽跟頭。
+
+![密碼學與金鑰安全的抽象插畫](/images/03-cryptography/cover.png)
+
+*圖注：從私鑰到簽名，本章要拆開的是一整條環環相扣的密碼學推導鏈條 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+很多人用了半年 MetaMask，也說不清楚私鑰、公鑰、地址三者的關係，更不知道那 12 個英文單詞憑什麼能找回全部資產。本章從最基礎的"一把鎖兩把鑰匙"講起，一路拆到私鑰如何推匯出公鑰和地址、BIP-39 助記詞和 HD 錢包如何用一句話生成無數地址、ECDSA 簽名如何證明所有權而不暴露私鑰、雜湊函式和默克爾樹如何支撐起區塊鏈的可驗證性，最後落到零知識證明這個正在重塑 Layer 2 擴容格局的技術。讀完本章，你不會再把這些詞當成"聽起來很安全"的黑箱。
+
+## 讀完你能做到什麼
+
+- 說清楚對稱加密和非對稱加密的根本區別，理解為什麼區塊鏈帳戶體系必須建立在非對稱加密之上
+- 獨立描述從 256 位私鑰到 42 字元地址的完整推導鏈條，並知道鏈條中每一步為什麼不可逆
+- 理解 BIP-39 助記詞和 BIP-32/BIP-44 派生路徑的關係，能自己判斷"匯入錢包後資金消失"是不是真的丟了
+- 看懂一筆交易簽名背後的數學原理，識別隨機數質量差、盲簽名這兩類真實發生過的安全事故
+- 分清 SHA-256 與 Keccak-256、zk-SNARK 與 zk-STARK 的關鍵差異，不再把名字相近的技術混為一談
+
+## 本章目錄
+
+<CardGrid>
+  <LinkCard title="1. 對稱與非對稱加密" description="一把鎖兩把鑰匙的思想實驗，為什麼區塊鏈選擇了非對稱加密" href="/zh-TW/03-cryptography/01-symmetric-vs-asymmetric/" />
+  <LinkCard title="2. 私鑰、公鑰、地址" description="從 256 位隨機數到 42 字元地址，三者如何推導又為何不可逆" href="/zh-TW/03-cryptography/02-private-public-key/" />
+  <LinkCard title="3. 助記詞與 BIP-39" description="12 個英文單詞憑什麼等於你的全部資產" href="/zh-TW/03-cryptography/03-mnemonic-bip39/" />
+  <LinkCard title="4. HD 錢包與派生路徑" description="一個助記詞為什麼能生出無數地址，以及資金'消失'的真相" href="/zh-TW/03-cryptography/04-hd-wallet-path/" />
+  <LinkCard title="5. 數字簽名機制" description="點選「確認」的那一刻，ECDSA 簽名到底做了什麼" href="/zh-TW/03-cryptography/05-digital-signature/" />
+  <LinkCard title="6. 雜湊函式詳解" description="SHA-256 與 Keccak-256 的構造差異和各自的應用場景" href="/zh-TW/03-cryptography/06-hash-functions/" />
+  <LinkCard title="7. 默克爾樹" description="為什麼一部手機也能驗證一筆十年前的交易" href="/zh-TW/03-cryptography/07-merkle-tree/" />
+  <LinkCard title="8. 零知識證明入門" description="不暴露秘密也能證明你知道它，以及它如何撐起 L2 擴容" href="/zh-TW/03-cryptography/08-zk-intro/" />
+</CardGrid>
+
+## 前置知識
+
+本章預設你已經讀過第 1 章（Web3 是什麼）和第 2 章（區塊鏈底層結構），知道"區塊""雜湊""共識"這些詞的基本含義。密碼學是純數學和工程細節比較密集的一章，建議按順序讀完 8 節——後面幾節會直接複用前面推匯出的概念，跳讀容易斷片。讀完本章，你才算真正為下一章"錢包實操"做好了準備。

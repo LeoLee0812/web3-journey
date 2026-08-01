@@ -1,0 +1,44 @@
+---
+title: 本章導讀 · 代幣世界
+description: 從 ERC-20/721/1155 標準到代幣經濟學、穩定幣三大流派、NFT 興衰與 RWA 上鍊，建立判斷一個代幣專案是否靠譜的完整分析框架。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 本章要解決一個問題——面對任何一個新代幣、新 NFT 專案，你能不能在十分鐘內判斷出它的機制是什麼、錢從哪來、風險在哪，而不是隻看白皮書裡的美好敘事。
+
+![代幣、穩定幣與數字藝術 NFT 的抽象插畫](/images/06-tokens-nft/cover.png)
+
+*圖注：本章要講的三樣東西——可互換的代幣、錨定價值的穩定幣、獨一無二的數字資產 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+鏈上的"資產"看起來五花八門，但歸根結底只有兩套底層標準：可互換的 ERC-20 和不可互換的 ERC-721/1155。前幾章你學會了怎麼開錢包、怎麼讀合約，這一章要解決的是更進一層的問題：一個代幣或 NFT 專案，到底值不值得研究、值不值得持有。穩定幣市值超過 $300B（截至 2026 年 8 月），但 USDT、USDC、DAI 背後是三種完全不同的信用結構；演算法穩定幣 UST 一週內蒸發 600 億美元；NFT 市場從全民投機分化成"遊戲道具活得好好的、投機藝術品 95% 無成交"的兩個世界。本章把這些真實發生過的案例拆開，教你識別代幣經濟學設計裡的坑、穩定幣機制裡的雷、NFT 敘事裡的泡沫。
+
+## 讀完你能做到什麼
+
+- 看到一個新代幣專案，能判斷該用 ERC-20、ERC-721 還是 ERC-1155，理解三者的 gas 成本和風險差異
+- 計算流通市值與完全稀釋價值（FDV）的比值，識別解鎖拋壓風險，避免在大解鎖前追高
+- 分清法幣抵押、超額抵押、演算法穩定三種穩定幣機制，知道自己持有的"穩定幣"到底穩定在哪
+- 能複述 UST 死螺旋和 USDC SVB 脫錨兩個真實案例的完整機制，而不只是記住結論
+- 判斷一個 NFT 專案屬於"有真實用途"還是"純投機敘事"，避開地板價幻覺和授權釣魚
+- 理解 RWA（現實世界資產代幣化）解決的是什麼問題，以及它當前的規模和侷限在哪
+
+## 小節索引
+
+<CardGrid>
+  <LinkCard title="1. ERC-20 / 721 / 1155 三大標準" href="/zh-TW/06-tokens-nft/01-token-standards/" description="可互換的錢、獨一無二的物品、兩者混合——選錯標準等於給專案綁了枷鎖" />
+  <LinkCard title="2. 代幣經濟學入門" href="/zh-TW/06-tokens-nft/02-tokenomics/" description="流通供應、完全稀釋價值、真實需求，代幣值不值錢的三個核心變數" />
+  <LinkCard title="3. 解鎖曲線與拋壓測算" href="/zh-TW/06-tokens-nft/03-unlock-schedule/" description="90% 的解鎖事件伴隨價格下跌，用一張表格量化這個風險" />
+  <LinkCard title="4. 穩定幣三大流派" href="/zh-TW/06-tokens-nft/04-stablecoins/" description="法幣抵押、超額抵押、演算法穩定——三種完全不同的信用來源" />
+  <LinkCard title="5. 案例復盤：UST 崩盤與幾次脫錨事件" href="/zh-TW/06-tokens-nft/05-stablecoin-failures/" description="拆解死螺旋的具體數學過程，以及 USDC 如何在 48 小時內恢復" />
+  <LinkCard title="6. NFT 是什麼" href="/zh-TW/06-tokens-nft/06-nft-basics/" description="NFT 的核心是鏈上識別符號而非圖片，後設資料、版稅機制的真相" />
+  <LinkCard title="7. NFT 的真實用途與泡沫" href="/zh-TW/06-tokens-nft/07-nft-utility/" description="哪些敘事活了下來，哪些已經破滅——2026 年市場分化全景" />
+  <LinkCard title="8. RWA 與新型鏈上資產" href="/zh-TW/06-tokens-nft/08-rwa-and-new-assets/" description="把國債、房產搬上鍊的現實進展：機構級應用、增速與三大障礙" />
+</CardGrid>
+
+## 前置知識提示
+
+本章預設你已經讀完第 4 章《錢包實戰》和第 5 章《以太坊與智能合約》——你需要知道錢包怎麼簽名授權、合約怎麼被呼叫，才能理解代幣轉帳背後的 approve 機制和 NFT 後設資料為什麼存在鏈外。如果你還沒搞清楚 Gas 費和授權撤銷是怎麼回事，建議先回第 4 章第 5、6 節補課，否則本章第 1 節講授權風險對等性時會有點跳。讀完本章，你會具備判斷代幣和 NFT 專案基本靠譜程度的框架，可以進入第 7 章去看這些資產在交易所和鏈上是怎麼被買賣的。

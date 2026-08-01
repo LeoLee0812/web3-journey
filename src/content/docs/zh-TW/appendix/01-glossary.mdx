@@ -1,0 +1,210 @@
+---
+title: 附錄 A · 全書術語表
+description: 收錄全書 13 章出現的 140 餘個 Web3 專業術語，按主題分組給出中英對照、一句話解釋和講解最透的章節連結，方便隨時速查與考前複習。
+sidebar:
+  order: 1
+---
+
+> **使用說明：** 這份術語表按主題分成 10 組，覆蓋全書 13 章出現過的高頻概念。查詞時先看"一句話解釋"能不能獨立看懂；如果需要更完整的機制拆解、案例和踩坑提醒，點開"出現章節"那一列的連結跳到原文。你也可以直接用右上角的搜尋框輸入中文或英文關鍵詞，搜尋結果會帶你跳到具體段落，比翻這張表更快。建議第一次通讀全書前先掃一眼分組標題建立框架，讀完某一章後回來對照複習，考前衝刺時重點看結尾的「最容易混淆的 8 組概念」。
+
+## 一、基礎概念
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 三代網際網路 | Web1 / Web2 / Web3 | 從只讀的靜態網頁，到平臺壟斷資料的讀寫網路，再到使用者自持資產和身份的價值網路 | [1.1](/zh-TW/01-what-is-web3/01-web1-web2-web3/) |
+| 去中心化 | Decentralization | 權力和資料不集中在單一機構，而是分散給網路中大量獨立參與者 | [1.2](/zh-TW/01-what-is-web3/02-why-decentralization/) |
+| 去中心化應用 | DApp | 前端與智能合約互動、邏輯跑在鏈上而非某家公司伺服器的應用 | [1.3](/zh-TW/01-what-is-web3/03-glossary-map/) |
+| 去中心化自治組織 | DAO | 由代幣持有者通過鏈上投票共同決定資金使用和規則修改的組織形式 | [1.3](/zh-TW/01-what-is-web3/03-glossary-map/) |
+| 治理代幣 | Governance Token | 持有者可以對協議引數、資金分配、升級方向進行投票的代幣 | [1.3](/zh-TW/01-what-is-web3/03-glossary-map/) |
+| 區塊 | Block | 打包一批交易並按時間順序連結成鏈的帳本基本單元 | [2.1](/zh-TW/02-blockchain-basics/01-ledger-metaphor/) |
+| 雜湊 | Hash | 把任意長度資料壓縮成固定長度指紋的函式，輸入差一點輸出就面目全非 | [2.2](/zh-TW/02-blockchain-basics/02-hash-and-blocks/) |
+| 全節點 / 輕節點 / 檔案節點 | Full / Light / Archive Node | 分別負責完整驗證、依賴證明快速查詢、儲存全部歷史資料的三類節點分工 | [2.3](/zh-TW/02-blockchain-basics/03-nodes-and-network/) |
+| 工作量證明 | PoW（Proof of Work） | 礦工靠海量雜湊運算競爭記帳權，誰先算出符合難度的結果誰出塊 | [2.4](/zh-TW/02-blockchain-basics/04-consensus-pow/) |
+| 權益證明 | PoS（Proof of Stake） | 驗證者鎖定資本代替燒電競爭，作惡會被扣除質押本金 | [2.5](/zh-TW/02-blockchain-basics/05-consensus-pos/) |
+| 不可能三角 | Blockchain Trilemma | 去中心化、安全、可擴充套件三個目標互相制約，沒有鏈能同時做到極致 | [2.6](/zh-TW/02-blockchain-basics/06-trilemma/) |
+| 硬分叉 / 軟分叉 | Hard Fork / Soft Fork | 前者不向後相容、舊節點必須升級；後者向後相容、舊節點仍可執行 | [2.7](/zh-TW/02-blockchain-basics/07-fork-and-governance/) |
+| 51% 攻擊 | 51% Attack | 攻擊者掌握全網過半算力或質押量後可以篡改交易記錄、發起雙花 | [2.4](/zh-TW/02-blockchain-basics/04-consensus-pow/) |
+
+## 二、密碼學與錢包
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 對稱加密 | Symmetric Encryption | 加密解密用同一把金鑰，速度快但兩方要先安全共享這把鑰匙 | [3.1](/zh-TW/03-cryptography/01-symmetric-vs-asymmetric/) |
+| 非對稱加密 | Asymmetric Encryption | 公鑰加密、私鑰解密的雙鑰體系，解決了陌生人之間的金鑰分發難題 | [3.1](/zh-TW/03-cryptography/01-symmetric-vs-asymmetric/) |
+| 私鑰 | Private Key | 64 位十六進位制字元組成的絕密數字，用來簽署交易、證明資產歸屬 | [3.2](/zh-TW/03-cryptography/02-private-public-key/) |
+| 公鑰 | Public Key | 由私鑰經橢圓曲線運算推出，可公開且無法反推出私鑰 | [3.2](/zh-TW/03-cryptography/02-private-public-key/) |
+| 地址 | Address | 帳戶對外公開的識別符號，類似銀行卡號，可以放心分享 | [3.2](/zh-TW/03-cryptography/02-private-public-key/) |
+| 助記詞 | Seed Phrase / BIP-39 | 12-24 個精選英文單詞，編碼了生成全部地址所需的隨機熵 | [3.3](/zh-TW/03-cryptography/03-mnemonic-bip39/) |
+| HD 錢包與派生路徑 | HD Wallet / BIP-32 / BIP-44 | 一個助記詞經分層推導可生成無限個地址，路徑格式如 m/44'/60'/0'/0/n | [3.4](/zh-TW/03-cryptography/04-hd-wallet-path/) |
+| 數字簽名 | Digital Signature | 用私鑰對交易簽名，任何人用公鑰都能驗證簽名真實性且無需暴露私鑰 | [3.5](/zh-TW/03-cryptography/05-digital-signature/) |
+| 雜湊函式 | SHA-256 / Keccak-256 | 比特幣和以太坊分別採用的兩種主力雜湊演算法，各自服務不同場景 | [3.6](/zh-TW/03-cryptography/06-hash-functions/) |
+| 默克爾樹 | Merkle Tree | 把成千上萬筆交易逐層配對雜湊，濃縮成一個根雜湊便於快速驗證 | [3.7](/zh-TW/03-cryptography/07-merkle-tree/) |
+| 零知識證明 | ZKP（Zero-Knowledge Proof） | 不透露秘密本身也能證明"我知道這個秘密"的密碼學技術 | [3.8](/zh-TW/03-cryptography/08-zk-intro/) |
+| 熱錢包 | Hot Wallet | 私鑰存在聯網裝置上的錢包，操作便利但暴露面大 | [4.1](/zh-TW/04-wallets/01-wallet-types/) |
+| 冷錢包 | Cold Wallet | 私鑰從不接觸網路的錢包，安全性高但操作流程複雜 | [4.1](/zh-TW/04-wallets/01-wallet-types/) |
+| 託管錢包 | Custodial Wallet | 私鑰由交易所等第三方代管，省心但要信任對方不作惡不被黑 | [4.1](/zh-TW/04-wallets/01-wallet-types/) |
+| Gas 費機制 | Base Fee / Priority Fee | EIP-1559 後 Gas 費拆成會被銷燬的基礎費和給驗證者的優先費兩部分 | [4.5](/zh-TW/04-wallets/05-gas-mechanics/) |
+| 授權與撤銷 | Approve / Revoke | 允許合約動用你代幣的操作，預設無限額度是最常見的資產被盜誘因 | [4.6](/zh-TW/04-wallets/06-approvals-and-revoke/) |
+| 硬體錢包 | Hardware Wallet | 私鑰儲存在獨立安全晶片、離線簽名的物理裝置，只保護私鑰不保護你的判斷 | [4.7](/zh-TW/04-wallets/07-hardware-wallet/) |
+| 帳戶抽象 | Account Abstraction（ERC-4337 / EIP-7702） | 讓錢包獲得社交恢復、批次交易、費用贊助等智能合約級能力的升級方案 | [4.8](/zh-TW/04-wallets/08-account-abstraction/) |
+
+## 三、以太坊與智能合約
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 以太坊虛擬機器 | EVM | 執行合約位元組碼的 256 位棧式虛擬機器，全網節點執行結果必須一致 | [5.2](/zh-TW/05-ethereum-smart-contracts/02-evm-and-state/) |
+| 外部帳戶 | EOA（Externally Owned Account） | 由私鑰控制、能主動發起交易的普通錢包帳戶，本身沒有程式碼 | [5.1](/zh-TW/05-ethereum-smart-contracts/01-ethereum-vs-bitcoin/) |
+| 合約帳戶 | Contract Account | 擁有程式碼和儲存、只能被動響應外部呼叫的帳戶型別 | [5.3](/zh-TW/05-ethereum-smart-contracts/03-what-is-contract/) |
+| 世界狀態 | World State | 全部帳戶資訊構成的分層樹結構，每個新區塊都會更新一次狀態根 | [5.2](/zh-TW/05-ethereum-smart-contracts/02-evm-and-state/) |
+| 智能合約 | Smart Contract | 部署在鏈上、由交易觸發自動執行的程式，程式碼即規則 | [5.3](/zh-TW/05-ethereum-smart-contracts/03-what-is-contract/) |
+| Solidity | Solidity | 以太坊最主流的合約程式語言，語法接近 JavaScript | [5.4](/zh-TW/05-ethereum-smart-contracts/04-read-solidity/) |
+| 應用二進位制介面 | ABI | 描述合約有哪些函式和引數格式的規範，外部程式靠它編解碼呼叫資料 | [5.4](/zh-TW/05-ethereum-smart-contracts/04-read-solidity/) |
+| 重入漏洞 | Reentrancy | 攻擊者趁餘額沒更新反覆回撥提款函式、把錢多次取走的經典漏洞 | [5.3](/zh-TW/05-ethereum-smart-contracts/03-what-is-contract/) |
+| 合約驗證 | Contract Verification | 把原始碼重新編譯後與鏈上位元組碼比對，證明程式碼公開可讀，但不等於安全 | [5.7](/zh-TW/05-ethereum-smart-contracts/07-verify-contract/) |
+| 代理模式（UUPS） | Proxy Pattern / UUPS（ERC-1822） | 使用者訪問固定代理地址，管理員可替換背後的邏輯合約實現合約升級 | [5.8](/zh-TW/05-ethereum-smart-contracts/08-upgradeable-proxy/) |
+| 記憶體池 | Mempool | 交易廣播後、被打包進區塊前的公開等待區，任何人都能提前看到 | [5.6](/zh-TW/05-ethereum-smart-contracts/06-mempool-mev/) |
+| 最大可提取價值 | MEV | 出塊者通過調整區塊內交易順序、插入或剔除交易來榨取的額外利潤 | [5.6](/zh-TW/05-ethereum-smart-contracts/06-mempool-mev/) |
+| 三明治攻擊 | Sandwich Attack | 機器人在你的交易前後各夾一筆單子，抬價後又回落套現的搶跑手法 | [5.6](/zh-TW/05-ethereum-smart-contracts/06-mempool-mev/) |
+
+## 四、代幣與 NFT 資產
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 同質化代幣標準 | ERC-20 | 任意兩枚完全等價、可自由互換的代幣標準，穩定幣和治理代幣都屬此類 | [6.1](/zh-TW/06-tokens-nft/01-token-standards/) |
+| 非同質化代幣標準 | ERC-721 | 每一枚都有唯一編號、彼此不可互換的代幣標準，用於藏品和門票 | [6.1](/zh-TW/06-tokens-nft/01-token-standards/) |
+| 多代幣標準 | ERC-1155 | 一份合約裡同時管理同質化和非同質化代幣，批次轉帳更省 Gas | [6.1](/zh-TW/06-tokens-nft/01-token-standards/) |
+| 代幣經濟學 | Tokenomics | 研究代幣的供應節奏、分配結構和真實需求如何決定長期價格的框架 | [6.2](/zh-TW/06-tokens-nft/02-tokenomics/) |
+| 完全稀釋估值 | FDV（Fully Diluted Valuation） | 假設全部代幣都已解鎖流通後的理論市值，等於現價乘以總供應量 | [6.2](/zh-TW/06-tokens-nft/02-tokenomics/) |
+| 解鎖曲線與懸崖期 | Unlock Schedule / Cliff | 團隊和投資人手中的代幣按什麼時間表釋放，懸崖期一到常伴隨集中拋壓 | [6.3](/zh-TW/06-tokens-nft/03-unlock-schedule/) |
+| 法幣抵押型穩定幣 | Fiat-Collateralized Stablecoin | 發行方存入等額法幣或國債作背書的穩定幣，如 USDT、USDC | [6.4](/zh-TW/06-tokens-nft/04-stablecoins/) |
+| 超額抵押型穩定幣 | Over-Collateralized Stablecoin | 用價值高於面值的加密資產抵押鑄出的穩定幣，典型代表是 DAI | [6.4](/zh-TW/06-tokens-nft/04-stablecoins/) |
+| 演算法穩定幣 | Algorithmic Stablecoin | 不靠真實資產抵押、純用套利機制維持錨定的穩定幣，脆弱性已被反覆驗證 | [6.4](/zh-TW/06-tokens-nft/04-stablecoins/) |
+| 脫錨 | Depeg | 穩定幣價格偏離承諾的 1 美元，可能是短暫折價也可能是不可逆崩塌 | [6.5](/zh-TW/06-tokens-nft/05-stablecoin-failures/) |
+| UST/LUNA 崩盤 | UST Collapse（2022） | 演算法穩定幣 UST 脫錨引發數百億美元生態歸零的標誌性事件 | [6.5](/zh-TW/06-tokens-nft/05-stablecoin-failures/) |
+| NFT 後設資料 | Metadata / Token URI / IPFS | NFT 圖片和屬性資訊通常不存在鏈上，靠一條連結指向去中心化儲存 | [6.6](/zh-TW/06-tokens-nft/06-nft-basics/) |
+| 版稅 | Royalty（EIP-2981） | 二級市場轉手時分給原創作者的抽成，是否強制執行取決於交易平臺 | [6.6](/zh-TW/06-tokens-nft/06-nft-basics/) |
+| 現實世界資產 | RWA（Real-World Assets） | 把國債、房產等鏈下資產代幣化搬上鍊，使其可全球交易和組合 | [6.8](/zh-TW/06-tokens-nft/08-rwa-and-new-assets/) |
+
+## 五、交易與市場
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 中心化交易所 | CEX | 由公司託管使用者資產並在內部資料庫撮合交易的平臺 | [7.1](/zh-TW/07-exchanges-trading/01-cex-overview/) |
+| 去中心化交易所 | DEX | 用鏈上智能合約完成撮合、使用者全程自持私鑰的交易場所 | [7.3](/zh-TW/07-exchanges-trading/03-dex-and-amm/) |
+| 實名認證 | KYC（Know Your Customer） | 交易所要求提交身份資訊以符合監管要求的合規流程 | [7.1](/zh-TW/07-exchanges-trading/01-cex-overview/) |
+| 訂單簿 | Order Book | 按價格排隊的買單賣單清單，價格發現發生在兩邊佇列碰撞處 | [7.2](/zh-TW/07-exchanges-trading/02-orderbook-basics/) |
+| 滑點 | Slippage | 預期成交價和實際成交價之間的偏差，交易規模越大偏得越多 | [7.2](/zh-TW/07-exchanges-trading/02-orderbook-basics/) |
+| 自動做市商 | AMM（Automated Market Maker） | 用數學公式自動報價的做市機制，取代人工掛單讓任意代幣隨時可換 | [7.3](/zh-TW/07-exchanges-trading/03-dex-and-amm/) |
+| 流動性提供者 | LP（Liquidity Provider） | 往流動性池按比例存入兩種資產、按份額分手續費的參與者 | [7.4](/zh-TW/07-exchanges-trading/04-lp-and-il/) |
+| 無常損失 | IL（Impermanent Loss） | 池內代幣價格變動導致被動調倉，最終價值低於當初直接持有不動的差額 | [7.4](/zh-TW/07-exchanges-trading/04-lp-and-il/) |
+| 永續合約 | Perpetual Futures | 沒有交割日、可以一直持有的槓桿合約，靠資金費率把價格拉回現貨附近 | [7.6](/zh-TW/07-exchanges-trading/06-perp-and-leverage/) |
+| 資金費率 | Funding Rate | 永續合約多空雙方定期結算的費用，用來把合約價拉回現貨價 | [7.6](/zh-TW/07-exchanges-trading/06-perp-and-leverage/) |
+| 強制平倉 | Liquidation | 保證金率跌破維持線後系統自動砍倉的價格觸發事件 | [7.6](/zh-TW/07-exchanges-trading/06-perp-and-leverage/) |
+| 閃電貸 | Flash Loan | 無需抵押借出鉅額資金，但必須在同一筆交易內還清否則整筆回滾 | [7.7](/zh-TW/07-exchanges-trading/07-arbitrage/) |
+| 止損 | Stop Loss | 提前設好的自動離場價格，把單筆交易的最大虧損鎖在可承受範圍內 | [7.8](/zh-TW/07-exchanges-trading/08-trading-discipline/) |
+
+## 六、DeFi
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 去中心化金融 | DeFi | 用智能合約替代銀行券商提供借貸、交易、衍生品服務的鏈上金融體系 | [8.1](/zh-TW/08-defi/01-defi-map/) |
+| 抵押率 | LTV（Loan-to-Value） | 抵押品價值中最多能借出的比例，決定你能借多少錢 | [8.2](/zh-TW/08-defi/02-lending/) |
+| 健康因子 | Health Factor（HF） | 抵押品加權價值除以總債務得到的安全餘量，跌到 1.0 以下即被清算 | [8.2](/zh-TW/08-defi/02-lending/) |
+| 清算人 | Liquidator | 替借款人還債換取折價獎勵的第三方機器人，維持協議不產生壞帳 | [8.2](/zh-TW/08-defi/02-lending/) |
+| 流動性挖礦 | Yield Farming | 把資金存入協議換取代幣獎勵，高收益往往靠增發代幣補貼撐出來 | [8.3](/zh-TW/08-defi/03-yield-farming/) |
+| 名義年利率 | APR（Annual Percentage Rate） | 不計複利的年化數字，專案方常用它做宣傳因為數字更漂亮 | [8.3](/zh-TW/08-defi/03-yield-farming/) |
+| 實際年化收益率 | APY（Annual Percentage Yield） | 計入復投頻率後的真實年化，與代幣價格掛鉤的部分會隨幣價縮水 | [8.3](/zh-TW/08-defi/03-yield-farming/) |
+| 流動性質押代幣 | LST（Liquid Staking Token） | 質押 ETH 後拿到的可自由交易計息憑證，如 Lido 的 stETH | [8.4](/zh-TW/08-defi/04-staking-lst/) |
+| 流動性再質押代幣 | LRT（Liquid Restaking Token） | 把 LST 再質押到其他網路換來的第二層憑證，收益疊加風險也疊加 | [8.4](/zh-TW/08-defi/04-staking-lst/) |
+| 罰沒 | Slashing | 驗證者作惡或長期掉線時被扣除部分質押本金的懲罰機制 | [8.4](/zh-TW/08-defi/04-staking-lst/) |
+| 預言機操縱 | Oracle Manipulation | 用鉅額資金瞬間拉扭某個池子價格、騙過協議喂價來低價套走抵押品 | [8.7](/zh-TW/08-defi/07-defi-risks/) |
+| 閃電貸攻擊 | Flash Loan Attack | 借來無抵押鉅款，在一筆交易內操縱價格榨乾協議再還款走人 | [8.7](/zh-TW/08-defi/07-defi-risks/) |
+| 真實收益 | Real Yield | 來自手續費、借貸利差等真實業務的分紅，而非靠印代幣補貼出來的收益 | [8.6](/zh-TW/08-defi/06-stable-yield/) |
+
+## 七、擴容與多鏈
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 第一層網路 | Layer 1 / L1 | 承載最終結算與安全共識的基礎區塊鏈，如比特幣、以太坊主網 | [9.1](/zh-TW/09-layer2-multichain/01-why-scaling/) |
+| 第二層網路 | Layer 2 / L2 | 建立在 L1 之上處理大量交易、定期向 L1 提交證明的獨立執行層 | [9.1](/zh-TW/09-layer2-multichain/01-why-scaling/) |
+| 彙總 | Rollup | 把大量交易打包壓縮後提交到 L1 結算的主流擴容方式 | [9.1](/zh-TW/09-layer2-multichain/01-why-scaling/) |
+| 樂觀彙總 | Optimistic Rollup | 預設信任鏈下交易正確、只在被挑戰時才驗證的擴容方案 | [9.2](/zh-TW/09-layer2-multichain/02-rollup-optimistic/) |
+| 欺詐證明 | Fraud Proof | 挑戰期內用於證明某筆交易存在錯誤的鏈上互動式仲裁機制 | [9.2](/zh-TW/09-layer2-multichain/02-rollup-optimistic/) |
+| 零知識彙總 | ZK Rollup | 用零知識證明驗證交易有效性、無需挑戰期的擴容方案 | [9.3](/zh-TW/09-layer2-multichain/03-rollup-zk/) |
+| zk-SNARK | zk-SNARK | 證明體積小、驗證快但需要可信設定的零知識證明系統 | [9.3](/zh-TW/09-layer2-multichain/03-rollup-zk/) |
+| zk-STARK | zk-STARK | 無需可信設定、抗量子但證明體積較大的零知識證明系統 | [9.3](/zh-TW/09-layer2-multichain/03-rollup-zk/) |
+| 排序器 | Sequencer | L2 上負責收集、排序並打包交易提交至 L1 的節點角色 | [9.2](/zh-TW/09-layer2-multichain/02-rollup-optimistic/) |
+| 跨鏈橋 | Bridge | 在不同區塊鏈間轉移資產與訊息的基礎設施 | [9.6](/zh-TW/09-layer2-multichain/06-bridges/) |
+| 鎖定鑄造模型 | Lock-Mint | 資產鎖定在源鏈、在目標鏈鑄造等額包裝資產的跨鏈模型 | [9.6](/zh-TW/09-layer2-multichain/06-bridges/) |
+| 包裝資產 | Wrapped Asset | 通過鎖定原生資產、在另一條鏈鑄造出的等額對映代幣 | [9.8](/zh-TW/09-layer2-multichain/08-multichain-ops/) |
+| 側鏈 | Sidechain | 與主鏈並行執行、通過橋接互動資產的獨立鏈，安全性不繼承主鏈 | [9.4](/zh-TW/09-layer2-multichain/04-l2-landscape/) |
+
+## 八、研究與空投
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 區塊瀏覽器 | Block Explorer | 查詢鏈上地址、交易與合約資訊的基礎工具，如 Etherscan | [10.2](/zh-TW/10-onchain-research/02-block-explorers/) |
+| 鏈上資料平臺 | On-chain Data Platform | 提供 TVL 排行、SQL 查詢、地址追蹤等功能的專用分析工具集合 | [10.3](/zh-TW/10-onchain-research/03-data-platforms/) |
+| 鎖定總價值 | TVL（Total Value Locked） | 鎖定在協議或鏈上資產的美元總值，衡量規模但非唯一健康指標 | [10.3](/zh-TW/10-onchain-research/03-data-platforms/) |
+| 倖存者偏差 | Survivorship Bias | 只統計存活專案資料、忽略已失敗專案導致收益率被系統性高估的偏差 | [10.3](/zh-TW/10-onchain-research/03-data-platforms/) |
+| 巨鯨追蹤 | Whale Tracking | 監控大戶錢包資金流向、發現潛在市場訊號的分析方法 | [10.5](/zh-TW/10-onchain-research/05-whale-tracking/) |
+| 聰明錢 | Smart Money | 歷史交易勝率高、被認為具有資訊優勢的專業投資地址 | [10.5](/zh-TW/10-onchain-research/05-whale-tracking/) |
+| 盡職調查 | Due Diligence（DD） | 對專案產品、代幣、團隊、審計等多維度核實真實性與風險的系統化流程 | [10.7](/zh-TW/10-onchain-research/07-due-diligence/) |
+| 空投 | Airdrop | 專案方免費向用戶分發代幣，以換取網路效應與去中心化合法性 | [11.1](/zh-TW/11-airdrop-farming/01-airdrop-logic/) |
+| 測試網農業 | Testnet Farming | 在專案主網上線前於測試網參與互動、零成本積累早期資格的策略 | [11.2](/zh-TW/11-airdrop-farming/02-find-opportunities/) |
+| 女巫攻擊 | Sybil Attack | 單一實體制造大量虛假身份，騙取本應分散給真實使用者的空投獎勵 | [11.5](/zh-TW/11-airdrop-farming/05-sybil-detection/) |
+| 首次去中心化交易所發行 | IDO / Launchpad | 專案通過去中心化交易所或打新平臺首次公開發行代幣的融資方式 | [11.6](/zh-TW/11-airdrop-farming/06-ido-launchpad/) |
+| 代幣生成事件 | TGE（Token Generation Event） | 專案代幣正式鑄造發行、通常伴隨空投分配的關鍵時間節點 | [11.7](/zh-TW/11-airdrop-farming/07-points-and-season/) |
+| 積分賽季制 | Points Season | 使用者在數月賽季週期內持續累積積分、賽季末按積分兌換代幣的空投模式 | [11.7](/zh-TW/11-airdrop-farming/07-points-and-season/) |
+| 成本率 | Cost Ratio | （Gas 費+時間成本）佔預期空投收益的比例，用於篩選值得參與的專案 | [11.4](/zh-TW/11-airdrop-farming/04-cost-accounting/) |
+
+## 九、安全與攻擊
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 威脅模型 | Threat Model | 系統性梳理資產可能流失的所有攻擊渠道，用於設計對應防禦架構 | [12.1](/zh-TW/12-security-risk/01-threat-model/) |
+| 盲籤 | Blind Signing | 使用者在看不懂十六進位制交易內容的情況下直接簽署，是資產被盜的主要根源 | [12.3](/zh-TW/12-security-risk/03-signature-attacks/) |
+| 清晰簽名 | Clear Signing | 硬體錢包在簽名前顯示人類可讀的交易內容，用於對抗盲籤風險 | [12.2](/zh-TW/12-security-risk/02-phishing/) |
+| 地址投毒 | Address Poisoning | 攻擊者構造與常用地址相似的地址，誘導使用者誤複製貼上轉帳 | [12.2](/zh-TW/12-security-risk/02-phishing/) |
+| Permit 簽名攻擊 | Permit（EIP-2612） | 離線授權標準，使用者簽名後合約可在有效期內代為轉帳，且簽名一旦簽出不可撤銷 | [12.3](/zh-TW/12-security-risk/03-signature-attacks/) |
+| 全域性授權 | setApprovalForAll | NFT/代幣合約中一次呼叫即可授予某地址轉移全部資產許可權的函式 | [12.3](/zh-TW/12-security-risk/03-signature-attacks/) |
+| Rug Pull | Rug Pull（跑路） | 專案方通過保留合約許可權或抽走流動性突然捲款跑路的詐騙模式 | [12.4](/zh-TW/12-security-risk/04-rugpull-patterns/) |
+| 蜜罐代幣 | Honeypot | 可以買入但無法賣出（或賣出稅極高）的惡意代幣，專門誘騙使用者接盤 | [12.4](/zh-TW/12-security-risk/04-rugpull-patterns/) |
+| 智能合約審計 | Smart Contract Audit | 第三方機構對合約程式碼進行的安全檢查，能發現常見漏洞但不保證完全安全 | [12.5](/zh-TW/12-security-risk/05-contract-audit-reading/) |
+| 形式化驗證 | Formal Verification | 用數學方法證明合約邏輯嚴格符合預期規範，是最高級別的審計手段 | [12.5](/zh-TW/12-security-risk/05-contract-audit-reading/) |
+| 作戰安全 | OPSEC（Operations Security） | 通過裝置、網路、帳號多層隔離降低個人資訊與資產暴露面的實踐理念 | [12.6](/zh-TW/12-security-risk/06-opsec/) |
+| 氣隙簽名 | Air-gapped Signing | 硬體錢包完全不聯網，僅通過二維碼等方式與外部通訊完成簽名 | [12.6](/zh-TW/12-security-risk/06-opsec/) |
+| 錢包分層管理 | Wallet Tiering | 按用途和額度把資產拆分到金庫、互動、測試三類錢包，縮小單點風險 | [12.7](/zh-TW/12-security-risk/07-wallet-hygiene/) |
+| 應急響應 | Incident Response | 資產被盜後按確認、隔離、通知交易所、追蹤報案順序展開的標準處置流程 | [12.8](/zh-TW/12-security-risk/08-incident-response/) |
+| 隱私混合器 | Privacy Mixer | 將鏈上資金打亂來源與去向關聯的工具，資金一旦進入即極難追蹤 | [12.8](/zh-TW/12-security-risk/08-incident-response/) |
+
+## 十、行業與崗位
+
+| 術語（中文） | 英文 / 縮寫 | 一句話解釋 | 出現章節 |
+|---|---|---|---|
+| 行業三層結構 | Protocol / Infrastructure / Application Layer | Web3 行業按協議層、基礎設施層、應用層劃分，各層融資和招聘特徵不同 | [13.1](/zh-TW/13-industry-career/01-industry-map/) |
+| 代幣薪酬 | Token Compensation | 用專案代幣替代部分現金髮放的薪酬形式，存在波動、流動性與稀釋三重風險 | [13.2](/zh-TW/13-industry-career/02-job-roles/) |
+| 商務拓展 | BD（Business Development） | 負責交易所上線、機構合作、融資支援等外部關係維護的崗位職能 | [13.2](/zh-TW/13-industry-career/02-job-roles/) |
+| 關鍵意見領袖 | KOL（Key Opinion Leader） | 在特定領域有影響力、可為專案背書推廣的社交媒體人物 | [13.4](/zh-TW/13-industry-career/04-kol-and-content/) |
+| 獲客成本 | CAC（Customer Acquisition Cost） | 投放成本除以新增活躍使用者數，用於評估某個渠道或 KOL 的投放效率 | [13.4](/zh-TW/13-industry-career/04-kol-and-content/) |
+| 加密資產市場監管條例 | MiCA | 歐盟針對加密資產的統一監管框架，為企業級應用提供了合規路徑 | [13.5](/zh-TW/13-industry-career/05-global-ops/) |
+| 非同步優先工作制 | Async-first | 以文件記錄和非同步影片代替即時會議，讓跨時區團隊擺脫同步線上約束 | [13.5](/zh-TW/13-industry-career/05-global-ops/) |
+| 最小化可行版本 | MVP（Minimum Viable Product） | 只實現核心功能、快速驗證問題和方案的最小成品，是作品集專案的推薦形式 | [13.7](/zh-TW/13-industry-career/07-portfolio/) |
+| 歸屬期 | Vesting | 期權或代幣薪酬分批解鎖的時間安排，直接決定實際能兌現的比例和時機 | [13.8](/zh-TW/13-industry-career/08-interview-and-risk/) |
+| 歸屬懸崖 | Vesting Cliff | 員工任職未滿一定期限前無法獲得任何期權/代幣份額的門檻機制 | [13.8](/zh-TW/13-industry-career/08-interview-and-risk/) |
+| 現金跑道 | Cash Runway | 公司現有資金能維持運營的時長，是判斷財務健康度和裁員風險的核心指標 | [13.8](/zh-TW/13-industry-career/08-interview-and-risk/) |
+| 資訊自動化流水線 | Information Automation Pipeline | 把資料抓取、清洗、摘要等重複性研究工作交給 AI 處理，人工只負責判斷 | [13.6](/zh-TW/13-industry-career/06-ai-automation/) |
+| 人工稽核節點 | Human Checkpoint | 在自動化流程中特意保留的人工把關環節，確保事實、承諾、財務類內容準確 | [13.6](/zh-TW/13-industry-career/06-ai-automation/) |
+
+## 最容易混淆的 8 組概念
+
+| 概念 A | 概念 B | 核心區別 |
+|---|---|---|
+| Layer 1（[2.6](/zh-TW/02-blockchain-basics/06-trilemma/)） | Layer 2（[9.1](/zh-TW/09-layer2-multichain/01-why-scaling/)） | L1 是獨立結算的基礎鏈，安全和最終性都由自己承擔；L2 建在 L1 之上處理交易，定期向 L1 提交證明，安全性來自 L1 |
+| APR（[8.3](/zh-TW/08-defi/03-yield-farming/)） | APY（[8.3](/zh-TW/08-defi/03-yield-farming/)） | APR 是不計複利的年化數字，看著更高；APY 計入復投頻率，才是更貼近真實到手收益的口徑 |
+| 代幣（[6.1](/zh-TW/06-tokens-nft/01-token-standards/)） | 幣（原生代幣 / Coin） | 幣指某條鏈自己的原生資產（如 ETH、BTC），用來付 Gas；代幣是在別人的鏈上用合約標準發行的資產，本身不能直接付 Gas |
+| 熱錢包（[4.1](/zh-TW/04-wallets/01-wallet-types/)） | 冷錢包（[4.1](/zh-TW/04-wallets/01-wallet-types/)） | 熱錢包私鑰在聯網裝置上，操作快但暴露面大；冷錢包私鑰從不接觸網路，安全性高但每次交易流程更繁瑣 |
+| 無常損失（[7.4](/zh-TW/07-exchanges-trading/04-lp-and-il/)） | 普通虧損 | 無常損失特指做市商因池內兩種資產價格比例變動、相對單純持有產生的帳面差額，撤出後才會"坐實"；普通虧損是資產本身價格下跌造成的直接損失 |
+| 私鑰（[3.2](/zh-TW/03-cryptography/02-private-public-key/)） | 助記詞（[3.3](/zh-TW/03-cryptography/03-mnemonic-bip39/)） | 私鑰對應單個地址，是最終的簽名金鑰；助記詞是一整個種子，能通過 HD 派生生成無數個私鑰和地址 |
+| Rollup（[9.2](/zh-TW/09-layer2-multichain/02-rollup-optimistic/)） | 側鏈（[9.4](/zh-TW/09-layer2-multichain/04-l2-landscape/)） | Rollup 把交易資料和證明提交回 L1，安全性繼承主鏈；側鏈是獨立執行的另一條鏈，靠自己的驗證者集合保障安全，風險與主鏈無關 |
+| 質押（[2.5](/zh-TW/02-blockchain-basics/05-consensus-pos/)） | 挖礦（[2.4](/zh-TW/02-blockchain-basics/04-consensus-pow/)） | 質押是 PoS 機制下鎖定資本參與共識，作惡被扣本金；挖礦是 PoW 機制下用算力競爭記帳權，成本是電力和硬體而非資本凍結 |

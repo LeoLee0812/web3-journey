@@ -1,0 +1,43 @@
+---
+title: 本章導讀 · 區塊鏈底層
+description: 從班級記帳本講到真實的以太坊區塊，搞懂區塊鏈為什麼"沒人管卻沒人能改"，為後面學錢包、DeFi、智能合約打地基。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 區塊鏈是一本沒有管理員、卻誰都改不了的帳本——本章拆開它的每一個零件，讓你看懂"不可篡改"到底是怎麼實現的，而不是停留在"聽說很安全"的印象裡。
+
+![區塊通過雜湊鏈相互連結，節點分佈在網路各處，共同維護同一本帳本](/images/02-blockchain-basics/cover.png)
+
+*圖注：區塊鏈的核心畫面——一條互相鎖定的區塊鏈條，加上分散式的記帳節點，兩者共同撐起"沒人管卻改不了"這句話 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+很多人對區塊鏈的認知停留在"一種很安全的技術"這類模糊描述上，一旦追問"安全體現在哪""誰在維護這本帳"，就答不上來了。本章從最樸素的記帳場景出發，一路拆到雜湊演算法、節點分工、兩種共識機制、不可能三角、分叉治理，最後落到一次真實的區塊瀏覽器操作。讀完你不會只記住"區塊鏈很牛"，而是能說清楚它每一層具體在做什麼、付出了什麼代價。
+
+## 讀完你能做到什麼
+
+- 用自己的話向別人解釋"區塊""雜湊""鏈"這三個詞分別指什麼，以及它們怎麼組合成"不可篡改"
+- 分清全節點、檔案節點、輕節點各自存什麼資料、承擔什麼責任，不再以為"人人都存一份完整帳本"
+- 說清楚工作量證明（PoW）和權益證明（PoS）分別靠什麼成本來防止作惡，以及以太坊為什麼在 2022 年放棄了前者
+- 理解"去中心化、安全、可擴充套件不可能三角"，看懂不同公鏈的取捨邏輯，不再輕信"三個都最優"的營銷話術
+- 開啟 Etherscan，獨立查一個真實區塊和交易，看懂 Gas 費是怎麼算出來的
+
+## 本章目錄
+
+<CardGrid>
+  <LinkCard title="1. 從班級記帳本講起" description="區塊鏈的基本結構：區塊、雜湊鏈、分散式儲存" href="/zh-TW/02-blockchain-basics/01-ledger-metaphor/" />
+  <LinkCard title="2. 雜湊：數字指紋與區塊鏈" description="SHA-256 如何把任意資料變成固定長度指紋，Merkle 樹怎麼組織交易" href="/zh-TW/02-blockchain-basics/02-hash-and-blocks/" />
+  <LinkCard title="3. 節點、全節點與輕節點" description="誰在真正儲存這本帳：三種節點的分工與硬體成本" href="/zh-TW/02-blockchain-basics/03-nodes-and-network/" />
+  <LinkCard title="4. 工作量證明 PoW" description="挖礦到底在算什麼，難度調整與區塊獎勵減半機制" href="/zh-TW/02-blockchain-basics/04-consensus-pow/" />
+  <LinkCard title="5. 權益證明 PoS" description="以太坊為什麼拋棄顯示卡，32 ETH 質押與懲罰機制" href="/zh-TW/02-blockchain-basics/05-consensus-pos/" />
+  <LinkCard title="6. 不可能三角" description="去中心化、安全、可擴充套件為什麼難以同時最大化" href="/zh-TW/02-blockchain-basics/06-trilemma/" />
+  <LinkCard title="7. 分叉與治理" description="硬分叉、軟分叉，以及 The DAO 事件留下的教訓" href="/zh-TW/02-blockchain-basics/07-fork-and-governance/" />
+  <LinkCard title="8. 動手：讀懂一個真實區塊" description="在 Etherscan 上查區塊、查交易，看懂 Gas 費怎麼算" href="/zh-TW/02-blockchain-basics/08-read-a-block/" />
+</CardGrid>
+
+## 前置知識
+
+本章預設你已經讀過第 1 章，知道 Web3、區塊鏈、加密貨幣這幾個詞大致的關係和邊界。如果還沒讀，建議先補上第 1 章再進入這裡——本章會直接使用"帳本""共識"這類詞，不再從零解釋它們和 Web3 整體圖景的關係。

@@ -1,0 +1,138 @@
+---
+title: HD 錢包與派生路徑：一個助記詞為什麼能生出無數地址
+description: 從 BIP-32 和 BIP-44 標準理解分層確定性錢包的數學原理，為什麼以太坊用 60' 這個數字，以及為什麼匯入錢包後資金會"消失"。
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句話結論：** 一個助記詞可以通過 BIP-32 的分層推導生成無限個子鑰匙，BIP-44 標準進一步用路徑格式 `m/44'/60'/0'/0/n` 為以太坊定義了統一的派生規則，保證跨錢包相容。
+
+## 為什麼一句 12 個單詞能管理無數個地址
+
+想像你有一本主帳本（BIP-39 助記詞轉出的種子），通過一套數學規則，你可以從中生成第一個錢包地址、第二個、第三個……無窮盡。這就像一個主金鑰打開了一個無限大的鑰匙庫，每一把子鑰匙都是獨立的地址，但所有權都源自這一本主帳本。
+
+這個設計解決了一個關鍵問題：你不需要為每個地址分別備份私鑰。只要備份一次 12 或 24 個單詞，你就能從中恢復出全部曾經生成過的地址。相比比特幣時代"一個私鑰一個地址，要備份一堆私鑰"的繁瑣方式，這是巨大的進步。
+
+## 兩個標準：BIP-32 的數學與 BIP-44 的路由表
+
+### BIP-32：如何從種子生成無限個子鑰匙
+
+BIP-32（Hierarchical Deterministic Wallets）定義了推導的數學方法。核心思想是**橢圓曲線點加法**：
+- 從 BIP-39 助記詞推匯出 512 位種子（64 位元組）
+- 前 256 位作為主私鑰（Master Key），後 256 位作為主鏈碼（Master Chain Code）
+- 主私鑰通過橢圓曲線點乘法得到主公鑰
+- 使用鏈碼和索引 i，生成子私鑰：`子私鑰 = 主私鑰 + HMAC-SHA512(chain_code, 索引)`
+
+這樣遞迴下去，你可以生成任意多層的子鑰匙。每一層都可以繼續派生，形成一棵完整的"金鑰樹"。
+
+### BIP-44：為區塊鏈設計的統一派生路徑
+
+但是，BIP-32 本身只定義了"怎樣推導"，沒有定義"推導到哪裡"。BIP-44 解決了這個問題，它規定了一個**標準化的路徑格式**：
+
+```
+m / 44' / coin_type' / account' / change / address_index
+```
+
+其中：
+- **m** = 主金鑰（Master）
+- **44'** = BIP-44 的固定版本號（字尾 `'` 表示"強化派生"，無法從公鑰逆推）
+- **coin_type'** = 幣種編碼（比特幣是 0'，以太坊是 60'，由 SLIP-44 標準定義）
+- **account'** = 帳戶索引（通常為 0'，支援多帳戶）
+- **change** = 變更分支（非強化，0 = 外部接收地址，1 = 找零地址）
+- **address_index** = 地址序號（0, 1, 2, …）
+
+**以太坊的標準路徑是 `m/44'/60'/0'/0/n`**，其中 `60` 是以太坊的 SLIP-44 幣種編碼，`n` 從 0 開始遞增。
+
+<Mermaid chart={`graph TD
+  A["BIP-39 種子<br/>512位"]
+  B["主私鑰<br/>m"]
+  C["第一帳戶<br/>m/44'/60'/0'"]
+  D["外部地址<br/>m/44'/60'/0'/0"]
+  E["地址0<br/>m/44'/60'/0'/0/0"]
+  F["地址1<br/>m/44'/60'/0'/0/1"]
+  G["地址N<br/>m/44'/60'/0'/0/N"]
+  
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  D --> F
+  D --> G
+  
+  style A fill:#e1f5ff
+  style B fill:#fff9c4
+  style C fill:#f3e5f5
+  style D fill:#fce4ec
+  style E fill:#c8e6c9
+  style F fill:#c8e6c9
+  style G fill:#c8e6c9
+`} />
+
+## 關鍵點：為什麼 EVM 鏈上的地址完全相同
+
+**以太坊、Polygon、BNB Chain、Arbitrum、Base、Optimism …… 所有 EVM 相容鏈都使用同一個 SLIP-44 幣種編碼：60。**
+
+這意味著什麼？如果你用一個 BIP-39 助記詞在 MetaMask 中生成第一個地址，然後在 imKey（以太坊錢包）中匯入同一個助記詞，系統會生成**完全相同的地址**。進一步，這個地址在所有 EVM 鏈上都有效——同一地址在以太坊、Polygon、BNB 上的餘額是獨立的，但地址本身是同一個。
+
+這就是"跨鏈單點登入"的原理：無需記住多個地址，一個地址走遍 EVM 生態。
+
+| 標準 | 路徑格式 | 用途 | 示例（以太坊） |
+|------|--------|------|-------------|
+| BIP-32 | `m/i/j/k/…` | 通用分層派生數學 | 路徑可任意巢狀 |
+| BIP-44 | `m/44'/X'/Y'/Z/N` | 多幣種多帳戶規範 | `m/44'/60'/0'/0/0` |
+| BIP-49 | `m/49'/X'/Y'/Z/N` | P2SH-P2WPKH（比特幣舊標準） | Bitcoin 向後相容 |
+| BIP-84 | `m/84'/X'/Y'/Z/N` | Native SegWit（比特幣新標準） | Bitcoin 原生隔離見證 |
+
+## 🧪 為什麼匯入後資金"消失"——派生路徑陷阱
+
+<Steps>
+
+1. **場景：** 你在 Ledger Live 用一個 12 詞助記詞建立了錢包，並在其中收到了 1 ETH。後來，你在 MetaMask 中匯入同一個助記詞。
+
+2. **預期：** 餘額仍然是 1 ETH。
+
+3. **實際：** MetaMask 顯示餘額為 0，你陷入了恐慌——"我的資金哪裡去了？"
+
+4. **根本原因：** 雖然兩個錢包都支援 BIP-44，但它們可能使用了**不同的派生路徑**。
+   - Ledger Live 的預設路徑：`m/44'/60'/0'/0`（僅地址索引變化）
+   - MetaMask 的路徑：`m/44'/60'/0'/0`（相同！）
+   - 但如果 Ledger 的帳戶索引用了 `m/44'/60'/1'/0`（Account 1），MetaMask 則始終只看 Account 0
+   - 結果：完全不同的地址集，看起來資金"消失"了
+
+5. **如何恢復：** 用 Etherscan 查詢原來的地址，確認資金仍在鏈上。然後在原錢包軟體（Ledger Live）中切換回正確的帳戶/路徑。
+
+6. **預防：** 匯入前，核實兩個錢包是否支援相同的派生路徑；在轉帳大額資金前，先用小額（如 0.01 ETH）測試。
+
+</Steps>
+
+## ⚠️ 常見坑與誤區
+
+1. **"路徑無關緊要"** — 錯誤。不同錢包可能選擇不同的路徑，導致同一個助記詞生成不同的地址集。MetaMask 只支援單一路徑 `m/44'/60'/0'/0/n`，而 Ledger 支援多個。
+
+2. **"強化派生和普通派生無差別"** — 錯誤。強化派生（用 `'` 標記）無法從公鑰反推，保證了安全隔離；普通派衍享相同鏈碼，存在理論洩露風險。
+
+3. **"BIP-39 保證全球唯一性"** — 不完全。BIP-39 只保證助記詞到種子的推導唯一，地址唯一性取決於派生路徑。同一個詞和路徑生成相同地址，這是數學確定性的必然。
+
+4. **"第 25 個詞（Passphrase）會增加派生深度"** — 錯誤。Passphrase 修改種子本身，導致整棵派生樹完全不同。忘記 Passphrase 後果比忘記 12 個詞更嚴重。
+
+5. **"所有 EVM 鏈必須用 60'"** — 正確。這是 SLIP-44 標準規定，保證 Polygon、Arbitrum、Base 等鏈的地址一致性。
+
+## 本節要點
+
+- BIP-32 定義從種子遞迴推導無限子鑰匙的數學方法（橢圓曲線點加法 + HMAC-SHA512）
+- BIP-44 規範化派生路徑格式：`m/44'/coin_type'/account'/change/address_index`
+- 以太坊幣種編碼（SLIP-44）是 **60**，路徑固定為 `m/44'/60'/0'/0/n`
+- 所有 EVM 鏈都用幣種編碼 60，同一地址在全 EVM 生態通用
+- 派生路徑不一致是"匯入後資金消失"根本原因，預防方法是先用小額測試
+- 強化派生（`'`）保證無法從公鑰逆推，是安全設計的關鍵
+
+## 延伸閱讀
+
+- [BIP-32 官方規範：分層確定性錢包](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
+- [BIP-44 官方規範：多帳戶分層結構](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+- [SLIP-44：幣種編碼登錄檔](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)
+- [Learn Me a Bitcoin - HD 錢包派生路徑詳解](https://learnmeabitcoin.com/technical/keys/hd-wallets/derivation-paths/)
+- [MetaMask 官方：匯入錢包時的派生路徑差異](https://support.metamask.io/managing-my-wallet/secret-recovery-phrase-and-private-keys/importing-a-seed-phrase-from-another-wallet-software-derivation-path/)

@@ -1,0 +1,98 @@
+---
+title: 一筆交易的一生：從簽名到打包再到最終確定
+description: 以太坊交易如何從你的錢包出發，經過簽名、廣播、打包、確認到最終確定？瞭解交易生命週期的關鍵引數、時間表和 EIP-1559 機制，理解為什麼你的交易有時快有時慢。
+sidebar:
+  order: 5
+---
+
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句話結論：** 一筆以太坊交易要經歷簽名、廣播、打包、確認、最終確定五個階段，總耗時從秒級到 12.8 分鐘，其中 Gas 費用和 Priority Fee 決定了打包速度。
+
+## 從點外賣說起
+
+想像你用手機點外賣。你選好菜、輸入收貨地址，然後點選"提交訂單"。這一刻到外賣送到你手上，中間經歷了：收單員接單 → 廚房準備 → 騎手取餐 → 路上配送 → 確認簽收。每個環節都要時間，最後簽收那一刻才算交易真正完成。
+
+以太坊的交易也是這樣。你在錢包裡點選"傳送"，並不是錢立刻就送到了。中間要經過五個環節，每個環節都有其作用。其中最容易讓人困惑的是："為什麼有時候我的交易顯示'pending'（待處理）很久？"答案就藏在這五個階段裡。
+
+## 五階段全景：從你的電腦到區塊鏈
+
+<Mermaid chart={`graph TD
+  A["你：簽名交易<br/>毫秒級"] -->|發廣播| B["記憶體池：交易等候<br/>秒級"]
+  B -->|驗證者選中| C["打包進區塊<br/>~12秒"]
+  C -->|至少1個驗證者投票| D["一次確認<br/>~12秒"]
+  D -->|等待2個epoch<br/>64個slot| E["最終確定性Finality<br/>12.8分鐘"]
+  style A fill:#fff4e6
+  style B fill:#fff4e6
+  style C fill:#f0f9ff
+  style D fill:#f0f9ff
+  style E fill:#e8f5e9
+`} />
+
+| 階段 | 時間耗時 | 發生什麼 | 你能做什麼 |
+|------|--------|--------|----------|
+| **1. 簽名** | 毫秒 | 錢包用你的私鑰簽署交易，生成簽名 | 選擇 Gas 價格、額度 |
+| **2. 廣播** | 秒級 | 交易傳送到以太坊網路，進入記憶體池 | 等待、無法改交易 |
+| **3. 打包** | ~12秒 | 驗證者選中你的交易，放入區塊 | Priority Fee 決定優先順序 |
+| **4. 確認** | ~12秒 | 區塊被連結到鏈上，至少 1 個驗證者投票 | 一般就此認可安全 |
+| **5. 最終確定** | 12.8分鐘 | 需要 2 個 epoch（64 個 slot），≈66% 質押 ETH 鎖定 | 絕對不會被回滾 |
+
+## 為什麼交易有時快有時慢：Gas 和 Priority Fee 的較量
+
+你在 MetaMask 裡會看到三個選項："低""標準""快速"。這三個選項對應的不是網路速度，而是你願意為這筆交易支付多少小費。
+
+根據 EIP-1559 升級（2021年8月啟用），**交易手續費 = Gas 用量 × (Base Fee + Priority Fee)**。
+
+- **Base Fee**（基礎費）：協議自動設定，按塊空間需求調整。這筆錢會被銷燬（從流通中永久移除），這是以太坊獨特的通縮機制。
+- **Priority Fee**（優先費）：你手動設定的小費，給驗證者的。這筆錢直接進入驗證者帳戶，激勵他優先打包你的交易。
+
+**現實數字（2026 年 8 月）**：
+- 一筆簡單的 ETH 轉帳：21,000 Gas
+- 當前 Base Fee：0.05~0.16 gwei
+- 標準 Priority Fee：1~2 gwei
+- 轉帳成本：約 $0.01~$0.50（取決於峰值）
+
+如果你看到某個時刻轉帳需要 $10 以上，那是網路高峰期。打包佇列很長，競爭激烈，Priority Fee 被抬高了。反之，夜間交通稀疏，Priority Fee 可能只需 0.5 gwei，幾十秒就上鍊。
+
+## mempool 中的"搶跑"怪象
+
+一旦你的交易進入 mempool（記憶體池），**全網路都能看到它**——包括專門監聽套利機會的機器人（Searcher）。它們可能在你的交易前後插入自己的交易，從價格波動中獲利，這叫"三明治攻擊"（Sandwich Attack），大額交易的實際損失可能達到 50% 以上。這是下一節的主題，詳見[本章第 6 節：記憶體池與 MEV](/zh-TW/05-ethereum-smart-contracts/06-mempool-mev/)。
+
+## 🧪 動手看你的交易
+
+訪問 [Etherscan Pending Transactions](https://etherscan.io/txsPending)，你能即時看到 mempool 裡有多少筆交易在等候。按 Gas Price 排序，你會發現：
+
+- **Gas Price 最低的交易**排在最後，可能等幾小時都打不進塊
+- **Gas Price 最高的交易**幾秒鐘就被打包了
+
+這不是 Etherscan 的演算法，而是驗證者的選擇——他們會優先選擇 Priority Fee 最高的交易，因為那意味著更多收入。
+
+**試試這個：** 下次你轉帳時，故意設定超低 Priority Fee（0.1 gwei），然後開啟 MetaMask，看交易狀態。它會一直卡在 pending，除非你"加速"（即重新發一筆更高 Gas Price 的同樣交易，錢包會幫你處理）。
+
+## ⚠️ 常見坑與誤區
+
+1. **"我的交易 pending 一小時了，是不是丟了？"** ❌ 不會丟，只是排隊。但如果 Priority Fee 設太低，可能永遠排不上。用加速功能重新提交，或者等網路空閒。
+
+2. **"為什麼有時候同一個交易我要付 $0.10，有時候要付 $5？"** 這就是 Base Fee 的動態調整。塊空間緊張時，協議自動提高 Base Fee，反之則降低。時機很重要。
+
+3. **"Finality 不是 1 分鐘嗎？"** 混淆了。Ethereum 在被廣泛接受但未最終確定的狀態是幾分鐘，但**完全確定性需要 12.8 分鐘（2 個 epoch，64 個 slot，每個 12 秒）**。這是 Ethereum PoS 的硬規格。
+
+4. **"我看有人說交易費很貴，是不是以太坊拉跨了？"** 2026 年主網交易費已降到歷史低位。費用看起來高是因為更多活動遷到了 Layer 2（Arbitrum、Optimism）。那些平臺的交易成本確實低 10~100 倍。
+
+5. **"我在大額交易前沒設滑點限制，結果被三明治了。"** Uniswap 等 DEX 都有"最小收到金額"（Min Received）的設定。大額交易一定要設定合理的滑點（如 1%~2%），否則極易被 MEV 機器人剝削。
+
+## 本節要點
+
+- 一筆交易的五個階段：簽名（毫秒）→ 廣播（秒）→ 打包（12 秒）→ 確認（12 秒）→ 最終確定（12.8 分鐘）
+- Gas 費 = Gas 用量 × (Base Fee + Priority Fee)，其中 Base Fee 被銷燬，Priority Fee 給驗證者
+- Priority Fee 高的交易先上鍊，這是驗證者選擇交易的唯一標準
+- mempool 完全透明，機器人能看到所有待打包交易，MEV 風險客觀存在
+- 大額交易設好滑點限制，分批下單，或用 MEV 保護服務（如 Flashbots Protect）
+
+## 延伸閱讀
+
+- [ethereum.org - 共識層文件](https://ethereum.org/developers/docs/consensus-mechanisms/pos)
+- [Etherscan Gas Tracker](https://etherscan.io/gastracker) — 即時檢視當前 Gas 價格
+- [Flashbots MEV-Inspect](https://mev-inspect.flashbots.net) — 看當前網路的 MEV 活動量
+- [DEXTools MEV 指南 2026 版](https://www.dextools.io/tutorials/what-is-mev-in-crypto-guide-2026)

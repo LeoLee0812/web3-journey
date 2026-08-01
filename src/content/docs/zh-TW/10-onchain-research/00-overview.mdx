@@ -1,0 +1,45 @@
+---
+title: 本章導讀 · 鏈上資料分析與專案研究方法
+description: 從區塊瀏覽器到研究報告模板，本章教你用結構化方法而非直覺判斷一個 Web3 專案，避開審計、TVL、社群熱度等常見的認知陷阱。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 鏈上資料是公開透明的，但工具和訊號都有各自的盲點，本章教你用系統化的框架和多工具交叉驗證，把"看資料"變成"做研究"。
+
+![鏈上資料研究的示意插畫：資料看板、圖表與調查線索](/images/10-onchain-research/cover.png)
+
+*圖注：鏈上資料分析的本質是在一堆公開圖表裡找出真正有意義的訊號 · 配圖由 AI 生成*
+
+## 本章要解決的核心問題
+
+Web3 世界最大的悖論是：所有資料都在鏈上公開可查，但大多數人依然做不出靠譜的判斷。原因不是資料不夠，而是**沒有方法論**——看到一筆巨鯨轉帳就斷定"要漲了"，看到"已通過審計"就認為絕對安全，看到 TVL 很高就覺得專案健康。2026 年上半年，68 個已審計 DeFi 協議遭到攻擊，其中 46 個（67.6%）的攻擊向量完全在審計範圍之外，造成的損失佔全部損失的 94.4%。這說明：**看得懂資料，不代表看得懂風險**。
+
+本章把"鏈上資料分析"拆解成一套可複用的工作流：從區塊瀏覽器和資料平臺的工具選擇，到 Dune SQL 的最小可用集，再到巨鯨追蹤、社群熱度量化、盡職調查清單，最後落地成一份可以直接拿去用（甚至拿去面試）的研究報告。
+
+## 讀完本章你能做到什麼
+
+- 用六維打分表（產品、代幣、團隊、融資、競爭、風險）系統評估任何一個 Web3 專案，而不是憑感覺打標籤
+- 知道該用哪個工具解決哪個問題：TVL 看 DefiLlama，自定義分析用 Dune，聰明錢追蹤用 Nansen/Arkham
+- 會 Fork 並修改 Dune 上的公開看板，不需要從零寫 SQL 也能定製查詢
+- 識別巨鯨轉帳、社群熱度裡的虛假訊號，理解為什麼"相關性不等於因果"
+- 獨立核查一個專案的融資背景、代幣解鎖計劃、審計範圍和管理員許可權，寫出結構化的研究報告
+
+## 本章目錄
+
+<CardGrid>
+	<LinkCard title="1. 專案研究框架" href="/zh-TW/10-onchain-research/01-research-framework/" description="六維打分表：產品、代幣、團隊、融資、競爭、風險" />
+	<LinkCard title="2. 區塊瀏覽器進階" href="/zh-TW/10-onchain-research/02-block-explorers/" description="從一個地址挖出一整條資金鍊路" />
+	<LinkCard title="3. 鏈上資料平臺工具箱" href="/zh-TW/10-onchain-research/03-data-platforms/" description="DefiLlama、Dune、Nansen、Arkham 分別解決什麼問題" />
+	<LinkCard title="4. 看懂並改寫 Dune 看板" href="/zh-TW/10-onchain-research/04-dune-basics/" description="非程式設計師的 SQL 最小集，Fork 工作流入門" />
+	<LinkCard title="5. 巨鯨與聰明錢追蹤" href="/zh-TW/10-onchain-research/05-whale-tracking/" description="地址標籤、資金異動與預警設定" />
+	<LinkCard title="6. 社群熱度量化" href="/zh-TW/10-onchain-research/06-social-signals/" description="從社交平臺與開發者活躍度裡讀出真訊號" />
+	<LinkCard title="7. 盡職調查清單" href="/zh-TW/10-onchain-research/07-due-diligence/" description="融資、鎖倉、審計報告怎麼核實" />
+	<LinkCard title="8. 產出物：研究報告模板" href="/zh-TW/10-onchain-research/08-research-report/" description="八章節框架 + 30 分鐘快速查證流程" />
+</CardGrid>
+
+## 前置知識提示
+
+本章假設你已經理解錢包地址、交易雜湊、智能合約這些基礎概念，並且知道 DeFi 借貸、DEX、流動性質押等常見專案型別是做什麼的。如果這些對你還比較陌生，建議先回顧前面講錢包與 DeFi 基礎的章節，再來學習本章的研究方法——工具用得再熟練，也需要先看懂它在分析什麼。

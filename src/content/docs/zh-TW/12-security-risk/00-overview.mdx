@@ -1,0 +1,46 @@
+---
+title: 本章導讀 · 安全與風控
+description: Web3 資產損失並非隨機事件，而是來自 7 個可識別的系統性風險口子。本章教你從威脅模型到應急響應搭建一套完整的個人防禦體系。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句話結論：** 本章不講"哪個專案會跑路"，而是教你一套可複用的防禦方法論——識別渠道、拆解攻擊手法、搭建隔離架構、準備應急預案。
+
+![一面盾牌與鎖在暗色數字森林中對抗釣魚鉤子的插畫](/images/12-security-risk/cover.png)
+
+*圖注：Web3 世界裡的風險像藏在暗林中的鉤子，安全能力是你自己撐起的那面盾 · 配圖由 AI 生成*
+
+## 本章要解決的問題
+
+2025 年一年，Bybit 單筆被盜 15 億美元，釣魚詐騙造成 7.5 億美元損失，Rug Pull 捲走超 6 億美元。這些數字背後有一個共同點：**幾乎每一起損失，都能追溯到某個本可以被識別的訊號**——一個未棄權的合約許可權、一次沒看懂就點了簽署的十六進位制、一個單點存放全部資產的錢包。Web3 世界沒有客服幫你撤銷轉帳，也沒有銀行幫你追回損失，安全能力必須自己建立。
+
+本章把這套能力拆成 8 個模組：先建立威脅模型認清風險全貌，再逐個拆解釣魚、簽名攻擊、Rug Pull、審計報告這幾類具體攻防細節，最後落到 OPSEC、錢包分層、應急響應這三套可執行的日常習慣上。
+
+## 讀完本章你能做到什麼
+
+- 說清楚自己的資產會從哪幾個渠道流失，並估算每個渠道的相對風險權重
+- 在簽名彈窗前判斷這是"看得懂的交易"還是"應該拒籤的盲籤"
+- 用 12 項檢查清單在新幣上線 48 小時內完成 Rug Pull 盡職調查
+- 看懂一份審計報告是否被"低風險問題堆砌"掩蓋了真實風險
+- 搭建金庫、互動、測試三層錢包架構，並配套裝置、網路、帳號的隔離習慣
+- 萬一被盜，知道黃金一小時裡該做什麼、按什麼順序做
+
+## 本章 8 節速覽
+
+<CardGrid>
+  <LinkCard title="1. 建立威脅模型" description="你的資產會從哪七個口子流走" href="/zh-TW/12-security-risk/01-threat-model/" />
+  <LinkCard title="2. 釣魚全圖鑑" description="假網站、假客服、假空投與剪貼簿劫持" href="/zh-TW/12-security-risk/02-phishing/" />
+  <LinkCard title="3. 簽名攻擊" description="Permit、setApprovalForAll 與盲籤的殺傷力" href="/zh-TW/12-security-risk/03-signature-attacks/" />
+  <LinkCard title="4. Rug Pull 識別" description="從合約許可權與流動性鎖看出跑路準備" href="/zh-TW/12-security-risk/04-rugpull-patterns/" />
+  <LinkCard title="5. 看懂審計報告" description="哪些結論有意義，哪些是營銷" href="/zh-TW/12-security-risk/05-contract-audit-reading/" />
+  <LinkCard title="6. 個人 OPSEC" description="裝置、網路、帳號與身份隔離" href="/zh-TW/12-security-risk/06-opsec/" />
+  <LinkCard title="7. 錢包分層管理" description="金庫、互動、垃圾錢包的三層架構" href="/zh-TW/12-security-risk/07-wallet-hygiene/" />
+  <LinkCard title="8. 被盜之後" description="黃金一小時的應急處置流程" href="/zh-TW/12-security-risk/08-incident-response/" />
+</CardGrid>
+
+## 前置知識
+
+本章預設你已經會用軟體錢包完成基本的轉帳、swap 與合約互動，並且對 Gas 費、授權（approve）、簽名這些概念有基礎認識。如果還不熟悉，建議先讀完前面講錢包與合約互動的章節，再回到這裡搭建安全體系——防禦知識只有在你已經會"進攻性"操作的前提下才有意義。

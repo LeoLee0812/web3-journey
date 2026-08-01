@@ -15,5 +15,8 @@
     "@astrojs/starlight": "^0.41.6",
     "astro": "^7.1.6",
     "mermaid": "^11.16.0"
+  },
+  "devDependencies": {
+    "opencc-js": "^1.4.1"
   }
 }

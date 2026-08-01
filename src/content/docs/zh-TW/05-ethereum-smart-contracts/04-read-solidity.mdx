@@ -1,0 +1,104 @@
+---
+title: 看懂 Solidity：非開發者需要認識的十個關鍵詞
+description: 智能合約程式碼中最常見的十個 Solidity 關鍵詞，非開發者也能通過識別這些詞彙快速找出合約的許可權漏洞和風險隱患。
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句話結論：** Solidity 程式碼有十個最常見的關鍵詞，只要認識它們、學會快速掃描，即使不懂程式設計也能在 Etherscan 上識別出合約的許可權陷阱和風險。
+
+## 你為什麼需要認識這些詞
+
+選單上看不懂法語？但看到"毒"字就會拒絕。智能合約也一樣。當你在 Etherscan 上看合約程式碼時，不需要成為開發者——只需學會搜尋幾個危險詞彙。
+
+2016 年 DAO 攻擊中，駭客通過 `reentrancy` 漏洞盜走 360 萬 ETH；2017 年 Parity 錢包事件源於 `delegatecall` 濫用。這些漏洞都能通過詞彙掃描被發現。
+
+掌握這十個關鍵詞，你就能秒速判斷一個合約是"嚴謹設計"還是"埋了時炸彈"。
+
+## 十個關鍵詞完整速查表
+
+| 關鍵詞 | 非技術理解 | 風險等級 | 你應該看什麼 |
+|--------|-----------|--------|-----------|
+| **state variable** | 合約的記憶力（儲存資料） | 🟡 中等 | 是否有私密資料能被公開讀取？ |
+| **require** / **assert** | 交易的安全檢查（不符合條件就中止） | 🟢 低 | 檢查邏輯是否有漏洞？ |
+| **payable** | 函式允許接收 ETH（打錢函式） | 🟡 中等 | 誰能呼叫這個函式？Owner 只有一個人嗎？ |
+| **mapping** | 合約的字典（快速查表） | 🟠 較高 | Owner 能否凍結任意地址的資金？ |
+| **event** | 合約發出的"收據"（鏈上日誌） | 🟢 低 | 日誌內容與合約邏輯是否一致？ |
+| **modifier** | 函式的"門禁卡"（許可權檢查） | 🔴 極高 | 是否只有 Owner 能呼叫關鍵函式？ |
+| **delegatecall** | 一個合約借用另一合約的程式碼執行 | 🔴 極高 | ⚠️ 最危險的詞彙，出現即紅旗 |
+| **fallback** / **receive** | 合約收到意外轉帳時的應急操作 | 🟠 較高 | 是否能被惡意利用反覆進入合約？ |
+| **interface** | 合約的"選單"（只列函式名） | 🟡 中等 | 介面定義是否與實現程式碼匹配？ |
+| **inheritance** | 合約之間的繼承關係 | 🟡 中等 | 是否繼承了包含已知漏洞的舊程式碼？ |
+
+## 最危險的五個詞，深入拆解
+
+### 1. delegatecall——比炸彈更可怕
+
+`delegatecall` 就像給了對方一把鑰匙，讓他用**你的身體**去執行命令。如果他的程式碼有後門，你的資料就全洩露了。這是 Proxy（可升級合約）的技術基礎，但也是最容易被濫用的。
+
+真實案例：2017 年 Parity 多籤錢包，攻擊者通過濫用 `delegatecall` 獲得對錢包合約的完全控制權，凍結了 1.52 億美元。搜尋程式碼時，只要看到 `delegatecall`，這個合約就該打上大紅旗。
+
+### 2. modifier（修飾符）——許可權的最後一道防線
+
+`onlyOwner` 確保只有專案方能呼叫敏感函式。問題是：**Owner 是單個帳戶還是多籤錢包？**如果 `mint`、`pause` 等危險函式只有一個 Owner 能呼叫，他的私鑰洩露就意味著專案完全淪陷。Parity 事件的教訓：關鍵許可權必須用多籤而不是單人帳戶。
+
+### 3. payable——誰能轉帳給合約
+
+`payable` 函式允許接收轉帳。但問題是：誰能呼叫它？如果 `withdraw()` 沒有許可權檢查，任何人都能提走別人的存款。
+
+### 4. mapping——凍結資金的工具
+
+`mapping` 記錄每個地址的代幣餘額。如果 Owner 有 `blacklist()` 函式，就能把任意地址的資金凍結成零——程式碼裡的後門。
+
+### 5. fallback / receive——重入漏洞的溫床
+
+這兩個函式在合約收到意外轉帳時自動觸發。2016 年 DAO 攻擊的關鍵就在這裡：駭客通過 `fallback` 函式再次進入合約，在合約還沒來得及減少他的餘額時就重複提取 ETH。
+
+## 🧪 實戰：在 Etherscan 上快速審查合約
+
+<Steps>
+
+1. 開啟 [Etherscan.io](https://etherscan.io)，搜尋合約地址（如 USDC：`0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`）
+2. 進入 "Contract" → "Code" 部分
+3. Ctrl+F 搜尋 `delegatecall`（出現 = 紅旗），然後 `onlyOwner`（看覆蓋範圍）
+4. 搜尋 `blacklist`、`pause`、`mint`，檢查這些危險函式誰能呼叫
+5. 檢查 Owner 地址：是單個帳戶還是多籤錢包？
+
+</Steps>
+
+USDC/USDT 的 Owner 是多籤錢包，風險更低。
+
+## ⚠️ 常見坑與誤區
+
+1. **"綠色對勾 = 程式碼安全"** ❌
+   - 驗證只意味著程式碼透明。DAO 攻擊的合約完全驗證，但邏輯有漏洞。
+
+2. **"只有 Owner 能呼叫，所以很安全"** ❌
+   - 單一 Owner 的私鑰洩露就完全淪陷。多籤錢包才是標準。
+
+3. **"我不需要懂程式碼"** ❌
+   - 只需會搜尋這 5 個詞：`delegatecall`、`onlyOwner`、`blacklist`、`pause`、`mint`。
+
+4. **"Etherscan 會標記有後門的合約"** ❌
+   - Etherscan 不審計，只驗證程式碼一致性。後門需要人工審計。
+
+5. **"DEXTools 標記安全，就真的安全"** ❌
+   - DEXTools 只覆蓋常見後門。自己去 Etherscan 看原始碼。
+
+## 本節要點
+
+- 只需認識十個關鍵詞，用 Ctrl+F 搜尋就能快速評估合約風險
+- `delegatecall` 是最危險的詞彙，是 Proxy 模式的技術基礎也是風險根源
+- `modifier` 決定許可權集中度，關鍵函式的許可權設計決定合約安全性
+- "已驗證" ≠ "安全"，程式碼透明只是前置條件，真正的風險來自許可權管理
+- Owner 是單籤還是多籤錢包，決定了 Proxy 合約的實際風險程度
+
+## 延伸閱讀
+
+- [soliditylang.org — Solidity 官方文件](https://www.soliditylang.org/) — 所有關鍵詞的官方定義
+- [Etherscan 合約驗證說明](https://info.etherscan.com/how-to-verify-contracts/) — 如何在 Etherscan 上檢視原始碼
+- [OpenZeppelin 審計通過的合約庫](https://docs.openzeppelin.com/contracts/) — 學習安全的程式碼寫法
+- [《The DAO Hack Explained》— learnblockchain.cn](https://learnblockchain.cn/books/geth/part6/dao.html) — 用真實案例理解 Solidity 漏洞
