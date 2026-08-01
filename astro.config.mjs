@@ -17,7 +17,7 @@ export default defineConfig({
     starlight({
       title: '从 0 开始的 Web3 之旅',
       description:
-        '面向零基础中文读者的 Web3 系统知识库：从区块链原理、钱包安全、DeFi 到链上研究与求职，13 章 104 节，约 10 万字干货。',
+        '面向零基础中文读者的 Web3 系统知识库：从区块链原理、钱包安全、DeFi 到链上研究与求职，13 章 104 节、约 18 万字干货，配 52 张图。',
       defaultLocale: 'root',
       locales: {
         root: { label: '简体中文', lang: 'zh-CN' },

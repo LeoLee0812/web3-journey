@@ -6,7 +6,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/LeoLee0812/web3-journey?style=flat-square&color=14b8a6)](https://github.com/LeoLee0812/web3-journey/commits/main)
 [![Repo Size](https://img.shields.io/github/repo-size/LeoLee0812/web3-journey?style=flat-square&color=0d9488)](https://github.com/LeoLee0812/web3-journey)
 
-> 面向**中文零基础读者**的 Web3 系统知识库。13 章 104 节，约 10 万字，从区块链底层原理一路讲到链上研究方法与行业求职。
+> 面向**中文零基础读者**的 Web3 系统知识库。13 章 104 节、约 18 万字，从区块链底层原理一路讲到链上研究方法与行业求职。
 >
 > 在线阅读：**<https://web3.saveme505.help>**
 
