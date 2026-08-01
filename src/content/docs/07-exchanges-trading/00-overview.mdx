@@ -1,0 +1,48 @@
+---
+title: 本章导读 · 交易所与交易
+description: 从选对交易所到看懂订单簿、玩转 DEX、算清无常损失与爆仓价格，这一章教你把"买卖币"这件事从直觉操作变成可计算的风险决策。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+![交易所与交易的抽象插画：K线图表、订单簿与代币兑换](/images/07-exchanges-trading/cover.png)
+
+*图注：从中心化交易所的订单簿，到去中心化交易所的自动做市，这一章拆解"买卖币"背后的全部机制 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+前几章讲了钱包、链和资产是什么，这一章回到最实际的问题：**钱怎么变成币，币怎么变成别的币，以及每一步藏着什么风险**。无论你是在中心化交易所（CEX）点「买入」，还是在去中心化交易所（DEX）点「Swap」，背后都是一套可以拆解、可以计算的机制——不是玄学，也不是运气。
+
+本章会用真实事故案例（$220,800 变成 $5,272 的三明治攻击、$1900 万的无常损失、单日 $29 亿的清算级联）告诉你：绝大多数亏损不是"币选错了"，而是**参数设置错了、风险没算清楚**。
+
+## 读完这一章你能做到什么
+
+- 看懂交易所的储备金证明和冷热钱包分离，判断一家 CEX 是否值得把资产放心地存进去
+- 看懂订单簿、点差、流动性深度，理解滑点从哪里来、该怎么设置
+- 理解 AMM 恒定乘积公式 x·y=k，知道 DEX 凭什么不需要人工做市商
+- 用公式 IL = 2√r/(1+r)−1 精确计算无常损失，而不是被高 APY 数字忽悠
+- 独立完成一笔链上 Swap，并用滑点、私有 RPC 等手段防住 MEV 夹子
+- 算出永续合约的爆仓价格，理解杠杆倍数和清算线之间的确定性关系
+- 认清"无风险套利"的真实成本结构，以及为什么散户很难靠它稳定赚钱
+- 建立一套仓位管理和交易纪律的硬性规则，把生存放在收益前面
+
+## 本章目录
+
+<CardGrid>
+  <LinkCard title="1. 中心化交易所全景" href="/07-exchanges-trading/01-cex-overview/" description="注册、KYC、储备金证明与冷热钱包分离" />
+  <LinkCard title="2. 订单簿、深度与滑点" href="/07-exchanges-trading/02-orderbook-basics/" description="看懂交易界面的每个数字，理解滑点从何而来" />
+  <LinkCard title="3. DEX 与 AMM" href="/07-exchanges-trading/03-dex-and-amm/" description="恒定乘积公式如何取代人工做市商" />
+  <LinkCard title="4. LP 与无常损失" href="/07-exchanges-trading/04-lp-and-il/" description="用精确公式判断做流动性提供者是否真的赚钱" />
+  <LinkCard title="5. 实操：链上 Swap 与防夹" href="/07-exchanges-trading/05-swap-in-practice/" description="从授权到确认的完整流程，五大防 MEV 策略" />
+  <LinkCard title="6. 合约、永续与杠杆" href="/07-exchanges-trading/06-perp-and-leverage/" description="爆仓价格是怎么用公式算出来的" />
+  <LinkCard title="7. 链上套利与价差" href="/07-exchanges-trading/07-arbitrage/" description="搬砖、三角套利、资金费率套利的真实成本" />
+  <LinkCard title="8. 交易纪律与仓位管理" href="/07-exchanges-trading/08-trading-discipline/" description="比选对币更难的是活到正确的那一刻" />
+</CardGrid>
+
+## 前置知识提示
+
+阅读本章前，建议你已经读过**第 4 章（钱包与资产托管）**，理解私钥、助记词和链上地址的基本概念——本章大量内容涉及从钱包向交易所充提资产、以及在钱包中直接完成 DEX 交易，没有这层基础会看不懂授权（Approve）和签名的具体操作。如果你还没接触过 Gas 费的概念，建议同步参考**第 2 章（区块链基础）**。
+
+下一章我们会从"交易"走向"DeFi"，看看这些交易机制如何组合成借贷、收益聚合等更复杂的链上金融产品。

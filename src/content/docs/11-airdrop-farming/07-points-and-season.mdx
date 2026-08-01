@@ -37,18 +37,13 @@ import Mermaid from '@components/Mermaid.astro';
 
 **兑现延迟通常是 1–4 周**。TGE（Token Generation Event）宣布后，项目方计算最终的积分转换率，然后自动或手动分配代币。
 
-<Mermaid chart={`
-graph TD
-  A["赛季开始<br/>第1周：用户注册"] --> B["持续 8-24 周<br/>累积交互与积分"]
-  B --> C["赛季末倒计时<br/>最后冲刺"]
-  C --> D["快照时刻<br/>数据冻结"]
-  D --> E["积分统计<br/>计算转换率"]
-  E --> F["TGE 公布<br/>公布转换公式"]
-  F --> G["代币分配<br/>直接到账或领取"]
-  
-  style A fill="#e1f5ff"
-  style D fill="#fff3e0"
-  style G fill="#e8f5e9"
+<Mermaid chart={`graph TD
+  A["赛季开始：用户注册"] --> B["持续 8-24 周：累积交互与积分"]
+  B --> C["赛季末倒计时：最后冲刺"]
+  C --> D["快照时刻：数据冻结"]
+  D --> E["积分统计：计算转换率"]
+  E --> F["TGE 公布：公布转换公式"]
+  F --> G["代币分配：直接到账或领取"]
 `} />
 
 ## 四种积分获取机制与权重

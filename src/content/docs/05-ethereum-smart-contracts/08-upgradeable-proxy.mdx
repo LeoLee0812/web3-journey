@@ -27,7 +27,13 @@ import Mermaid from '@components/Mermaid.astro';
 - 代码在代理的存储中运行，结果返回给用户
 - 用户的余额、状态等一切数据都存在代理中
 
-<Mermaid chart={`graph TD\n  A["用户"] -->|"调用"| B["代理合约(Proxy)"]\n  B -->|"delegatecall"| C["实现合约(Implementation)"]\n  C -->|"在代理存储中执行代码"| D["修改代理的状态"]\n  D -->|"返回结果"| B\n  B -->|"返回给用户"| A\n`} />
+<Mermaid chart={`graph TD
+  A["用户"] -->|"调用"| B["代理合约(Proxy)"]
+  B -->|"delegatecall"| C["实现合约(Implementation)"]
+  C -->|"在代理存储中执行代码"| D["修改代理的状态"]
+  D -->|"返回结果"| B
+  B -->|"返回给用户"| A
+`} />
 
 升级时，只需改变代理指向的实现地址，新代码就会接管，而用户的数据完好保留。
 

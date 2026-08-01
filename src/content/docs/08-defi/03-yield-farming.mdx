@@ -31,10 +31,10 @@ import Mermaid from '@components/Mermaid.astro';
 流动性挖矿最可怕的风险叫「挖提卖」死亡螺旋。它是这样的：
 
 <Mermaid chart={`graph TD
-  A["新项目发布，承诺高APY<br/>（如日产5%奖励）"] --> B["大量LPegg聚集<br/>提供流动性"]
-  B --> C["LPegg每日claim奖励<br/>立即兑现成稳定币"]
+  A["新项目发布，承诺高APY<br/>（如日产5%奖励）"] --> B["大量LP聚集<br/>提供流动性"]
+  B --> C["LP每日claim奖励<br/>立即兑现成稳定币"]
   C --> D["矿币供应量暴增<br/>币价断崖下跌"]
-  D --> E["APY直线下降<br/>LPegg开始逃离"]
+  D --> E["APY直线下降<br/>LP开始逃离"]
   E --> F["流动性枯竭<br/>代币无人接盘"]
   F --> G["代币价格趋零<br/>本金血本无归"]
 `} />
@@ -99,9 +99,11 @@ Aave 这样的老牌项目通过了顶级审计，但新项目的审计报告可
 - **预言机和清算风险** —— 多源验证价格，保持健康因子 > 1.5 才安全
 - **复投成本会吃掉收益** —— 计算 breakeven，高 APY 不一定等于高实际收益
 
+下一节我们转向质押赛道——同样是"存钱生息"，但 LST 和 LRT 用的是完全不同的收益逻辑和风险结构。
+
 ## 延伸阅读
 
-1. **Uniswap 官方开发文档** —— https://developers.uniswap.org/ （理解 V2 vs V3 的无常损失差异）
-2. **Curve Finance 官方** —— https://curve.fi/ （稳定币 LP 如何规避无常损失）
-3. **DeFiLlama 协议排名** —— https://defillama.com/ （实时 TVL 和费用统计，甄别真伪项目）
-4. **BlockBeats 安全分析报告** —— https://learnblockchain.cn/article/12734 （2024 年 DeFi 漏洞和风险案例）
+- [Uniswap 官方开发文档](https://developers.uniswap.org/) —— 理解 V2 vs V3 的无常损失差异
+- [Curve Finance 官方](https://curve.fi/) —— 稳定币 LP 如何规避无常损失
+- [DeFiLlama 协议排名](https://defillama.com/) —— 实时 TVL 和费用统计，甄别真伪项目
+- [BlockBeats 安全分析报告](https://learnblockchain.cn/article/12734) —— 2024 年 DeFi 漏洞和风险案例

@@ -40,28 +40,17 @@ Solana 的核心创新是 **Proof of History（PoH）**——一个全网共享�
 
 ## 其他 L1 的性能对标与取舍
 
-<Mermaid chart={`graph LR
-    subgraph 快["快速"][1k-100k TPS]
-        A["Solana<br/>1-4k"]
-        B["Aptos<br/>~100k"]
-        C["Sui<br/>~10k"]
-    end
-    subgraph 中["平衡"][100-1k TPS]
-        D["Cosmos<br/>10-20k"]
-        E["Polkadot<br/>~1k"]
-    end
-    subgraph 安["安全优先"][<100 TPS]
-        F["Ethereum<br/>15-20"]
-        G["Bitcoin<br/>7"]
-    end
-    
-    style A fill="#4CAF50"
-    style B fill="#4CAF50"
-    style C fill="#4CAF50"
-    style D fill="#FFC107"
-    style E fill="#FFC107"
-    style F fill="#2196F3"
-    style G fill="#2196F3"
+<Mermaid chart={`graph TD
+  A["公链 TPS 分层"] --> B["高吞吐区<br/>1k-100k TPS"]
+  A --> C["平衡区<br/>100-1k TPS"]
+  A --> D["安全优先区<br/>小于100 TPS"]
+  B --> B1["Solana 1-4k"]
+  B --> B2["Aptos 约100k理论"]
+  B --> B3["Sui 约10k"]
+  C --> C1["Cosmos 10-20k"]
+  C --> C2["Polkadot 约1k"]
+  D --> D1["Ethereum L1 15-20"]
+  D --> D2["Bitcoin 7"]
 `} />
 
 **性能对比表**（截至 2026 年 8 月）

@@ -1,0 +1,43 @@
+---
+title: 本章导读 · 密码学基础
+description: 从一把钥匙讲到零知识证明，搞懂私钥、公钥、地址、签名、助记词到底是怎么来的，为什么它们各自不可逆，这是安全用钱包的底层前提。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 你的 Web3 账户没有用户名密码，只有一串数字——本章拆开这串数字从随机数到地址、从助记词到签名的完整推导链条，让你知道每一步为什么安全、又会在哪一步栽跟头。
+
+![密码学与密钥安全的抽象插画](/images/03-cryptography/cover.png)
+
+*图注：从私钥到签名，本章要拆开的是一整条环环相扣的密码学推导链条 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+很多人用了半年 MetaMask，也说不清楚私钥、公钥、地址三者的关系，更不知道那 12 个英文单词凭什么能找回全部资产。本章从最基础的"一把锁两把钥匙"讲起，一路拆到私钥如何推导出公钥和地址、BIP-39 助记词和 HD 钱包如何用一句话生成无数地址、ECDSA 签名如何证明所有权而不暴露私钥、哈希函数和默克尔树如何支撑起区块链的可验证性，最后落到零知识证明这个正在重塑 Layer 2 扩容格局的技术。读完本章，你不会再把这些词当成"听起来很安全"的黑箱。
+
+## 读完你能做到什么
+
+- 说清楚对称加密和非对称加密的根本区别，理解为什么区块链账户体系必须建立在非对称加密之上
+- 独立描述从 256 位私钥到 42 字符地址的完整推导链条，并知道链条中每一步为什么不可逆
+- 理解 BIP-39 助记词和 BIP-32/BIP-44 派生路径的关系，能自己判断"导入钱包后资金消失"是不是真的丢了
+- 看懂一笔交易签名背后的数学原理，识别随机数质量差、盲签名这两类真实发生过的安全事故
+- 分清 SHA-256 与 Keccak-256、zk-SNARK 与 zk-STARK 的关键差异，不再把名字相近的技术混为一谈
+
+## 本章目录
+
+<CardGrid>
+  <LinkCard title="1. 对称与非对称加密" description="一把锁两把钥匙的思想实验，为什么区块链选择了非对称加密" href="/03-cryptography/01-symmetric-vs-asymmetric/" />
+  <LinkCard title="2. 私钥、公钥、地址" description="从 256 位随机数到 42 字符地址，三者如何推导又为何不可逆" href="/03-cryptography/02-private-public-key/" />
+  <LinkCard title="3. 助记词与 BIP-39" description="12 个英文单词凭什么等于你的全部资产" href="/03-cryptography/03-mnemonic-bip39/" />
+  <LinkCard title="4. HD 钱包与派生路径" description="一个助记词为什么能生出无数地址，以及资金'消失'的真相" href="/03-cryptography/04-hd-wallet-path/" />
+  <LinkCard title="5. 数字签名机制" description="点击「确认」的那一刻，ECDSA 签名到底做了什么" href="/03-cryptography/05-digital-signature/" />
+  <LinkCard title="6. 哈希函数详解" description="SHA-256 与 Keccak-256 的构造差异和各自的应用场景" href="/03-cryptography/06-hash-functions/" />
+  <LinkCard title="7. 默克尔树" description="为什么一部手机也能验证一笔十年前的交易" href="/03-cryptography/07-merkle-tree/" />
+  <LinkCard title="8. 零知识证明入门" description="不暴露秘密也能证明你知道它，以及它如何撑起 L2 扩容" href="/03-cryptography/08-zk-intro/" />
+</CardGrid>
+
+## 前置知识
+
+本章默认你已经读过第 1 章（Web3 是什么）和第 2 章（区块链底层结构），知道"区块""哈希""共识"这些词的基本含义。密码学是纯数学和工程细节比较密集的一章，建议按顺序读完 8 节——后面几节会直接复用前面推导出的概念，跳读容易断片。读完本章，你才算真正为下一章"钱包实操"做好了准备。

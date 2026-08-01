@@ -20,6 +20,10 @@ import Mermaid from '@components/Mermaid.astro';
 
 ## 多维度检测的核心框架
 
+![指纹识别象征身份核验与检测](/images/11-airdrop-farming/05-sybil-detection.jpg)
+
+*图注：女巫检测的本质是给每个账户做"指纹比对"，多维度数据一旦重叠就会暴露关联身份 · 图片：Pexels / Towfiqu barbhuiya*
+
 项目方检测女巫不是看某一个维度，而是像警察破案一样做"多维度关联分析"。
 
 <Mermaid chart={`graph TD
@@ -72,7 +76,7 @@ import Mermaid from '@components/Mermaid.astro';
 
 3. **"分散交互金额就能避免检测"** — 这个有效，但只解决了 1 个维度。因为检测系统还看时间戳、资金流向、社交信号。金额多样化不是充分条件。
 
-4. **"等 Gas 便宜了再卖空投"** — 这不是女巫问题，但是经济问题。空投后 24-72 小时是抛售窗口，流动性充足价格稳定。等 7 天，代币可能已跌 50%+，省下的 $10 Gas 费相比损失是九牛一毛。
+4. **"等 Gas 便宜了再卖空投"** — 这不是女巫问题，是抛售时机的经济账，详见[本章第 8 节](/11-airdrop-farming/08-realistic-expectations/)。
 
 5. **"我在社交媒体上有 1000 粉丝，应该过得了"** — 错。如果账号成立时间短、粉丝都是僵尸、没有历史发言记录，Gitcoin Passport 评分仍然很低，女巫检测仍会命中。
 

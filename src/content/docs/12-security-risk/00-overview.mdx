@@ -1,0 +1,46 @@
+---
+title: 本章导读 · 安全与风控
+description: Web3 资产损失并非随机事件，而是来自 7 个可识别的系统性风险口子。本章教你从威胁模型到应急响应搭建一套完整的个人防御体系。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 本章不讲"哪个项目会跑路"，而是教你一套可复用的防御方法论——识别渠道、拆解攻击手法、搭建隔离架构、准备应急预案。
+
+![一面盾牌与锁在暗色数字森林中对抗钓鱼钩子的插画](/images/12-security-risk/cover.png)
+
+*图注：Web3 世界里的风险像藏在暗林中的钩子，安全能力是你自己撑起的那面盾 · 配图由 AI 生成*
+
+## 本章要解决的问题
+
+2025 年一年，Bybit 单笔被盗 15 亿美元，钓鱼诈骗造成 7.5 亿美元损失，Rug Pull 卷走超 6 亿美元。这些数字背后有一个共同点：**几乎每一起损失，都能追溯到某个本可以被识别的信号**——一个未弃权的合约权限、一次没看懂就点了签署的十六进制、一个单点存放全部资产的钱包。Web3 世界没有客服帮你撤销转账，也没有银行帮你追回损失，安全能力必须自己建立。
+
+本章把这套能力拆成 8 个模块：先建立威胁模型认清风险全貌，再逐个拆解钓鱼、签名攻击、Rug Pull、审计报告这几类具体攻防细节，最后落到 OPSEC、钱包分层、应急响应这三套可执行的日常习惯上。
+
+## 读完本章你能做到什么
+
+- 说清楚自己的资产会从哪几个渠道流失，并估算每个渠道的相对风险权重
+- 在签名弹窗前判断这是"看得懂的交易"还是"应该拒签的盲签"
+- 用 12 项检查清单在新币上线 48 小时内完成 Rug Pull 尽职调查
+- 看懂一份审计报告是否被"低风险问题堆砌"掩盖了真实风险
+- 搭建金库、交互、测试三层钱包架构，并配套设备、网络、账号的隔离习惯
+- 万一被盗，知道黄金一小时里该做什么、按什么顺序做
+
+## 本章 8 节速览
+
+<CardGrid>
+  <LinkCard title="1. 建立威胁模型" description="你的资产会从哪七个口子流走" href="/12-security-risk/01-threat-model/" />
+  <LinkCard title="2. 钓鱼全图鉴" description="假网站、假客服、假空投与剪贴板劫持" href="/12-security-risk/02-phishing/" />
+  <LinkCard title="3. 签名攻击" description="Permit、setApprovalForAll 与盲签的杀伤力" href="/12-security-risk/03-signature-attacks/" />
+  <LinkCard title="4. Rug Pull 识别" description="从合约权限与流动性锁看出跑路准备" href="/12-security-risk/04-rugpull-patterns/" />
+  <LinkCard title="5. 看懂审计报告" description="哪些结论有意义，哪些是营销" href="/12-security-risk/05-contract-audit-reading/" />
+  <LinkCard title="6. 个人 OPSEC" description="设备、网络、账号与身份隔离" href="/12-security-risk/06-opsec/" />
+  <LinkCard title="7. 钱包分层管理" description="金库、交互、垃圾钱包的三层架构" href="/12-security-risk/07-wallet-hygiene/" />
+  <LinkCard title="8. 被盗之后" description="黄金一小时的应急处置流程" href="/12-security-risk/08-incident-response/" />
+</CardGrid>
+
+## 前置知识
+
+本章默认你已经会用软件钱包完成基本的转账、swap 与合约交互，并且对 Gas 费、授权（approve）、签名这些概念有基础认识。如果还不熟悉，建议先读完前面讲钱包与合约交互的章节，再回到这里搭建安全体系——防御知识只有在你已经会"进攻性"操作的前提下才有意义。

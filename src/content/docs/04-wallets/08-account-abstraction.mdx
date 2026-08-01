@@ -48,7 +48,23 @@ Pectra 升级（2025 年 5 月 7 日）激活的更激进方案：**允许 EOA �
 | **支持方** | Pimlico、Stackup、Coinbase 等 | MetaMask、Rabby（2025底前） |
 | **社交恢复** | 支持（通过合约逻辑） | 支持（通过代码委托） |
 
-<Mermaid chart={`graph LR\n  A["用户钱包 0x123..."]\n  B["发起交易或 UserOp"]\n  C["ERC-4337: Bundler 打包"]\n  D["EIP-7702: 直接代理到合约"]\n  E["EntryPoint 合约验证"]\n  F["智能合约执行"]\n  G["返回结果"]\n\n  A --> B\n  B --> C\n  B --> D\n  C --> E\n  D --> F\n  E --> F\n  F --> G\n`} />
+<Mermaid chart={`graph LR
+  A["用户钱包 0x123..."]
+  B["发起交易或 UserOp"]
+  C["ERC-4337: Bundler 打包"]
+  D["EIP-7702: 直接代理到合约"]
+  E["EntryPoint 合约验证"]
+  F["智能合约执行"]
+  G["返回结果"]
+
+  A --> B
+  B --> C
+  B --> D
+  C --> E
+  D --> F
+  E --> F
+  F --> G
+`} />
 
 ## 🧪 实操：MetaMask 的 Smart Account
 

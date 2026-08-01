@@ -1,0 +1,46 @@
+---
+title: 本章导读 · 以太坊与智能合约
+description: 从账户模型到 EVM 执行，从 Solidity 关键词到交易生命周期与 MEV，再到合约验证与代理升级——建立看懂并核验一份智能合约的完整能力。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 本章要解决一个问题——当你在链上和一份陌生的智能合约打交道时，你能不能自己判断它在做什么、可不可信，而不是只看别人说"安全"就相信。
+
+![以太坊虚拟机与智能合约自动化的示意插画](/images/05-ethereum-smart-contracts/cover.png)
+
+*图注：以太坊在账本之上加了一台可编程的虚拟机，代码由此成为能自动执行的规则 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+比特币能记账，但不能"执行规则"。以太坊在账本之上加了一台**图灵完备的虚拟机（EVM）**，让代码本身成为可以自动执行、不可篡改的"规则制定者"——这就是智能合约。但灵活性带来了复杂性：合约可以被设计得很安全，也可以被设计得暗藏后门；升级机制可以用来修复漏洞，也可以用来偷偷改规则。本章从底层架构一路讲到实操核验，目标是让你不依赖任何人背书，自己就能读懂一份合约的风险边界。
+
+## 读完你能做到什么
+
+- 说清楚以太坊的账户模型和比特币的 UTXO 模型在架构上的根本区别，以及各自的取舍
+- 理解 EVM 如何把一笔交易变成"世界状态"的一次改写，为什么所有节点必须执行相同顺序
+- 看懂智能合约的本质限制：它只能被动响应，不会主动做任何事
+- 在 Etherscan 上认出十个最关键的 Solidity 关键词，快速定位权限相关的代码
+- 追踪一笔交易从签名到最终确定的完整生命周期，理解 Gas 费为什么时高时低
+- 识别 mempool 抢跑和 MEV 三明治攻击的原理，知道怎么设置滑点来自保
+- 独立核验一个合约是否开源、有没有常见的后门函数模式
+- 判断一个可升级合约（代理模式）的风险等级，看懂谁真正掌握着"改规则"的权力
+
+## 小节索引
+
+<CardGrid>
+  <LinkCard title="1. 以太坊与比特币的根本分歧" href="/05-ethereum-smart-contracts/01-ethereum-vs-bitcoin/" description="账户模型 vs UTXO 模型，两种记账哲学决定了谁能跑智能合约" />
+  <LinkCard title="2. EVM 与状态机" href="/05-ethereum-smart-contracts/02-evm-and-state/" description="链上「世界状态」是怎么被一笔笔交易改写的" />
+  <LinkCard title="3. 智能合约到底是什么" href="/05-ethereum-smart-contracts/03-what-is-contract/" description="自动售货机模型：合约只会被动响应，永远不会主动做事" />
+  <LinkCard title="4. 看懂 Solidity" href="/05-ethereum-smart-contracts/04-read-solidity/" description="非开发者也要认识的十个关键词，秒速识别权限陷阱" />
+  <LinkCard title="5. 一笔交易的一生" href="/05-ethereum-smart-contracts/05-tx-lifecycle/" description="从签名、广播、打包到最终确定，五个阶段和 Gas 机制" />
+  <LinkCard title="6. 内存池与 MEV" href="/05-ethereum-smart-contracts/06-mempool-mev/" description="你的交易在被谁抢跑：三明治攻击与 MEV 三角关系" />
+  <LinkCard title="7. 实操：核验一个合约" href="/05-ethereum-smart-contracts/07-verify-contract/" description="用 30 秒红旗清单判断合约是否开源、有没有后门" />
+  <LinkCard title="8. 可升级合约与代理模式" href="/05-ethereum-smart-contracts/08-upgradeable-proxy/" description="项目方能不能偷偷改规则？关键看谁掌握升级权" />
+</CardGrid>
+
+## 前置知识提示
+
+本章默认你已经读过前面几章，知道什么是钱包、私钥、公开地址，以及 Gas 这个概念的雏形。如果你还没搞清楚"链上地址是怎么来的"或者"热钱包、冷钱包、托管钱包有什么区别"，建议先回去补第 4 章《钱包》再回来读本章，否则第 2、3 节会有点陡。

@@ -16,6 +16,10 @@ import Mermaid from '@components/Mermaid.astro';
 
 Dune 也是这样。200K+ 公开仪表板里大多数是"模板"，而不是专为你设计的。学会 Fork（复制）看板和修改关键参数（时间、合约地址、代币名），你就从"数据的消费者"变成"快速研究者"。这是链上分析的工作流分界线。
 
+![多屏电脑前分析各类图表数据的场景](/images/10-onchain-research/04-dune-basics.jpg)
+
+*图注：Fork 一个看板就像坐到别人电脑前，把现成的图表改成你需要的参数 · 图片：Pexels / AlphaTradeZone*
+
 ## SQL 最小集：你只需要记住 4 句
 
 Dune 基于 Trino SQL（不是标准 PostgreSQL），但查询 95% 的用例只需要 4 个动词：SELECT、FROM、WHERE、GROUP BY。
@@ -115,7 +119,7 @@ USDC 在以太坊和 Polygon 各有一个地址，在 Arbitrum 又有另一个�
 
 **坑 5：把相关性当因果关系**
 
-"TVL 增加 20% 的同时交易费也增加了 20%，所以 TVL 增加导致费用增加"。实际可能是：市场上升期间两个指标都受市场情绪驱动，互为关联而非因果。用 Dune 构建对照组（同时期的其他协议）来验证因果。
+"TVL 增加 20% 的同时交易费也增加了 20%，所以 TVL 增加导致费用增加"——这是把相关性当因果。用 Dune 构建对照组（同时期的其他协议）来验证，完整的辨析逻辑见[本章第 3 节](/10-onchain-research/03-data-platforms/)。
 
 ## 本节要点
 

@@ -1,0 +1,43 @@
+---
+title: 本章导读 · 区块链底层
+description: 从班级记账本讲到真实的以太坊区块，搞懂区块链为什么"没人管却没人能改"，为后面学钱包、DeFi、智能合约打地基。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 区块链是一本没有管理员、却谁都改不了的账本——本章拆开它的每一个零件，让你看懂"不可篡改"到底是怎么实现的，而不是停留在"听说很安全"的印象里。
+
+![区块通过哈希链相互连接，节点分布在网络各处，共同维护同一本账本](/images/02-blockchain-basics/cover.png)
+
+*图注：区块链的核心画面——一条互相锁定的区块链条，加上分布式的记账节点，两者共同撑起"没人管却改不了"这句话 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+很多人对区块链的认知停留在"一种很安全的技术"这类模糊描述上，一旦追问"安全体现在哪""谁在维护这本账"，就答不上来了。本章从最朴素的记账场景出发，一路拆到哈希算法、节点分工、两种共识机制、不可能三角、分叉治理，最后落到一次真实的区块浏览器操作。读完你不会只记住"区块链很牛"，而是能说清楚它每一层具体在做什么、付出了什么代价。
+
+## 读完你能做到什么
+
+- 用自己的话向别人解释"区块""哈希""链"这三个词分别指什么，以及它们怎么组合成"不可篡改"
+- 分清全节点、档案节点、轻节点各自存什么数据、承担什么责任，不再以为"人人都存一份完整账本"
+- 说清楚工作量证明（PoW）和权益证明（PoS）分别靠什么成本来防止作恶，以及以太坊为什么在 2022 年放弃了前者
+- 理解"去中心化、安全、可扩展不可能三角"，看懂不同公链的取舍逻辑，不再轻信"三个都最优"的营销话术
+- 打开 Etherscan，独立查一个真实区块和交易，看懂 Gas 费是怎么算出来的
+
+## 本章目录
+
+<CardGrid>
+  <LinkCard title="1. 从班级记账本讲起" description="区块链的基本结构：区块、哈希链、分布式存储" href="/02-blockchain-basics/01-ledger-metaphor/" />
+  <LinkCard title="2. 哈希：数字指纹与区块链" description="SHA-256 如何把任意数据变成固定长度指纹，Merkle 树怎么组织交易" href="/02-blockchain-basics/02-hash-and-blocks/" />
+  <LinkCard title="3. 节点、全节点与轻节点" description="谁在真正保存这本账：三种节点的分工与硬件成本" href="/02-blockchain-basics/03-nodes-and-network/" />
+  <LinkCard title="4. 工作量证明 PoW" description="挖矿到底在算什么，难度调整与区块奖励减半机制" href="/02-blockchain-basics/04-consensus-pow/" />
+  <LinkCard title="5. 权益证明 PoS" description="以太坊为什么抛弃显卡，32 ETH 质押与惩罚机制" href="/02-blockchain-basics/05-consensus-pos/" />
+  <LinkCard title="6. 不可能三角" description="去中心化、安全、可扩展为什么难以同时最大化" href="/02-blockchain-basics/06-trilemma/" />
+  <LinkCard title="7. 分叉与治理" description="硬分叉、软分叉，以及 The DAO 事件留下的教训" href="/02-blockchain-basics/07-fork-and-governance/" />
+  <LinkCard title="8. 动手：读懂一个真实区块" description="在 Etherscan 上查区块、查交易，看懂 Gas 费怎么算" href="/02-blockchain-basics/08-read-a-block/" />
+</CardGrid>
+
+## 前置知识
+
+本章默认你已经读过第 1 章，知道 Web3、区块链、加密货币这几个词大致的关系和边界。如果还没读，建议先补上第 1 章再进入这里——本章会直接使用"账本""共识"这类词，不再从零解释它们和 Web3 整体图景的关系。

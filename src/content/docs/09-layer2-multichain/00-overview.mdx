@@ -1,0 +1,43 @@
+---
+title: 本章导读 · 扩容、多链与跨链桥
+description: 区块空间为什么不够用、Rollup 如何扩容、多链资产怎么安全流转——本章帮你搭起理解 L2 与跨链的完整框架。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 以太坊主网的区块空间是稀缺资源，Layer 2 用 Rollup 技术把交易搬到链下执行、把结果压缩后提交回主网，而跨链桥则负责把资产和消息在这些链之间搬运——本章讲清这套体系怎么运转、怎么选、怎么防坑。
+
+![多条区块链通过桥梁与高速公路网络互联的示意插画](/images/09-layer2-multichain/cover.png)
+
+*图注：Layer 2 与跨链桥共同构成了多链世界的"公路网"，把原本拥堵的单一主链拆分成多条并行车道 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+Web3 早已不是"一条以太坊主网打天下"的时代。截至 2026 年 8 月，仅 Layer 2 就有 20 多条网络在运行，加上 Solana、比特币生态 L2、Cosmos/Polkadot 等非以太坊公链，普通用户的资产很容易散落在五六条链上。这带来两个直接问题：**该把交易放在哪条链**，以及**资产在链与链之间搬运时怎么才安全**。本章按"为什么要扩容 → 两条扩容技术路线 → 各链定位 → 跨链桥怎么工作 → 跨链桥为什么总出事 → 日常怎么管理多链资产"的顺序，把这套体系从原理讲到实操。
+
+## 读完本章你能做到
+
+- 看懂"区块空间稀缺"和 Gas 竞价的底层逻辑，不再被"Ethereum 太贵"这种笼统说法带偏
+- 分清 Optimistic Rollup 和 ZK Rollup 的技术权衡，知道 7 天挑战期到底意味着什么
+- 根据你要用的应用（而不是道听途说）判断该把资产放在 Base、Arbitrum 还是别的 L2
+- 识别跨链桥的三种模型（锁定铸造、流动性池、消息传递），理解它们各自的风险来源
+- 建立一份跨链前的自查清单，避免成为下一个桥被黑事件的受害者
+
+## 本章内容索引
+
+<CardGrid>
+  <LinkCard title="1. 为什么必须扩容" href="/09-layer2-multichain/01-why-scaling/" description="区块空间是稀缺商品，供给固定而需求增长，费用竞价是必然结果" />
+  <LinkCard title="2. Optimistic Rollup" href="/09-layer2-multichain/02-rollup-optimistic/" description="欺诈证明机制与 7 天挑战期，双轨提现如何兼顾安全与速度" />
+  <LinkCard title="3. ZK Rollup" href="/09-layer2-multichain/03-rollup-zk/" description="有效性证明省去挑战期，代价是证明生成延迟与硬件成本" />
+  <LinkCard title="4. L2 生态盘点" href="/09-layer2-multichain/04-l2-landscape/" description="Base、Arbitrum、Optimism 的市场格局与差异化定位" />
+  <LinkCard title="5. 非以太坊公链" href="/09-layer2-multichain/05-alt-l1/" description="Solana 高吞吐、比特币 L2、Cosmos/Polkadot 模块化路线的取舍" />
+  <LinkCard title="6. 跨链桥原理" href="/09-layer2-multichain/06-bridges/" description="锁定铸造、流动性池、消息传递三种模型的机制与风险" />
+  <LinkCard title="7. 桥为什么总被黑" href="/09-layer2-multichain/07-bridge-hacks/" description="历史大案拆解与跨链前的自查清单" />
+  <LinkCard title="8. 多链操作手册" href="/09-layer2-multichain/08-multichain-ops/" description="Gas 管理、跨链路由选择、钱包分级持有的实操指南" />
+</CardGrid>
+
+## 前置知识提示
+
+本章假设你已经理解区块链的基本运作方式（区块、交易、Gas、钱包）和以太坊主网的核心概念。如果你还不熟悉这些，建议先回头读完前面讲以太坊基础和钱包操作的章节，再进入本章——否则"Rollup""挑战期""DVN"这些术语会让你云里雾里。

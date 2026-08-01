@@ -1,0 +1,45 @@
+---
+title: 本章导读 · 链上数据分析与项目研究方法
+description: 从区块浏览器到研究报告模板，本章教你用结构化方法而非直觉判断一个 Web3 项目，避开审计、TVL、社区热度等常见的认知陷阱。
+sidebar:
+  order: 0
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+> **一句话结论：** 链上数据是公开透明的，但工具和信号都有各自的盲点，本章教你用系统化的框架和多工具交叉验证，把"看数据"变成"做研究"。
+
+![链上数据研究的示意插画：数据看板、图表与调查线索](/images/10-onchain-research/cover.png)
+
+*图注：链上数据分析的本质是在一堆公开图表里找出真正有意义的信号 · 配图由 AI 生成*
+
+## 本章要解决的核心问题
+
+Web3 世界最大的悖论是：所有数据都在链上公开可查，但大多数人依然做不出靠谱的判断。原因不是数据不够，而是**没有方法论**——看到一笔巨鲸转账就断定"要涨了"，看到"已通过审计"就认为绝对安全，看到 TVL 很高就觉得项目健康。2026 年上半年，68 个已审计 DeFi 协议遭到攻击，其中 46 个（67.6%）的攻击向量完全在审计范围之外，造成的损失占全部损失的 94.4%。这说明：**看得懂数据，不代表看得懂风险**。
+
+本章把"链上数据分析"拆解成一套可复用的工作流：从区块浏览器和数据平台的工具选择，到 Dune SQL 的最小可用集，再到巨鲸追踪、社区热度量化、尽职调查清单，最后落地成一份可以直接拿去用（甚至拿去面试）的研究报告。
+
+## 读完本章你能做到什么
+
+- 用六维打分表（产品、代币、团队、融资、竞争、风险）系统评估任何一个 Web3 项目，而不是凭感觉打标签
+- 知道该用哪个工具解决哪个问题：TVL 看 DefiLlama，自定义分析用 Dune，聪明钱追踪用 Nansen/Arkham
+- 会 Fork 并修改 Dune 上的公开看板，不需要从零写 SQL 也能定制查询
+- 识别巨鲸转账、社区热度里的虚假信号，理解为什么"相关性不等于因果"
+- 独立核查一个项目的融资背景、代币解锁计划、审计范围和管理员权限，写出结构化的研究报告
+
+## 本章目录
+
+<CardGrid>
+	<LinkCard title="1. 项目研究框架" href="/10-onchain-research/01-research-framework/" description="六维打分表：产品、代币、团队、融资、竞争、风险" />
+	<LinkCard title="2. 区块浏览器进阶" href="/10-onchain-research/02-block-explorers/" description="从一个地址挖出一整条资金链路" />
+	<LinkCard title="3. 链上数据平台工具箱" href="/10-onchain-research/03-data-platforms/" description="DefiLlama、Dune、Nansen、Arkham 分别解决什么问题" />
+	<LinkCard title="4. 看懂并改写 Dune 看板" href="/10-onchain-research/04-dune-basics/" description="非程序员的 SQL 最小集，Fork 工作流入门" />
+	<LinkCard title="5. 巨鲸与聪明钱追踪" href="/10-onchain-research/05-whale-tracking/" description="地址标签、资金异动与预警设置" />
+	<LinkCard title="6. 社区热度量化" href="/10-onchain-research/06-social-signals/" description="从社交平台与开发者活跃度里读出真信号" />
+	<LinkCard title="7. 尽职调查清单" href="/10-onchain-research/07-due-diligence/" description="融资、锁仓、审计报告怎么核实" />
+	<LinkCard title="8. 产出物：研究报告模板" href="/10-onchain-research/08-research-report/" description="八章节框架 + 30 分钟快速查证流程" />
+</CardGrid>
+
+## 前置知识提示
+
+本章假设你已经理解钱包地址、交易哈希、智能合约这些基础概念，并且知道 DeFi 借贷、DEX、流动性质押等常见项目类型是做什么的。如果这些对你还比较陌生，建议先回顾前面讲钱包与 DeFi 基础的章节，再来学习本章的研究方法——工具用得再熟练，也需要先看懂它在分析什么。
