@@ -1,8 +1,140 @@
 ---
-title: 非以太坊公链：Solana、Bitcoin 生态与其他 L1 的差异化
-description: 待生成
+title: 非以太坊公链：Solana、比特币生态与其他 L1 的差异化
+description: Solana 以 PoH 机制突破 1000+ TPS 交易速度，Bitcoin L2 生态探索抵押属性与应用，Cosmos/Polkadot 走模块化路线。了解各公链的性能取舍与适用场景。
 sidebar:
   order: 5
 ---
 
-占位内容，待生成。
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句话结论：** Solana 靠 Proof of History 机制达到实际 1000+ TPS，Bitcoin L2 用 PoX 和 Staking 重塑抵押层，Cosmos/Polkadot 则选择模块化互操作——各链的差异不是好坏，而是用户和开发者的权衡选择。
+
+## 从支付宝到跨行转账：为什么不同链的体验差这么大
+
+你在支付宝转账给朋友，通常秒到；但给朋友的银行卡转账，却要 1-3 个工作日。区块链也一样。以太坊主网像银行系统——安全但慢，交易成本高达 $0.2-0.5；而 Solana 更像支付宝——速度快到几乎无感，成本仅需 $0.00025。问题来了：为什么 Ethereum 不直接用 Solana 的方案？因为快和便宜往往要付出代价——可能是更强的硬件门槛、更高的中心化风险，或者更复杂的开发者体验。本节就讲清楚这些取舍。
+
+## Solana：Proof of History 如何突破吞吐天花板
+
+Solana 的核心创新是 **Proof of History（PoH）**——一个全网共享的时间戳机制。简单说，验证节点在出块前就已经达成"这个时刻发生了什么"的共识，无需再等待所有其他验证者投票确认。
+
+**实际性能数据**（截至 2026 年 8 月）：
+- **块时间**：400ms（以太坊的 30 倍快）
+- **实际 TPS**：1,000-4,000（实验室环境能达 2,500）
+- **平均 Gas**：$0.00025，是以太坊的万分之一
+- **确认时间**：&lt; 1 秒
+
+听起来完美？但代价是：验证节点硬件要求极高（16 核 CPU、128GB 内存），导致验证人集中度问题。同时，Solana 的 MEV（最大可提取价值）问题比以太坊严重——400ms 出块速度反而让 sandwich attack（夹击攻击）更容易被自动化执行。
+
+**2026 年 Firedancer 升级**会改变这个格局。Jump Crypto 用 C 语言重写了验证客户端（原版用 Rust），测试环境已突破 **>1M TPS**。生产环境预计 2026 下半年集成后能达到 10-50k TPS，虽然远低于理论的 65k，但足以吸引更多链上交易。
+
+## Bitcoin L2：「抵押品之王」的应用突破
+
+比特币不是为高频交易设计的——10 分钟出块、7 TPS。但 2024-2025 年，一股「Bitcoin L2」潮流涌现，用不同的方式为比特币扩容。
+
+**Stacks** 是最有代表性的 Bitcoin L2。它不是在以太坊概念上「链下执行，链上结算」，而是用 **Proof of Transfer (PoX)** 让比特币矿工直接参与 Stacks 的共识，后者在 Clarity 智能合约中执行。结果是：Stacks 上的应用既继承了比特币的最终性保证，又能做到 20-30 秒出块。2026 年路线图目标达成 **&lt;10 秒交易时间**。
+
+**Babylon** 走另一条路——让比特币持有者直接 Staking 获取收益，无需学习新链。这是比特币历史上首次向持有者开放 stake 机制，当前在 Beta 测试阶段。
+
+**Ordinals（铭刻）和 Runes（代币标准）** 则是比特币应用层的爆点。Ordinals 允许你在比特币 UTXO 中刻入任意数据（图片、NFT 元数据），Runes 则用更高效的方式定义链上代币。2026 年，这些资产开始被用作 DeFi 抵押品——比如用 Bitcoin Ordinals 去借贷或交易衍生品。虽然还很早期，但代表着比特币从"数字黄金"向"应用平台"的探索。
+
+## 其他 L1 的性能对标与取舍
+
+<Mermaid chart={`graph LR
+    subgraph 快["快速"][1k-100k TPS]
+        A["Solana<br/>1-4k"]
+        B["Aptos<br/>~100k"]
+        C["Sui<br/>~10k"]
+    end
+    subgraph 中["平衡"][100-1k TPS]
+        D["Cosmos<br/>10-20k"]
+        E["Polkadot<br/>~1k"]
+    end
+    subgraph 安["安全优先"][<100 TPS]
+        F["Ethereum<br/>15-20"]
+        G["Bitcoin<br/>7"]
+    end
+    
+    style A fill="#4CAF50"
+    style B fill="#4CAF50"
+    style C fill="#4CAF50"
+    style D fill="#FFC107"
+    style E fill="#FFC107"
+    style F fill="#2196F3"
+    style G fill="#2196F3"
+`} />
+
+**性能对比表**（截至 2026 年 8 月）
+
+| 公链 | TPS（实际） | 块时间 | 平均 Gas | 核心特色 |
+|------|-----------|--------|---------|--------|
+| **Solana** | 1,000-4,000 | 400ms | $0.00025 | PoH 时间戳，超高吞吐但 MEV 问题 |
+| **Aptos** | ~10,000 | ~1s | $0.0001 | Move 语言，并行执行，生态小 |
+| **Sui** | ~10,000 | ~1s | $0.0001 | 对象模型，Move 共享生态 |
+| **Cosmos** | 10,000-20,000 | 可配 | 可配 | IBC 跨链，高度定制自由 |
+| **Polkadot** | ~1,000 | 可配 | 可配 | 平行链生态，安全租赁模型 |
+| **Ethereum L1** | 15-20 | 12s | 0.15 gwei | 最高安全性，最成熟生态 |
+| **Bitcoin L2** | 20-30 | 20-30s | 取决于 L2 | 最强抵押属性，应用早期 |
+
+**关键差异**不在"更快更便宜"，而在**开发者体验与生态锁定**：
+- Solana 和 Aptos 优化的是**序列化 TPS**（单链最高速）
+- Cosmos 和 Polkadot 优化的是**互操作性**（跨链最灵活）
+- Ethereum + L2 优化的是**安全与流动性深度**（生态最成熟）
+
+## 🧪 实战场景：该选哪条链
+
+<Steps>
+
+1. **高频交易（DEX、期货）**：Solana 或 Arbitrum
+   - Solana 最便宜（$0.00025/笔），适合超高频刷单
+   - Arbitrum 流动性最深（DeFi 交易对最全）
+   
+2. **小额支付（Tip、Gas 退款）**：Base（Coinbase 原生）或 Solana
+   - Base 用户活跃，出入金最便利
+   - Solana 成本最低（Gas &lt; $0.001）
+
+3. **持有 Bitcoin 并参与 DeFi**：Stacks + Babylon
+   - Stacks 原生支持 Bitcoin 最终性
+   - Babylon Staking 允许 BTC 直接获取收益
+
+4. **追求最高安全性**：Ethereum L1
+   - TVL 最深，应用最成熟
+   - Gas 虽高但对大额交易（>$10k）相对可接受
+
+5. **跨链互操作需求**：Cosmos 或 LayerZero + Arbitrum
+   - Cosmos：内部 IBC 最成熟
+   - LayerZero：可任意链组合（但需考虑 DVN 配置）
+
+</Steps>
+
+## ⚠️ 常见坑与误区
+
+**坑 1：盲目信仰 TPS 数字**
+Solana 标榜 65,000 TPS，但实际网络常在 1,000-4,000 TPS 波动。TPS 只衡量单条链的吞吐能力，无法反映流动性深度、应用生态、跨链成本等实际体验。选链应看**应用生态**，而非速度标签。
+
+**坑 2：忽视不同链的 Gas 费用差异**
+在 Solana 上做大额交易，Gas &lt; $0.01；但跨链到以太坊主网的成本可能是 $5-20（L1 Gas）+ 桥接费。永远别假设链与链的成本一致。
+
+**坑 3：高估 Solana 的中心化风险**
+媒体常说"Solana 中心化"，但 2024-2025 年验证人数已增到 3,000+ 个。相对安全性虽低于以太坊，但不至于"一家说了算"。关键是不要把**全部资产**押在任何单条链。
+
+**坑 4：低估 Bitcoin L2 的早期性**
+Stacks、Babylon 虽然概念新颖，但应用生态远不成熟。别用大额资产去体验，先用 $10-100 测试交易流程。
+
+**坑 5：跨链成本反超链内成本**
+跨链到便宜链的固定费用（通常 $0.5-2）可能远高于在贵链上的单笔交易。若交易金额 &lt; $100，跨链的成本占比会很大。
+
+## 本节要点
+
+- **Solana 用 Proof of History 达到 1,000-4,000 TPS**，Gas 成本百万分之一，但需忍受验证人集中化与 MEV 风险
+- **Bitcoin L2**（Stacks、Babylon）寻求在保留 Bitcoin 抵押属性的前提下扩容，Ordinals & Runes 为比特币打开应用想象
+- **Cosmos 和 Polkadot** 各自走模块化路线，优化跨链互操作而非单链吞吐
+- **选链不是选最快最便宜**，而是权衡生态成熟度、流动性深度、开发者体验、跨链成本
+- **不同链的差异是永久的**，未来不会出现"唯一赢家"，而是多链并存与聚合
+
+## 延伸阅读
+
+- [Solana 官方文档](https://docs.solana.com/)——包含实时 TPS、Gas 费用、验证人硬件需求
+- [Stacks 官方](https://www.stacks.co/)——Bitcoin L2 的设计原理与 2026 路线图
+- [Chainalysis - Bitcoin L2 深度分析](https://www.chainalysis.com/)——追踪 Ordinals 和 Runes 的链上数据与应用趋势
+- [L2BEAT](https://l2beat.com/)——实时对比所有 L2 的 TVL、交易费、风险评分

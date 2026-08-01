@@ -1,8 +1,142 @@
 ---
 title: 授权（Approve）是最大暗雷：如何查看与撤销
-description: 待生成
+description: ERC-20 Approve 的无限授权一旦被滥用，攻击者可转走所有代币。本节讲清授权机制、撤销工具、新授权的正确姿势，以及 Permit 等替代方案的现状。
 sidebar:
   order: 6
 ---
 
-占位内容，待生成。
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句话结论：** Approve 无限授权是 DeFi 的隐形炸弹——一旦授权，DApp 可随时转走你的代币；你必须定期用 Revoke.cash 检查并撤销不再使用的授权。
+
+## 为什么要讲这个
+
+想象你去餐厅就餐，服务员说「把信用卡给我刷一下」。你递过去，他们没有直接扣款，而是说「你先签个授权表，只要你的卡号和有效期，我们以后可以随时从这张卡里扣钱，不用每次都问你」。你一想「反正我信任这家餐厅」，就签了。
+
+三个月后，餐厅被黑了。黑客拿到了你的授权，不仅扣走了你所有的餐饮费，还扣走了所有存款。
+
+这就是 Approve 的真实故事。
+
+在 DeFi 中，当你在 Uniswap 交换代币、在 Aave 借贷或在任何 DApp 里交互时，第一步常常是「授权」——允许这个 DApp 的智能合约访问你钱包里的特定代币。问题是：默认情况下，这个授权是**无限的**。
+
+2025-2026 上半年，33 起钱包攻击事件造成约 4.45 亿美元损失，其中很大一部分就是因为用户的 Approve 授权被滥用。这比技术漏洞本身还要常见。
+
+## Approve 机制：三种授权方式
+
+### 1. ERC-20 Approve（代币授权）
+
+当你在 Uniswap 交换 USDT 时，流程是这样的：
+
+1. 点击「交换」
+2. MetaMask 弹出 **Approve 交易** → 授予 Uniswap 路由合约访问你的 USDT 权限
+3. 支付 Gas、签名、交易上链
+4. 再弹出 **Swap 交易** → 实际执行交换
+
+第一步的授权就是调用 `approve(spender, amount)` 函数，参数是：
+- `spender`：被授权的合约地址（比如 Uniswap 路由）
+- `amount`：被授权的额度（通常是 `uint256(-1)`，理论无限大）
+
+一旦授权，**即使你没有再做任何操作，这个合约也可以随时从你的钱包转走代币**——直到你撤销授权为止。
+
+### 2. NFT 授权（setApprovalForAll）
+
+NFT 的授权更危险。当你在 OpenSea 上架 NFT 出售时，OpenSea 会要求你调用 `setApprovalForAll(operator, true)`。这个一个函数调用，**它授予对方权限转移你钱包里所有的该合约标准（ERC-721/ERC-1155）的 NFT**。
+
+如果 OpenSea 被黑，你的整个 NFT 组合都没了。ERC-20 的授权至少是针对单一代币，NFT 的 `setApprovalForAll` 风险要大得多。
+
+### 3. EIP-2612 Permit（离线签名）
+
+新标准 Permit 允许用户离线签名授权，签名本身就当作链上交易。听起来更方便，但也更危险——你在钱包外部签署一条数据，如果被钓鱼网站骗签，攻击者拿到签名后可以随时在链上执行，而你毫不知情。
+
+<Mermaid chart={`graph TD
+  A["用户在DApp交互"] --> B["DApp请求Approve授权"]
+  B --> C{"授权方式"}
+  C -->|ERC-20| D["调用approve<br/>代币额度"]
+  C -->|NFT| E["调用setApprovalForAll<br/>整个钱包的NFT"]
+  C -->|Permit| F["离线签名<br/>风险最高"]
+  D --> G["合约获得转账权"]
+  E --> G
+  F --> G
+  G --> H{"后续如果DApp被黑"}
+  H -->|未撤销| I["❌ 代币/NFT被转走<br/>无法追回"]
+  H -->|已撤销| J["✅ 新授权被阻止<br/>旧资产安全"]
+`} />
+
+## 🧪 实战：查看与撤销授权
+
+### 用 Revoke.cash 检查授权
+
+<Steps>
+
+1. 打开 https://revoke.cash/token-approval-checker（注意是官方网址，防止钓鱼克隆）
+
+2. 输入你的钱包地址（0x 开头）
+
+3. 自动检测网络（通常是 Ethereum），列表会显示所有已授权的 DApp：
+   - **Token** → USDT、DAI 等代币名
+   - **Spender** → 被授权的合约（如 "Uniswap V3 Router"）
+   - **Allowance** → 授权额度（"Unlimited" 或具体数字）
+   - **Last Updated** → 最后修改时间
+
+4. 找到不再使用的授权，点击对应行
+
+5. 点击 "Revoke" 按钮
+
+6. MetaMask 弹出签名确认，点击 "Sign"
+
+7. 需要支付 Gas 费（通常 $0.5-5 不等，取决于网络拥堵）
+
+8. 交易确认后，状态更新为 "Revoked"
+
+</Steps>
+
+**新授权的正确姿势**：
+
+- **不要**无脑选 "Unlimited"。改成 "Custom"，输入 **实际交易额度 + 10%**（例如交换 100 USDT，授权 110）
+- 小额交易后立即撤销（成本很低，$0.5-2）
+- 优先选择支持 Permit 的 DApp（这样可以跳过授权步骤）
+- 定期检查（建议每月一次），删除那些已经不用的授权
+
+### Etherscan 内置工具
+
+如果不想用第三方网站，也可以在 https://etherscan.io/tokenapprovalchecker 用 Etherscan 自己的工具。步骤类似，但界面稍有区别。
+
+MetaMask、Rabby 等钱包也内置了授权管理界面，但功能不如 Revoke.cash 全面（只能看到部分授权）。
+
+## ⚠️ 常见坑与误区
+
+**坑 1：「Approve Unlimited 没关系，反正我信任这个 DApp」**
+
+2024-2025 年多个主流 DApp（包括排名前 20 的协议）在升级合约时被黑客入侵，恶意代码被部署上去。那些曾经做过 Unlimited 授权的用户瞬间被清空。"信任"在区块链的智能合约面前没有意义——只有代码才能保证。
+
+**坑 2：「撤销授权就能追回被转走的代币」**
+
+链上交易不可逆。撤销授权只能阻止后续转账，**已经被转走的资金无法追回**。如果你的授权被滥用了，唯一的办法是通过法律途径追究 DApp 团队的责任（难度很大）。
+
+**坑 3：「Permit 签名更安全」**
+
+Permit 确实避免了链上授权交易，省 Gas，但离线签名的风险是**你可能在钓鱼网站上签署了一个看似无害的消息，其实却是一条完整的授权**。恶意网站可以在你不知情的情况下截图或录屏你的签名，之后在链上执行。
+
+**坑 4：「NFT 授权问题不大」**
+
+NFT 的 `setApprovalForAll` 意味着一个授权可以转走你整个钱包的 NFT 组合。很多新手在 OpenSea 上上架一个 NFT，OpenSea 获得了整个钱包的授权，之后不小心删除了书签，再也找不到这个授权，两年后它被黑了。
+
+定期检查 NFT 授权一样重要。Revoke.cash 和 Etherscan 也支持 NFT 授权检查。
+
+## 本节要点
+
+- Approve 是 DeFi 交互的必要步骤，但 **Unlimited 授权是一个定时炸弹**
+- 默认授权额度应该是**具体数字 + 少量余量**，而不是无限
+- **定期用 Revoke.cash 检查和撤销授权**（建议每月一次）
+- 撤销授权本身需要支付 Gas，但成本很低（通常 $1-3）
+- **NFT 授权（setApprovalForAll）风险更大**，需要特别警惕
+- Permit 是未来方案，但目前采用率低，且需要谨慎对待离线签名
+- 撤销授权**无法追回已转走的资金**，只能阻止未来的转账
+
+## 延伸阅读
+
+- [Revoke.cash 官方](https://revoke.cash) — 最流行的授权检查与撤销工具，支持 100+ 网络
+- [Etherscan Token Approval Checker](https://etherscan.io/tokenapprovalchecker) — 以太坊原生工具，无需连接钱包
+- [EIP-2612: Permit 标准规范](https://eips.ethereum.org/EIPS/eip-2612) — 离线签名授权的新标准
+- [MetaMask 授权管理](https://support.metamask.io/en/articles/6174519-how-to-revoke-smart-contract-permissions-in-metamask) — 钱包内置撤销功能说明

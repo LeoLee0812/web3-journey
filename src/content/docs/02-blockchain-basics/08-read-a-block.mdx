@@ -1,8 +1,149 @@
 ---
 title: 动手：在区块浏览器里读懂一个真实区块的每一栏
-description: 待生成
+description: 通过 Etherscan 区块浏览器的实际操作，学会解读真实区块和交易的每个字段，理解 Gas 费用计算、区块确认和链上数据的含义。
 sidebar:
   order: 8
 ---
 
-占位内容，待生成。
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句话结论：** 区块浏览器是你读懂链上世界的最直观工具，通过一个真实的区块和交易，你能看到数字指纹、矿工奖励、每一分钱的手续费是怎么花的。
+
+## 为什么要看区块浏览器
+
+你已经知道了区块链是什么、哈希如何把区块串起来、矿工和验证者如何达成共识。但这些概念落到现实世界是什么样？当你看到一笔交易在钱包里 pending（待确认），你怎么知道它是卡了还是成功了？为什么有时候要等 15 秒，有时候要等 5 分钟？答案都在区块浏览器里。
+
+区块浏览器就像区块链的"Google"。你可以搜索任何一个区块、交易、或钱包地址，实时看到链上发生了什么——就像在看一本透明的账本。截至 2026 年 8 月，**Etherscan 是以太坊最主流的浏览器**，每天处理数百万次查询。这一节的核心任务很简单：打开一个真实区块，学会读每一栏，理解它们的含义。
+
+## 区块的四类关键字段
+
+区块浏览器会显示大量信息，但其实可以分成四个层级：
+
+<Mermaid chart={`graph TD
+  A["一个真实区块"] --> B["区块级字段"]
+  A --> C["交易级字段"]
+  A --> D["地址级字段"]
+  A --> E["Gas 与费用"]
+  B --> B1["Block Hash"]
+  B --> B2["Timestamp"]
+  B --> B3["Gas Used/Limit"]
+  C --> C1["TX Hash"]
+  C --> C2["From/To"]
+  C --> C3["Value"]
+  D --> D1["账户余额"]
+  D --> D2["交易历史"]
+  E --> E1["Gas Price"]
+  E --> E2["Transaction Fee"]
+`} />
+
+**区块级字段**（告诉你这个块本身的信息）
+- **Block Height（区块高度）**: 从创世块开始数，这是第几个块。高度越大=越新。
+- **Block Hash（区块哈希）**: 这个块的数字指纹，64 个十六进制字符，唯一标识。改一个字节，整个哈希都变。
+- **Timestamp（时间戳）**: 区块创建的时间。以太坊的目标是每 12 秒出一个块。
+- **Gas Used / Gas Limit**: 这个块内所有交易实际消耗的 Gas，和这个块最多能消耗多少。比率接近 100% 说明网络很拥塞。
+
+**交易级字段**（每笔交易的细节）
+- **TX Hash（交易哈希）**: 这笔交易的唯一 ID。
+- **From / To**: 发起方和接收方的钱包地址。
+- **Value**: 转了多少 ETH（注意：只有 ETH，其他代币在 Logs 里）。
+- **Gas Used / Gas Limit**: 这笔交易实际消耗了多少 Gas，上限是多少。
+- **Transaction Fee**: 总费用 = Gas Used × Gas Price。
+
+**Gas 和费用的换算公式**（2026 年 8 月数据）
+
+| 单位 | 等值 | 现实用途 |
+| --- | --- | --- |
+| 1 Wei | 最小单位 | 理论上最小金额 |
+| 1 Gwei | 10^9 Wei | Gas 价格通常用 Gwei 显示 |
+| 1 ETH | 10^18 Wei = 10^9 Gwei | 实际交易单位 |
+| 21,000 Gas | 简单转账标准 | 从 A 转 ETH 到 B，约 $0.10～$0.25（2026 年 8 月） |
+
+正常时段，Gas 价格范围是 **8～25 Gwei**；高峰时段可能飙到 **80～200 Gwei**。所以一笔转账费用从 0.10 美元到几块钱都有可能。
+
+## 🧪 动手：完整查询流程
+
+<Steps>
+
+1. **打开 Etherscan**
+   访问 https://etherscan.io（确认 URL 是 `etherscan.io`，不是钓鱼域名）。
+
+2. **在搜索框输入关键字**
+   可以搜索：
+   - 区块号（如 `21000000`）
+   - 区块哈希（一长串十六进制）
+   - 交易哈希（从你的钱包复制 TX 哈希）
+   - 钱包地址（`0x` 开头，40 个十六进制字符）
+   - ENS 域名（如 `alice.eth`）
+
+3. **进入区块详情页**
+   看到这些关键字段：
+   - **Block Height**：这是第几个块
+   - **Hash**：这个块的指纹
+   - **Parent Hash**：应该等于上一个块的 Hash（证明链的连贯性）
+   - **Timestamp**：与前一个块的时间戳应相差约 12 秒
+   - **Transactions**：有多少笔交易
+
+4. **点开一笔交易查看详情**
+   重点看：
+   - **Status**：✓ Success（成功）还是 ✗ Fail（失败）？
+   - **From / To**：谁转给了谁
+   - **Value**：转了多少 ETH
+   - **Transaction Fee**：花了多少手续费（即使失败也要付费！）
+   - **Gas Used vs Gas Limit**：消耗情况（如果 Gas Limit 太低交易会失败）
+
+5. **对比相邻区块验证链的连贯性**
+   打开相邻的两个块：
+   - 新块的 Parent Hash 应该 = 旧块的 Hash ✓
+   - Timestamp 应相差约 12 秒 ✓
+   - 如果不符，可能是区块组织或网络问题
+
+6. **查看 Input Data 理解合约交互**
+   - 纯 ETH 转账显示 `0x`（空）
+   - 合约调用显示方法选择器（前 4 字节）+ 参数（十六进制编码）
+   - 复杂的 DeFi 交互可能有上百 KB 的 Input Data
+
+</Steps>
+
+## ⚠️ 常见坑与误区
+
+<Aside type="caution">
+**坑 1：交易失败了也要付手续费**  
+看到 Status = ✗ Fail，很多新手以为"没有成功，就不用付钱了"。错！失败的交易也消耗了计算资源，矿工还是要收费。唯一的区别是你的"预期操作"没有执行（比如转账没有完成）。
+</Aside>
+
+<Aside type="caution">
+**坑 2：Gas Price 太低会一直 Pending**  
+如果你设置的 Gas Price 低于网络中位数，交易不会报错，但可能排在队伍后面，等几小时甚至永远不被打包。查看 Etherscan 的 Gas Tracker（首页显示）推荐的价格再发送。
+</Aside>
+
+<Aside type="caution">
+**坑 3：搜索地址时混淆大小写**  
+以太坊地址不区分大小写（因为有校验和机制），但 Etherscan 的搜索框有时不够聪明。如果搜不到，试试用钱包软件复制标准格式。
+</Aside>
+
+<Aside type="caution">
+**坑 4：以为 Gas 单位就是费用**  
+Gas 是计量单位，不是费用。费用 = Gas Used × Gas Price。21,000 Gas 在 Gas Price 为 10 Gwei 时是 21 万 Gwei = 0.00021 ETH，费用才几十块钱。但在 200 Gwei 时，费用就是 0.0042 ETH，可能值 $15+。
+</Aside>
+
+<Aside type="caution">
+**坑 5：交易确认数与安全性**  
+看到 "1 Block Confirmation（1 个确认）"不代表完全安全，理论上后续块可能被回滚。一般建议等 **6 个确认**（约 72 秒）才认为"最终确定"，但对 BTC 这样的链，通常等 3～12 个确认。小型链需要等更多。
+</Aside>
+
+## 本节要点
+
+- 区块浏览器是链上世界的"谷歌"，可以查询区块、交易、地址的所有信息。
+- **区块字段**包括高度、哈希、时间戳、Gas 消耗；**交易字段**包括哈希、双方地址、转账金额、手续费。
+- **Gas 公式**：Transaction Fee = Gas Used × Gas Price。21,000 Gas 是简单 ETH 转账的标准成本。
+- **2026 年 8 月现状**：正常时段 Gas 价格 8～25 Gwei，一笔转账费用约 $0.10～$0.25；高峰时段可能涨到 80～200 Gwei。
+- **即使交易失败也要付 Gas 费**，因为矿工/验证者已经消耗了计算资源。
+- **6 个区块确认**后交易通常认为不可逆转，但小型链可能需要更多。
+
+## 延伸阅读
+
+- [Etherscan 官方文档](https://docs.etherscan.io/) — 浏览器所有功能的完整指南
+- [Ethereum Gas 费用官方解释](https://ethereum.org/developers/docs/gas/) — 深入理解 Gas 机制
+- [MoonPay：Etherscan 使用指南](https://www.moonpay.com/learn/cryptocurrency/what-is-etherscan) — 新手向的可视化教程
+- [Alchemy Gwei 换算工具](https://www.alchemy.com/gwei-calculator) — 快速计算 Gas 费用

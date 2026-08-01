@@ -25,7 +25,7 @@ sidebar:
 
 ```mdx
 import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
-import Mermaid from '../../components/Mermaid.astro';
+import Mermaid from '@components/Mermaid.astro';
 
 > **一句话结论：** ……（30-60 字，先给答案）
 

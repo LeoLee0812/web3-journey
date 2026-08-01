@@ -1,11 +1,18 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'node:url';
 import starlight from '@astrojs/starlight';
 
 // 站点配置：从 0 开始的 Web3 之旅
 // 纯静态输出，部署在 Vercel，自定义域名 web3.saveme505.help
 export default defineConfig({
   site: 'https://web3.saveme505.help',
+  // 正文 MDX 分布在不同深度的目录里，用别名引组件，免得相对路径层数写错
+  vite: {
+    resolve: {
+      alias: { '@components': fileURLToPath(new URL('./src/components', import.meta.url)) },
+    },
+  },
   integrations: [
     starlight({
       title: '从 0 开始的 Web3 之旅',
@@ -15,6 +22,7 @@ export default defineConfig({
       locales: {
         root: { label: '简体中文', lang: 'zh-CN' },
       },
+      favicon: '/favicon.svg',
       customCss: ['./src/styles/custom.css'],
       lastUpdated: true,
       pagination: true,

@@ -1,8 +1,134 @@
 ---
 title: 看懂并改写 Dune 看板：非程序员的 SQL 最小集
-description: 待生成
+description: Dune 已积累 200K+ 公开看板。学会 Fork 和改四句 SQL 就能定制查询，门槛从"必须懂代码"降到"会改参数"。
 sidebar:
   order: 4
 ---
 
-占位内容，待生成。
+import { Aside, Steps, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+import Mermaid from '@components/Mermaid.astro';
+
+> **一句话结论：** Dune 已降低入门门槛到"Fork + 改参数"，200K+ 公开看板可直接复用，非程序员也能在 2-3 分钟内定制查询。
+
+## 为什么要自己改看板，而不是找现成的
+
+想象你在 Excel 里看到一份同事做的销售数据透视表，但数据只到上个月。你需要的是"本月数据"。两个选择：一是求同事重新做一份（等他有空、互相沟通、版本管理混乱），二是自己复制表格、把"上月"改成"本月"、按一下 F9 刷新数据，3 分钟搞定。
+
+Dune 也是这样。200K+ 公开仪表板里大多数是"模板"，而不是专为你设计的。学会 Fork（复制）看板和修改关键参数（时间、合约地址、代币名），你就从"数据的消费者"变成"快速研究者"。这是链上分析的工作流分界线。
+
+## SQL 最小集：你只需要记住 4 句
+
+Dune 基于 Trino SQL（不是标准 PostgreSQL），但查询 95% 的用例只需要 4 个动词：SELECT、FROM、WHERE、GROUP BY。
+
+| 动词 | 作用 | 例子 |
+|------|------|------|
+| **SELECT** | 选择要看的列 | `SELECT block_time, token_symbol, amount` |
+| **FROM** | 选择数据表 | `FROM ethereum.erc20_transfer_events` |
+| **WHERE** | 筛选条件 | `WHERE block_time >= NOW() - INTERVAL '7' DAY` |
+| **GROUP BY** | 分组汇总 | `GROUP BY token_symbol` |
+
+这 4 个串起来就是完整查询的骨架：
+
+```sql
+SELECT token_symbol, SUM(amount) as total
+FROM ethereum.erc20_transfer_events
+WHERE block_time >= NOW() - INTERVAL '7' DAY
+GROUP BY token_symbol
+```
+
+意思是："过去 7 天每种代币的转账总量"。改一个数字（"7"→"30"），就变成"过去 30 天"。这就是 Fork 工作流的核心。
+
+## Fork 工作流 vs 从零写查询
+
+公开看板有一个蓝色的 "Fork" 按钮，点击后你会得到一份可编辑的副本。Dune 社区积累了 200K+ 这样的模板，覆盖：协议 TVL、代币转账、DEX 交易量、钱包余额、聪明钱动向。
+
+**何时 Fork（改现成的）**：
+- 你想看某协议的过去 30 天交易量（找已有的交易量看板，改参数）
+- 你想追踪某个钱包的入出流（找已有的钱包分析看板，改地址）
+- 你想对比 A 代币 vs B 代币的活跃度（找已有的多代币对比看板，改代币符号）
+
+**何时自写查询**：
+- 没有现成看板可用
+- 需要跨链聚合（如统计从以太坊到 Arbitrum 的跨链转账）
+- 需要自定义复杂逻辑（如识别"刚进场的新手 vs 老手巨鲸"）
+
+**比例经验**：日常 80% 的需求靠 Fork 解决，真正自写的只有 20%。
+
+<Mermaid chart={`graph LR
+  A["想要分析\n某个数据"] --> B{"现成看板\n中有吗?"}
+  B -->|有| C["点 Fork"]
+  C --> D["改 3-5 个参数"]
+  D --> E["刷新，看结果"]
+  B -->|没有| F["自己写 SQL"]
+  F --> G["学习 SELECT/WHERE\n等语法"]
+  G --> E
+`} />
+
+## 🧪 动手环节：10 分钟 Fork 一个 TVL 看板
+
+<Steps>
+
+1. **打开 Dune 并登录** → 访问 https://dune.com，用邮箱或 GitHub 账号注册/登录（免费版足够用）
+
+2. **搜索一个热门协议的 TVL 看板** → 在搜索框输入"Lido TVL"或"Aave TVL"，浏览结果。找到一个有绿色 ✓ 标记（官方认证或高热度）的看板，点开它。
+
+3. **点 Fork 按钮** → 页面右上角有"Fork"按钮，点击后 Dune 会创建一份属于你的副本。
+
+4. **查看 SQL 编辑器** → 看板下方会显示 SQL 代码。找到 WHERE 子句里的时间范围，通常写法是：
+   ```sql
+   WHERE block_time >= '2026-06-01' AND block_time <= '2026-08-01'
+   ```
+   或
+   ```sql
+   WHERE block_time >= NOW() - INTERVAL '30' DAY
+   ```
+
+5. **修改参数** → 把"30"改成"90"（查询过去 90 天），或把日期范围改成你要的时间段。
+
+6. **点刷新或 "Refresh" 按钮** → Dune 会重新运行查询，生成新数据。如果没报错，你看到的就是改过后的结果。
+
+7. **保存你的看板** → 点"Save"，起个名字（如"Lido TVL - 90 Days"），以后可以复用。
+
+</Steps>
+
+如果你卡在"看不懂 SQL"，可以用 Dune 的 AI 助手功能（部分付费计划提供）或直接问 ChatGPT："怎样改这条 SQL 只看最近 7 天的数据？"
+
+## ⚠️ 常见坑与误区
+
+**坑 1：不加 WHERE 子句，查询卡住或超时**
+
+新手常犯的错误是直接 `SELECT * FROM ethereum.transactions`，想要查整个以太坊的交易历史（数十亿行）。Dune 会警告你或直接超时。
+
+正确做法：永远加时间范围 `WHERE block_time >= NOW() - INTERVAL '7' DAY`。
+
+**坑 2：混淆稳定币地址，数据重复或丢失**
+
+USDC 在以太坊和 Polygon 各有一个地址，在 Arbitrum 又有另一个。如果只查一个地址，会漏掉其他链的转账。查询时用 `token_symbol = 'USDC'` 或检查 `contract_address` 是否齐全。
+
+**坑 3：不检查看板"Last Updated"时间**
+
+某些 Dune 看板可能 2 天没更新（尤其是 L2 链的数据）。浏览时看页面底部或图表旁的时间戳，确认数据是否最新。
+
+**坑 4：过度信任预聚类数据的标签**
+
+有些看板用"交易所冷钱包""巨鲸""VC 钱包"等标签过滤数据，但这些标签来自第三方（Arkham、Nansen），准确度在 70-95% 之间。发布结论时要披露"数据来自 X 平台的自动标签，准确度有上限"。
+
+**坑 5：把相关性当因果关系**
+
+"TVL 增加 20% 的同时交易费也增加了 20%，所以 TVL 增加导致费用增加"。实际可能是：市场上升期间两个指标都受市场情绪驱动，互为关联而非因果。用 Dune 构建对照组（同时期的其他协议）来验证因果。
+
+## 本节要点
+
+- Dune 已积累 1.5M+ 数据集和 200K+ 公开仪表板；新手不需要从零写 SQL，只需学会 Fork 和修改参数
+- SQL 最小集是 4 个动词：SELECT、FROM、WHERE、GROUP BY；掌握它们就能处理 80% 的日常查询
+- Fork 看板时，关键改动通常是时间范围（NOW() - INTERVAL）、合约地址、代币符号这三个参数
+- 永远加 WHERE 子句筛选时间；不要无限制查询整个表，否则会超时或卡住
+- 跨链数据需要小心：同一代币在不同链有不同地址，用 token_symbol 而非硬编码 contract_address
+- 看板的标签数据（如"巨鲸"身份）来自第三方启发式，准确度 70-95%，不能完全信任
+
+## 延伸阅读
+
+- [Dune Analytics 官方文档 - Query Editor 入门](https://dune.com/docs) — 官方教程，含 Trino SQL 语法和数据表说明
+- [Mastering Chain Analytics - Dune SQL 中文教程](https://sixdegreelab.gitbook.io/mastering-chain-analytics/) — 从 SELECT 到聚合函数的完整中文指南
+- [登链社区 - Dune SQL 与以太坊数据分析](https://learnblockchain.cn/article/6480) — 社区贡献的实战案例
+- [Dune 官方 SQL 参考](https://dune.com/docs/query/sql-reference) — Trino 方言的完整函数库和最佳实践
